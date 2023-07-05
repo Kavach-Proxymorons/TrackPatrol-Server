@@ -1,6 +1,8 @@
 import express from "express";
 import User from "../models/User.js";
-
+import { registerController, loginController } from "../controllers/authController.js";
+import { body, query, param } from "express-validator";
+import validateRequest from "../utils/requestValidator.js";
 const router = express.Router();
 
 router.post("/login", (req, res) => {
@@ -8,32 +10,15 @@ router.post("/login", (req, res) => {
     res.status(200).send(`Username: ${username}, Password: ${password}`);
 });
 
-router.post("/signup", async(req, res) => {
-    try {
-        const { username, name, password, role } = req.body;
-    
-        // Check if the username already exists
-        const existingUser = await User.findOne({ username });
-        if (existingUser) {
-          return res.status(409).json({ error: 'Username already exists' });
-        }
-    
-        // Create a new user
-        const newUser = new User({
-          username,
-          name,
-          password,
-          role
-        });
-    
-        // Save the user to the database
-        await newUser.save();
-    
-        return res.status(201).json({ message: 'User registered successfully' });
-      } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Internal server error' });
-      }
-});
+router.post("/signup",
+    [
+        body("username").exists().withMessage("username is required"),
+        body("name").exists().withMessage("name is required"),
+        body("password").exists().withMessage("password is required"),
+        body("role").exists().withMessage("role is required. enum: admin, personnel"),
+    ],
+    validateRequest,
+    registerController
+);
 
 export default router;
