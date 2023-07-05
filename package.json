@@ -5,7 +5,10 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "node swagger.js && nodemon app.js",
+    "swagger-autogen": "node swagger.js"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,8 @@
   },
   "homepage": "https://github.com/Kavach-Proxymorons/TrackPatrol-Server#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "swagger-autogen": "^2.23.4",
+    "swagger-ui-express": "^4.6.3"
   }
 }
