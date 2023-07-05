@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "dev": "node swagger.js && nodemon app.js",
-    "swagger-autogen": "node swagger.js"
+    "dev": "nodemon app.js",
+    "update-doc": "node swagger.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/Kavach-Proxymorons/TrackPatrol-Server#readme",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
+    "mongoose": "^7.3.1",
+    "morgan": "^1.10.0",
     "swagger-autogen": "^2.23.4",
     "swagger-ui-express": "^4.6.3"
   }
