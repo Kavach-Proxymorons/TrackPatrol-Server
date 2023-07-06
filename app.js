@@ -4,6 +4,7 @@ import express from "express";
 import morgan from "morgan";
 import swaggerui from "swagger-ui-express";
 import mongoose from "mongoose";
+import ErrorHandler from "./utils/errorHandler.js";
 import swaggerFile from "./docs/swagger_output.json" assert { type: "json" };
 import router from "./routes/router.js";
 
@@ -27,6 +28,12 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/v1", router);
+
+app.get("*", (req, res) => {
+    res.status(404).send("Not Found");
+});
+
+app.use(ErrorHandler);
 
 app.listen(3000, () => {
     console.log(`Server is running on port 3000`);

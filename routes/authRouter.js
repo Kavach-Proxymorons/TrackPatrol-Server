@@ -9,7 +9,7 @@ router.post("/login", (req, res) => {
     res.status(200).send(`Username: ${username}, Password: ${password}`);
 });
 
-router.post("/signup",
+router.post("/register",
     [
         body("username").exists().withMessage("username is required"),
         body("name").exists().withMessage("name is required"),

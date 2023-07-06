@@ -59,109 +59,15 @@
         }
       }
     },
-    "/api/v1/auth/signup": {
+    "/api/v1/auth/register": {
       "post": {
         "tags": [
           "Auth"
         ],
         "description": "Endpoint to register a new user",
         "responses": {
-          "201": {
-            "description": "User registered successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "User registered successfully"
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": true
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "User registered successfully"
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "username already exists",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "username already exists"
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean",
-                      "example": false
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "username already exists"
-                    }
-                  },
-                  "xml": {
-                    "name": "main"
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Internal Server Error"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Internal Server Error"
-                }
-              }
-            }
+          "200": {
+            "description": "OK"
           }
         },
         "requestBody": {
@@ -221,30 +127,61 @@
           "name",
           "password",
           "role"
-        ],
-        "xml": {
-          "name": "User"
-        }
+        ]
       },
-      "Internal Server Error": {
+      "Error": {
         "type": "object",
         "properties": {
           "success": {
             "type": "boolean",
             "example": false
           },
+          "status": {
+            "type": "number",
+            "example": 500
+          },
           "message": {
             "type": "string",
             "example": "Internal server error"
+          },
+          "stack": {
+            "type": "string",
+            "example": "Something went wrong"
           }
         },
         "required": [
           "success",
-          "message"
-        ],
-        "xml": {
-          "name": "Internal Server Error"
-        }
+          "status",
+          "message",
+          "stack"
+        ]
+      },
+      "Success": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "User Registered Successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "required": [
+          "success",
+          "status",
+          "message",
+          "data"
+        ]
       }
     }
   }

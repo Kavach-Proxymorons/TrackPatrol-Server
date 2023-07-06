@@ -26,10 +26,18 @@ const doc = {
   ],
   schemes: ['http'],
   definitions: {
-    "Internal Server Error" : {
+    Error : {
       $success: false,
-      $message: "Internal server error"
-    }
+      $status: 500,
+      $message: "Internal server error",
+      $stack: "Something went wrong"
+    },
+    Success: {
+      $success: true,
+      $status: 200,
+      $message: "User Registered Successfully",
+      $data: {}
+    },
   },
   components: {
     schemas: {
