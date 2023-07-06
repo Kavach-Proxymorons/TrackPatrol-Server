@@ -10,10 +10,40 @@ const doc = {
     title: 'Trackpatrol API',
     description: 'API doc Documentation for Trackpatrol',
   },
-  host: 'localhost:3000',
+  tags: [{
+    name: 'Auth',
+    description: 'Authentication endpoints'
+  }],
+  servers: [
+    {
+      url: "http://localhost:3000/",
+      description: "local server"
+    },
+    {
+      url: "https://trackpatrol.onrender.com/",
+      description: "production server"
+    }
+  ],
   schemes: ['http'],
+  definitions: {
+    "Internal Server Error" : {
+      $success: false,
+      $message: "Internal server error"
+    }
+  },
+  components: {
+    schemas: {
+      User: {
+        $username: "Shahbaz",
+        $name: "Shahbaz",
+        $password: "123456789",
+        $role: "admin",
+        last_login: "2021-07-01T00:00:00.000Z"
+      },
+    },
+  }
 };
 
-swaggerAutogen()(outputFile, endpointsFiles, doc).then(async () => {
-    await import('./app.js'); 
-  });
+swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc).then(async () => {
+  await import('./app.js');
+});

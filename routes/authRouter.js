@@ -1,5 +1,4 @@
 import express from "express";
-import User from "../models/User.js";
 import { registerController, loginController } from "../controllers/authController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
