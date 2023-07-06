@@ -5,6 +5,9 @@ const registerController = async (req, res, next) => {
     /*
         #swagger.tags = ['Auth']
         #swagger.description = 'Endpoint to register a new user'
+
+
+
     */
 
     try {
