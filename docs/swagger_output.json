@@ -32,6 +32,70 @@
         }
       }
     },
+    "/api/v1/auth/": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "description": "Endpoint to get user auth details",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User auth details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Authenticated"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Authenticated"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/auth/register": {
       "post": {
         "tags": [
@@ -300,6 +364,75 @@
         },
         "xml": {
           "name": "Validation error"
+        }
+      },
+      "Authenticated": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Authorized"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "60f0b6b3e6b3a51e3c9f0b1f"
+              },
+              "username": {
+                "type": "string",
+                "example": "shahbaz42"
+              },
+              "name": {
+                "type": "string",
+                "example": "Shahbaz"
+              },
+              "role": {
+                "type": "string",
+                "example": "admin"
+              },
+              "last_login": {
+                "type": "string",
+                "example": "2021-07-16T07:25:07.000Z"
+              },
+              "__v": {
+                "type": "number",
+                "example": 0
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Authenticated"
+        }
+      },
+      "Unauthorized": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "status": {
+            "type": "number",
+            "example": 401
+          },
+          "message": {
+            "type": "string",
+            "example": "Unauthorized"
+          }
+        },
+        "xml": {
+          "name": "Unauthorized"
         }
       },
       "Registration req.body": {

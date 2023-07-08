@@ -44,6 +44,24 @@ const doc = {
       message: "Validation error",
       errors: []
     },
+    "Authenticated": {
+      success: true,
+      status: 200,
+      message: "Authorized",
+      data: {
+        _id: '60f0b6b3e6b3a51e3c9f0b1f',
+        username: 'shahbaz42',
+        name: 'Shahbaz',
+        role: 'admin',
+        last_login: '2021-07-16T07:25:07.000Z',
+        __v: 0
+      }
+    },
+    "Unauthorized": {
+      success: false,
+      status: 401,
+      message: "Unauthorized",
+    },
     "Registration req.body": {
       $username: "Shahbaz",
       $name: "Shahbaz",
