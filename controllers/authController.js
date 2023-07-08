@@ -1,6 +1,23 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
+const authController = async (req, res) => {
+    try{
+        // Remove the password from the user object
+        req.user.password = undefined;
+
+        // Send the response
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Authorized',
+            data: req.user
+        });
+    } catch(error){
+        next(error);
+    }
+}
+
 const registerController = async (req, res, next) => {
     try {
         const { username, name, password, role } = req.body;
@@ -86,4 +103,8 @@ const loginController = async (req, res) => {
     }
 }
 
-export { registerController, loginController };
+export { 
+    authController, 
+    registerController, 
+    loginController 
+};

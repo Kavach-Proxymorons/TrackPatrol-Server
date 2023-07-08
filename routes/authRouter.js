@@ -1,8 +1,33 @@
 import express from "express";
-import { registerController, loginController } from "../controllers/authController.js";
+import { checkAuth } from "../middlewares/authMiddleware.js";
+import { authController, registerController, loginController } from "../controllers/authController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
 const router = express.Router();
+
+router.get("/",
+    /*  #swagger.tags = ['Auth']
+        #swagger.description = 'Endpoint to get user auth details'
+
+        #swagger.responses[200] = {
+            description: 'User auth details',
+            schema: { $ref: "#/definitions/Authenticated" }
+        }
+
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+
+    */
+    checkAuth,
+    authController
+)
 
 router.post("/register",
     /*  #swagger.tags = ['Auth']
