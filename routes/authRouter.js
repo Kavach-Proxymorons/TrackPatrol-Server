@@ -4,11 +4,6 @@ import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
 const router = express.Router();
 
-router.post("/login", (req, res) => {
-    const { username, password } = req.body;
-    res.status(200).send(`Username: ${username}, Password: ${password}`);
-});
-
 router.post("/register",
     /*  #swagger.tags = ['Auth']
         #swagger.description = 'Endpoint to register a new user'
@@ -51,5 +46,47 @@ router.post("/register",
     validateRequest,
     registerController
 );
+
+router.post("/login",
+    /*  #swagger.tags = ['Auth']
+        #swagger.description = 'Endpoint to login a user'
+
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: { $ref: "#/definitions/Login req.body" }
+                }
+            }
+        }
+
+        #swagger.responses[200] = {
+            description: 'Login successful',
+            schema: { $ref: "#/definitions/Login successful" }
+        }
+
+        #swagger.responses[401] = {
+            description: 'Unauthorized incorrect username or password',
+            schema: { $ref: "#/definitions/Unauthorized incorrect username or password" }
+        }
+
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+
+    [
+        body("username").exists().withMessage("username is required"),
+        body("password").exists().withMessage("password is required"),
+    ],
+    validateRequest,
+    loginController
+)
 
 export default router;
