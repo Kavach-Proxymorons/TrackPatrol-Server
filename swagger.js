@@ -58,7 +58,6 @@ const doc = {
         _id: '60f0b6b3e6b3a51e3c9f0b1f',
         username: 'shahbaz42',
         name: 'Shahbaz',
-        password: '123456789',
         role: 'admin',
         last_login: '2021-07-16T07:25:07.000Z',
         __v: 0
@@ -69,8 +68,33 @@ const doc = {
       "status": 409,
       "message": "Username already exists",
       "stack": "Error: Username already exists ..."
+    },
+    "Login req.body": {
+      $username: "Shahbaz",
+      $password: "123456789"
+    },
+    "Unauthorized incorrect username or password": {
+      success: false,
+      status: 401,
+      message: "Unauthorized : incorrect username or password",
+    },
+    "Login successful": {
+      success: true,
+      status: 200,
+      message: 'Login successful',
+      data: {
+        token: "asdfjasldkfjlaskdfjlaskdjfasdffdasdfasdfas",
+        expires_in: "30d",
+        user: {
+          _id: '60f0b6b3e6b3a51e3c9f0b1f',
+          username: 'shahbaz42',
+          name: 'Shahbaz',
+          role: 'admin',
+          last_login: '2021-07-16T07:25:07.000Z',
+          __v: 0
+        }
+      }
     }
-
   },
   components: {
     schemas: {
