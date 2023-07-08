@@ -5,9 +5,10 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
+    "pm2": "pm2 start processes.json --no-daemon",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "node ./bin/www.js",
+    "dev": "nodemon ./bin/www.js",
     "update-doc": "node swagger.js"
   },
   "repository": {
@@ -28,6 +29,7 @@
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.3.1",
     "morgan": "^1.10.0",
+    "pm2": "^5.3.0",
     "swagger-autogen": "^2.23.4",
     "swagger-ui-express": "^4.6.3"
   }
