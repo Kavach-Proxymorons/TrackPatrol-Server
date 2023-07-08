@@ -3,6 +3,14 @@ import jwt from "jsonwebtoken";
 
 const checkAuth = async (req, res, next) => {
     try {
+        // If authorization header not found
+        if(!req.headers.authorization)
+            return res.status(401).json({
+                success: false,
+                status: 401,
+                message: 'Unauthorized : no authorization header found'
+            });
+
         // Get the token from the header
         const token = req.headers.authorization.split(" ")[1];
 

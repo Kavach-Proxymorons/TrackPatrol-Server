@@ -37,7 +37,7 @@
         "tags": [
           "Auth"
         ],
-        "description": "Endpoint to get user auth details",
+        "description": "Endpoint to get user auth details. Pass the JWT token in the authorization header as \"Bearer <token>\"",
         "parameters": [
           {
             "name": "authorization",
@@ -93,7 +93,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/auth/register": {
@@ -639,6 +644,13 @@
         "xml": {
           "name": "Login successful"
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   }

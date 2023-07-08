@@ -7,7 +7,11 @@ const router = express.Router();
 
 router.get("/",
     /*  #swagger.tags = ['Auth']
-        #swagger.description = 'Endpoint to get user auth details'
+        #swagger.description = 'Endpoint to get user auth details. Pass the JWT token in the authorization header as "Bearer <token>"'
+
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
 
         #swagger.responses[200] = {
             description: 'User auth details',

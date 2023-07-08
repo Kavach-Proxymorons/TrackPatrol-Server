@@ -24,6 +24,13 @@ const doc = {
       description: "production server"
     }
   ],
+  securityDefinitions: {
+    bearerAuth: {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT'
+    }
+  },
   schemes: ['http'],
   definitions: {
     Success: {
