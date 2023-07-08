@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 import express from "express";
+import cors from "cors";
 import morgan from "morgan";
 import swaggerui from "swagger-ui-express";
 import mongoose from "mongoose";
@@ -11,6 +12,7 @@ import router from "./routes/router.js";
 const app = express();
 
 app.use(morgan("dev"));
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use("/doc", swaggerui.serve, swaggerui.setup(swaggerFile));
 
