@@ -26,22 +26,55 @@ const doc = {
   ],
   schemes: ['http'],
   definitions: {
-    Error : {
-      $success: false,
-      $status: 500,
-      $message: "Internal server error",
-      $stack: "Something went wrong"
-    },
     Success: {
-      $success: true,
-      $status: 200,
-      $message: "User Registered Successfully",
-      $data: {}
+      success: true,
+      status: 200,
+      message: "Success message",
+      data: {}
     },
+    "Internal server error": {
+      success: false,
+      status: 500,
+      message: "Internal server error",
+      stack: "Something went wrong"
+    },
+    "Validation error": {
+      success: false,
+      status: 422,
+      message: "Validation error",
+      errors: []
+    },
+    "Registration req.body": {
+      $username: "Shahbaz",
+      $name: "Shahbaz",
+      $password: "123456789",
+      $role: "admin"
+    },
+    "Registration successful": {
+      success: true,
+      status: 200,
+      message: 'User registered successfully',
+      data: {
+        _id: '60f0b6b3e6b3a51e3c9f0b1f',
+        username: 'shahbaz42',
+        name: 'Shahbaz',
+        password: '123456789',
+        role: 'admin',
+        last_login: '2021-07-16T07:25:07.000Z',
+        __v: 0
+      }
+    },
+    "Username already exists": {
+      "success": false,
+      "status": 409,
+      "message": "Username already exists",
+      "stack": "Error: Username already exists ..."
+    }
+
   },
   components: {
     schemas: {
-      User: {
+      "User Model": {
         $username: "Shahbaz",
         $name: "Shahbaz",
         $password: "123456789",
