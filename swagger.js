@@ -268,6 +268,24 @@ const doc = {
       message: "Personnel not found, please check the sid",
       stack: ""
     },
+    "Bulk delete personnel req.body": {
+      $sids: ["1", "2", "3"]
+    },
+    "Personnel deleted in bulk response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel deleted successfully",
+      "data": {
+        "personnelDeleteResult": {
+          "acknowledged": true,
+          "deletedCount": 2
+        },
+        "userDeleteResult": {
+          "acknowledged": true,
+          "deletedCount": 2
+        }
+      }
+    },
     "Personnel deleted successfully response": {
       "success": true,
       "status": 200,

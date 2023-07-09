@@ -428,6 +428,95 @@
         ]
       }
     },
+    "/api/v1/personnel/search": {
+      "get": {
+        "tags": [
+          "Personnel"
+        ],
+        "description": "Search personnel by sid or name",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Search query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit per page",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnel list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel list response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel list response"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/v1/personnel/{sid}": {
       "get": {
         "tags": [
@@ -598,53 +687,39 @@
         ]
       }
     },
-    "/api/v1/personnel/search": {
-      "get": {
+    "/api/v1/personnel/bulk_delete": {
+      "delete": {
         "tags": [
           "Personnel"
         ],
-        "description": "Search personnel by sid or name",
-        "parameters": [
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Search query",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "Page number",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Limit per page",
-            "required": true,
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
+        "description": "Delete multiple personnel by sid. (requires role : \"admin\" )",
         "responses": {
           "200": {
-            "description": "Personnel list",
+            "description": "Personnel deleted in bulk response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Personnel list response"
+                  "$ref": "#/components/schemas/Personnel deleted in bulk response"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Personnel list response"
+                  "$ref": "#/components/schemas/Personnel deleted in bulk response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Personnel not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
                 }
               }
             }
@@ -684,7 +759,17 @@
           {
             "bearerAuth": []
           }
-        ]
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bulk delete personnel req.body"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -1458,6 +1543,79 @@
         },
         "xml": {
           "name": "Personnel not found response"
+        }
+      },
+      "Bulk delete personnel req.body": {
+        "type": "object",
+        "properties": {
+          "sids": {
+            "type": "array",
+            "example": [
+              "1",
+              "2",
+              "3"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "sids"
+        ],
+        "xml": {
+          "name": "Bulk delete personnel req.body"
+        }
+      },
+      "Personnel deleted in bulk response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel deleted successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "personnelDeleteResult": {
+                "type": "object",
+                "properties": {
+                  "acknowledged": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "deletedCount": {
+                    "type": "number",
+                    "example": 2
+                  }
+                }
+              },
+              "userDeleteResult": {
+                "type": "object",
+                "properties": {
+                  "acknowledged": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "deletedCount": {
+                    "type": "number",
+                    "example": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Personnel deleted in bulk response"
         }
       },
       "Personnel deleted successfully response": {

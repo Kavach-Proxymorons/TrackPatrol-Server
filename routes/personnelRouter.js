@@ -4,7 +4,8 @@ import { addPersonnel,
         getPersonnelList, 
         getOnePersonnel, 
         deleteOnePersonnel, 
-        searchPersonnel 
+        searchPersonnel,
+        bulkDeletePersonnel 
 } from "../controllers/personnelController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
@@ -181,6 +182,45 @@ router.get("/:sid",
     validateRequest,
     // checkAuth,
     getOnePersonnel
+)
+
+router.delete("/bulk_delete",
+    /*  #swagger.tags = ['Personnel']
+        #swagger.description = 'Delete multiple personnel by sid. (requires role : "admin" )'
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: { $ref: "#/definitions/Bulk delete personnel req.body" }
+                }
+            }
+        }
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: 'Personnel deleted in bulk response',
+            schema: { $ref: "#/definitions/Personnel deleted in bulk response" }
+        }
+        #swagger.responses[404] = {
+            description: 'Personnel not found response',
+            schema: { $ref: "#/definitions/Personnel not found response" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        body("sids").exists().withMessage("sids is required"),
+    ],
+    validateRequest,
+    // checkAuth,
+    bulkDeletePersonnel 
 )
 
 router.delete("/:sid",

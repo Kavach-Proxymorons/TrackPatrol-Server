@@ -88,6 +88,37 @@ const getOnePersonnel = async (req, res, next) => {
     }
 }
 
+const bulkDeletePersonnel = async (req, res, next) => {
+    try{
+        // sids is an array of sid
+        const { sids } = req.body;
+
+        // finding all the personnels and users to delete
+        const personnelsToDelete = await Personnel.find({ sid: { $in: sids } });
+        console.log(personnelsToDelete);
+
+        const userIdsToDelete = personnelsToDelete.map(personnel => personnel.user._id);
+        console.log(userIdsToDelete);
+
+        // deleting all the personnels and users
+        const personnelDeleteResult = await Personnel.deleteMany({ sid: { $in: sids } });
+        const userDeleteResult = await User.deleteMany({ _id: { $in: userIdsToDelete } });
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Personnel deleted successfully',
+            data: {
+                personnelDeleteResult,
+                userDeleteResult
+            }
+        });
+        
+    } catch(error){
+        next(error);
+    }
+}
+
 const deleteOnePersonnel = async (req, res, next) => {
     try{
         const { sid } = req.params;
@@ -166,6 +197,7 @@ export {
     addPersonnel,
     getPersonnelList,
     getOnePersonnel,
+    bulkDeletePersonnel,
     deleteOnePersonnel,
     searchPersonnel
 }
