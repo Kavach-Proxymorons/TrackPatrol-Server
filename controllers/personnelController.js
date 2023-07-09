@@ -63,7 +63,34 @@ const getPersonnelList = async (req, res, next) => {
     }
 }
 
+const getOnePersonnel = async (req, res, next) => {
+    try{
+        const { sid } = req.params;
+
+        const personnel = await Personnel.findOne({ sid })
+            .populate('user', 'username name')
+            .exec();
+
+        if(!personnel){
+            const err = new Error('Personnel not found');
+            err.status = 404;
+            throw err;
+        }
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Personnel fetched successfully',
+            data: personnel
+        });
+    } catch(error){
+        next(error);
+    }
+}
+
+
 export {
     addPersonnel,
-    getPersonnelList
+    getPersonnelList,
+    getOnePersonnel
 }

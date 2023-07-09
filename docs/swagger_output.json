@@ -371,6 +371,13 @@
         "description": "Get all personnel with pagination",
         "parameters": [
           {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "page",
             "in": "query",
             "description": "Page number",
@@ -401,6 +408,95 @@
               "application/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/Personnel list response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/personnel/{sid}": {
+      "get": {
+        "tags": [
+          "Personnel"
+        ],
+        "description": "Get personnel by sid",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SID of personnel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnel details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel details response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel details response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Personnel not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
                 }
               }
             }
@@ -551,6 +647,30 @@
         },
         "xml": {
           "name": "Validation error"
+        }
+      },
+      "Resource not found": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "status": {
+            "type": "number",
+            "example": 404
+          },
+          "message": {
+            "type": "string",
+            "example": "Resource not found"
+          },
+          "stack": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "xml": {
+          "name": "Resource not found"
         }
       },
       "Authenticated": {
@@ -1080,6 +1200,116 @@
         },
         "xml": {
           "name": "Personnel list response"
+        }
+      },
+      "Personnel details response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel fetched successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "64ab004508597db7a4e069c1"
+              },
+              "sid": {
+                "type": "string",
+                "example": "1"
+              },
+              "user": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "64ab004508597db7a4e069bf"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Monkey"
+                  }
+                }
+              },
+              "official_name": {
+                "type": "string",
+                "example": "Monkey"
+              },
+              "designation": {
+                "type": "string",
+                "example": "jungle patrol"
+              },
+              "photograph": {
+                "type": "string",
+                "example": "https://www.google.com"
+              },
+              "dob": {
+                "type": "string",
+                "example": "2000-07-16T07:25:07.000Z"
+              },
+              "blood_group": {
+                "type": "string",
+                "example": "A+"
+              },
+              "identification_mark": {
+                "type": "string",
+                "example": "None"
+              },
+              "posted_at": {
+                "type": "string",
+                "example": "Delhi"
+              },
+              "address": {
+                "type": "string",
+                "example": "Delhi"
+              },
+              "__v": {
+                "type": "number",
+                "example": 0
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Personnel details response"
+        }
+      },
+      "Personnel not found response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "status": {
+            "type": "number",
+            "example": 404
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel not found, please check the sid"
+          },
+          "stack": {
+            "type": "string",
+            "example": ""
+          }
+        },
+        "xml": {
+          "name": "Personnel not found response"
         }
       }
     },

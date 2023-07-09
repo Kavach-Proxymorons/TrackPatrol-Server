@@ -1,6 +1,6 @@
 import express from "express";
 import { checkAuth, checkAdmin } from "../middlewares/authMiddleware.js";
-import { addPersonnel, getPersonnelList } from "../controllers/personnelController.js";
+import { addPersonnel, getPersonnelList, getOnePersonnel } from "../controllers/personnelController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
 
@@ -90,8 +90,45 @@ router.get("/",
         query("limit").exists().withMessage("Limit per page is required"),
     ],
     validateRequest,
-    // checkAuth,
+    checkAuth,
     getPersonnelList
 );
+
+router.get("/:sid",
+    /*  #swagger.tags = ['Personnel']
+        #swagger.description = 'Get personnel by sid'
+        #swagger.parameters['sid'] = {
+            in: 'path',
+            description: 'SID of personnel',
+            required: true,
+            type: 'string'
+        }
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: 'Personnel details',
+            schema: { $ref: "#/definitions/Personnel details response" }
+        }
+        #swagger.responses[404] = {
+            description: 'Personnel not found response',
+            schema: { $ref: "#/definitions/Personnel not found response" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param("sid").exists().withMessage("SID is required"),
+    ],
+    validateRequest,
+    // checkAuth,
+    getOnePersonnel
+)
 
 export default router;

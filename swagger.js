@@ -56,6 +56,12 @@ const doc = {
       message: "Validation error",
       errors: []
     },
+    "Resource not found": {
+      success: false,
+      status: 404,
+      message: "Resource not found",
+      stack: ""
+    },
     "Authenticated": {
       success: true,
       status: 200,
@@ -232,6 +238,35 @@ const doc = {
         "totalPages": 2,
         "currentPage": "1"
       }
+    },
+    "Personnel details response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel fetched successfully",
+      "data": {
+        "_id": "64ab004508597db7a4e069c1",
+        "sid": "1",
+        "user": {
+          "_id": "64ab004508597db7a4e069bf",
+          "username": "1",
+          "name": "Monkey"
+        },
+        "official_name": "Monkey",
+        "designation": "jungle patrol",
+        "photograph": "https://www.google.com",
+        "dob": "2000-07-16T07:25:07.000Z",
+        "blood_group": "A+",
+        "identification_mark": "None",
+        "posted_at": "Delhi",
+        "address": "Delhi",
+        "__v": 0
+      }
+    },
+    "Personnel not found response": {
+      success: false,
+      status: 404,
+      message: "Personnel not found, please check the sid",
+      stack: ""
     },
   },
   components: {
