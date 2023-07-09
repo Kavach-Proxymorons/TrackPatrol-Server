@@ -13,7 +13,12 @@ const doc = {
   tags: [{
     name: 'Auth',
     description: 'Authentication endpoints'
-  }],
+    },
+    {
+      name: 'Personnel',
+      description: 'Personnel endpoints'
+    }
+  ],
   servers: [
     {
       url: "http://localhost:3000/",
@@ -69,6 +74,11 @@ const doc = {
       status: 401,
       message: "Unauthorized",
     },
+    "Forbidden": {
+      success: false,
+      status: 403,
+      message: "Forbidden",
+    },
     "Registration req.body": {
       $username: "Shahbaz",
       $name: "Shahbaz",
@@ -119,7 +129,110 @@ const doc = {
           __v: 0
         }
       }
+    },
+    /**const personnelSchema = new mongoose.Schema({
+    sid: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    official_name: {
+        type: String,
+        required: true
+    },
+    designation: {
+        type: String,
+        required: true
+    },
+    photograph: {
+        type: String,
+        required: true
+    },
+    dob: {
+        type: Date,
+        required: true
+    },
+    blood_group: {
+        type: String,
+        required: true
+    },
+    identification_mark: {
+        type: String,
+        required: true
+    },
+    posted_at: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
     }
+}); */
+    "create personnel req.body": {
+      $sid: "123456789",
+      $temp_password: "123456789",
+      $official_name: "Shahbaz",
+      $designation: "Officer",
+      $photograph: "https://www.google.com",
+      $dob: "2000-07-16T07:25:07.000Z",
+      $blood_group: "A+",
+      $identification_mark: "None",
+      $posted_at: "Delhi",
+      $address: "Delhi"
+    },
+    "Personnel created successfully response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel created successfully",
+      "data": {
+        "sid": "123456789",
+        "user": "64aafc98b0370830e5cb5d48",
+        "official_name": "Shahbaz",
+        "designation": "Officer",
+        "photograph": "https://www.google.com",
+        "dob": "2000-07-16T07:25:07.000Z",
+        "blood_group": "A+",
+        "identification_mark": "None",
+        "posted_at": "Delhi",
+        "address": "Delhi",
+        "_id": "64aafc99b0370830e5cb5d4a",
+        "__v": 0
+      }
+    },
+    "Personnel list response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel list fetched successfully",
+      "data": {
+        "personnel": [
+          {
+            "_id": "64aafded69d38a1c547c36ac",
+            "sid": "123456789",
+            "user": {
+              "_id": "64aafded69d38a1c547c36aa",
+              "username": "123456789",
+              "name": "Shahbaz"
+            },
+            "official_name": "Shahbaz",
+            "designation": "Officer",
+            "photograph": "https://www.google.com",
+            "dob": "2000-07-16T07:25:07.000Z",
+            "blood_group": "A+",
+            "identification_mark": "None",
+            "posted_at": "Delhi",
+            "address": "Delhi",
+            "__v": 0
+          }
+        ],
+        "totalPages": 2,
+        "currentPage": "1"
+      }
+    },
   },
   components: {
     schemas: {
@@ -135,5 +248,5 @@ const doc = {
 };
 
 swaggerAutogen({ openapi: '3.0.0' })(outputFile, endpointsFiles, doc).then(async () => {
-  await import('./app.js');
+  await import('./bin/www.js');
 });

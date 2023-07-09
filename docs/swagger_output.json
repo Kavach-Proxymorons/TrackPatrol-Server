@@ -19,6 +19,10 @@
     {
       "name": "Auth",
       "description": "Authentication endpoints"
+    },
+    {
+      "name": "Personnel",
+      "description": "Personnel endpoints"
     }
   ],
   "paths": {
@@ -260,6 +264,184 @@
           }
         }
       }
+    },
+    "/api/v1/personnel/": {
+      "post": {
+        "tags": [
+          "Personnel"
+        ],
+        "description": "Create a new personnel",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnel created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel created successfully response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel created successfully response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "409": {
+            "description": "sid already exists",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Username already exists"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Username already exists"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/create personnel req.body"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Personnel"
+        ],
+        "description": "Get all personnel with pagination",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit per page",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnel list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel list response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel list response"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -438,6 +620,26 @@
         },
         "xml": {
           "name": "Unauthorized"
+        }
+      },
+      "Forbidden": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "status": {
+            "type": "number",
+            "example": 403
+          },
+          "message": {
+            "type": "string",
+            "example": "Forbidden"
+          }
+        },
+        "xml": {
+          "name": "Forbidden"
         }
       },
       "Registration req.body": {
@@ -643,6 +845,241 @@
         },
         "xml": {
           "name": "Login successful"
+        }
+      },
+      "create personnel req.body": {
+        "type": "object",
+        "properties": {
+          "sid": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "temp_password": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "official_name": {
+            "type": "string",
+            "example": "Shahbaz"
+          },
+          "designation": {
+            "type": "string",
+            "example": "Officer"
+          },
+          "photograph": {
+            "type": "string",
+            "example": "https://www.google.com"
+          },
+          "dob": {
+            "type": "string",
+            "example": "2000-07-16T07:25:07.000Z"
+          },
+          "blood_group": {
+            "type": "string",
+            "example": "A+"
+          },
+          "identification_mark": {
+            "type": "string",
+            "example": "None"
+          },
+          "posted_at": {
+            "type": "string",
+            "example": "Delhi"
+          },
+          "address": {
+            "type": "string",
+            "example": "Delhi"
+          }
+        },
+        "required": [
+          "sid",
+          "temp_password",
+          "official_name",
+          "designation",
+          "photograph",
+          "dob",
+          "blood_group",
+          "identification_mark",
+          "posted_at",
+          "address"
+        ],
+        "xml": {
+          "name": "create personnel req.body"
+        }
+      },
+      "Personnel created successfully response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel created successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "sid": {
+                "type": "string",
+                "example": "123456789"
+              },
+              "user": {
+                "type": "string",
+                "example": "64aafc98b0370830e5cb5d48"
+              },
+              "official_name": {
+                "type": "string",
+                "example": "Shahbaz"
+              },
+              "designation": {
+                "type": "string",
+                "example": "Officer"
+              },
+              "photograph": {
+                "type": "string",
+                "example": "https://www.google.com"
+              },
+              "dob": {
+                "type": "string",
+                "example": "2000-07-16T07:25:07.000Z"
+              },
+              "blood_group": {
+                "type": "string",
+                "example": "A+"
+              },
+              "identification_mark": {
+                "type": "string",
+                "example": "None"
+              },
+              "posted_at": {
+                "type": "string",
+                "example": "Delhi"
+              },
+              "address": {
+                "type": "string",
+                "example": "Delhi"
+              },
+              "_id": {
+                "type": "string",
+                "example": "64aafc99b0370830e5cb5d4a"
+              },
+              "__v": {
+                "type": "number",
+                "example": 0
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Personnel created successfully response"
+        }
+      },
+      "Personnel list response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel list fetched successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "personnel": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "64aafded69d38a1c547c36ac"
+                    },
+                    "sid": {
+                      "type": "string",
+                      "example": "123456789"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "64aafded69d38a1c547c36aa"
+                        },
+                        "username": {
+                          "type": "string",
+                          "example": "123456789"
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "Shahbaz"
+                        }
+                      }
+                    },
+                    "official_name": {
+                      "type": "string",
+                      "example": "Shahbaz"
+                    },
+                    "designation": {
+                      "type": "string",
+                      "example": "Officer"
+                    },
+                    "photograph": {
+                      "type": "string",
+                      "example": "https://www.google.com"
+                    },
+                    "dob": {
+                      "type": "string",
+                      "example": "2000-07-16T07:25:07.000Z"
+                    },
+                    "blood_group": {
+                      "type": "string",
+                      "example": "A+"
+                    },
+                    "identification_mark": {
+                      "type": "string",
+                      "example": "None"
+                    },
+                    "posted_at": {
+                      "type": "string",
+                      "example": "Delhi"
+                    },
+                    "address": {
+                      "type": "string",
+                      "example": "Delhi"
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": 0
+                    }
+                  }
+                }
+              },
+              "totalPages": {
+                "type": "number",
+                "example": 2
+              },
+              "currentPage": {
+                "type": "string",
+                "example": "1"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Personnel list response"
         }
       }
     },
