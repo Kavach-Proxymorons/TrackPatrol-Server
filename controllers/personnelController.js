@@ -121,10 +121,51 @@ const deleteOnePersonnel = async (req, res, next) => {
     }
 }
 
+const searchPersonnel = async (req, res, next) => {
+    try{
+        console.log("req recieved");
+        // search by name, sid
+        const { q, page, limit } = req.query;
+        console.log(q);
+
+        const personnel = await Personnel.find({
+            $or: [
+                { official_name: { $regex: q, $options: 'i' } },
+                { sid: { $regex: q, $options: 'i' } }
+            ]
+        })
+            .populate('user', 'username name last_login role')
+            .skip((page - 1) * limit)
+            .limit(limit * 1)
+            .exec();
+
+        const count = await Personnel.countDocuments({
+            $or: [
+                { official_name: { $regex: q, $options: 'i' } },
+                { sid: { $regex: q, $options: 'i' } },
+                { email: { $regex: q, $options: 'i' } }
+            ]
+        });
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Personnel list fetched successfully',
+            data: {
+                personnel,
+                totalPages: Math.ceil(count / limit),
+                currentPage: page
+            }
+        });
+    } catch(error){
+        next(error);
+    }
+}
 
 export {
     addPersonnel,
     getPersonnelList,
     getOnePersonnel,
     deleteOnePersonnel,
+    searchPersonnel
 }

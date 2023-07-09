@@ -1,6 +1,11 @@
 import express from "express";
 import { checkAuth, checkAdmin } from "../middlewares/authMiddleware.js";
-import { addPersonnel, getPersonnelList, getOnePersonnel, deleteOnePersonnel } from "../controllers/personnelController.js";
+import { addPersonnel, 
+        getPersonnelList, 
+        getOnePersonnel, 
+        deleteOnePersonnel, 
+        searchPersonnel 
+} from "../controllers/personnelController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
 
@@ -92,6 +97,53 @@ router.get("/",
     validateRequest,
     // checkAuth,
     getPersonnelList
+);
+
+router.get("/search",
+    /*  #swagger.tags = ['Personnel']
+        #swagger.description = 'Search personnel by sid or name'
+        #swagger.parameters['q'] = {
+            in: 'query',
+            description: 'Search query',
+            required: true,
+            type: 'string'
+        }
+        #swagger.parameters['page'] = {
+            in: 'query',
+            description: 'Page number',
+            required: true,
+            type: 'integer'
+        }
+        #swagger.parameters['limit'] = {
+            in: 'query',
+            description: 'Limit per page',
+            required: true,
+            type: 'integer'
+        }
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: 'Personnel list',
+            schema: { $ref: "#/definitions/Personnel list response" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        query("q").exists().withMessage("Search query is required"),
+        query("page").exists().withMessage("Page number is required"),
+        query("limit").exists().withMessage("Limit per page is required"),
+    ],
+    validateRequest,
+    // checkAuth,
+    searchPersonnel
 );
 
 router.get("/:sid",
