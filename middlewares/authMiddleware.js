@@ -43,4 +43,21 @@ const checkAuth = async (req, res, next) => {
     }
 }
 
-export { checkAuth }
+// use checkAdmin after checkAuth
+const checkAdmin = async (req, res, next) => {
+    try {
+        // If user is not admin
+        if(req.role !== 'admin')
+            return res.status(403).json({
+                success: false,
+                status: 403,
+                message: 'Forbidden'
+            });
+        
+        next();
+    } catch (error) {
+        next(error);
+    }
+}
+
+export { checkAuth, checkAdmin }
