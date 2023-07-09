@@ -41,7 +41,7 @@ const getPersonnelList = async (req, res, next) => {
             throw new Error('Invalid query');
 
         const personnel = await Personnel.find()
-            .populate('user', 'username name')
+            .populate('user', 'username name last_login role')
             .skip((page - 1) * limit)
             .limit(limit * 1)
             .exec();
@@ -68,7 +68,7 @@ const getOnePersonnel = async (req, res, next) => {
         const { sid } = req.params;
 
         const personnel = await Personnel.findOne({ sid })
-            .populate('user', 'username name')
+            .populate('user', 'username name last_login role')
             .exec();
 
         if(!personnel){
@@ -88,9 +88,43 @@ const getOnePersonnel = async (req, res, next) => {
     }
 }
 
+const deleteOnePersonnel = async (req, res, next) => {
+    try{
+        const { sid } = req.params;
+
+        const personnel = await Personnel.findOne({ sid })
+
+        if(!personnel){
+            const err = new Error('Personnel not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const deletedUser = await User.findByIdAndDelete(personnel.user._id);
+        const deletedPersonnel = await Personnel.findByIdAndDelete(personnel._id);
+
+        deletedUser.password = undefined;
+
+        const deletedPersonnelData = {
+            personnel: deletedPersonnel,
+            user: deletedUser
+        }
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Personnel deleted successfully',
+            data: deletedPersonnelData
+        });
+    } catch(error){
+        next(error);
+    }
+}
+
 
 export {
     addPersonnel,
     getPersonnelList,
-    getOnePersonnel
+    getOnePersonnel,
+    deleteOnePersonnel,
 }

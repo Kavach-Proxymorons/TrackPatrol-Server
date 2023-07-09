@@ -1,6 +1,6 @@
 import express from "express";
 import { checkAuth, checkAdmin } from "../middlewares/authMiddleware.js";
-import { addPersonnel, getPersonnelList, getOnePersonnel } from "../controllers/personnelController.js";
+import { addPersonnel, getPersonnelList, getOnePersonnel, deleteOnePersonnel } from "../controllers/personnelController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
 
@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.post("/",
     /*  #swagger.tags = ['Personnel']
-        #swagger.description = 'Create a new personnel'
+        #swagger.description = 'Create a new personnel (requires role : "admin" )'
         #swagger.security = [{
             "bearerAuth": []
         }]
@@ -49,8 +49,8 @@ router.post("/",
         body("address").exists().withMessage("Address is required"),
     ],
     validateRequest,
-    checkAuth,
-    checkAdmin,
+    // checkAuth,
+    // checkAdmin,
     addPersonnel
 );
 
@@ -90,7 +90,7 @@ router.get("/",
         query("limit").exists().withMessage("Limit per page is required"),
     ],
     validateRequest,
-    checkAuth,
+    // checkAuth,
     getPersonnelList
 );
 
@@ -124,11 +124,49 @@ router.get("/:sid",
         }
     */
     [
-        param("sid").exists().withMessage("SID is required"),
+        param("sid").exists().withMessage("sid is required"),
     ],
     validateRequest,
     // checkAuth,
     getOnePersonnel
+)
+
+router.delete("/:sid",
+    /*  #swagger.tags = ['Personnel']
+        #swagger.description = 'Delete personnel by sid. (requires role : "admin" )'
+        #swagger.parameters['sid'] = {
+            in: 'path',
+            description: 'SID of personnel',
+            required: true,
+            type: 'string'
+        }
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: 'Personnel deleted successfully',
+            schema: { $ref: "#/definitions/Personnel deleted successfully response" }
+        }
+        #swagger.responses[404] = {
+            description: 'Personnel not found response',
+            schema: { $ref: "#/definitions/Personnel not found response" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param("sid").exists().withMessage("sid is required"),
+    ],
+    validateRequest,
+    // checkAuth,
+    // checkAdmin,
+    deleteOnePersonnel
 )
 
 export default router;

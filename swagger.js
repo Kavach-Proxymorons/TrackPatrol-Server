@@ -13,11 +13,11 @@ const doc = {
   tags: [{
     name: 'Auth',
     description: 'Authentication endpoints'
-    },
-    {
-      name: 'Personnel',
-      description: 'Personnel endpoints'
-    }
+  },
+  {
+    name: 'Personnel',
+    description: 'Personnel endpoints'
+  }
   ],
   servers: [
     {
@@ -268,6 +268,35 @@ const doc = {
       message: "Personnel not found, please check the sid",
       stack: ""
     },
+    "Personnel deleted successfully response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel deleted successfully",
+      "data": {
+        "personnel": {
+          "_id": "64ab2b88aea7531ce0825efd",
+          "sid": "2",
+          "user": "64ab2b88aea7531ce0825efb",
+          "official_name": "Shahbaz",
+          "designation": "Officer",
+          "photograph": "https://www.google.com",
+          "dob": "2000-07-16T07:25:07.000Z",
+          "blood_group": "A+",
+          "identification_mark": "None",
+          "posted_at": "Delhi",
+          "address": "Delhi",
+          "__v": 0
+        },
+        "user": {
+          "_id": "64ab2b88aea7531ce0825efb",
+          "username": "2",
+          "name": "Shahbaz",
+          "role": "personnel",
+          "last_login": "2023-07-09T21:50:00.139Z",
+          "__v": 0
+        }
+      }
+    }
   },
   components: {
     schemas: {

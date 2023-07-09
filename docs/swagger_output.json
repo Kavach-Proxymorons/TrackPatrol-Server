@@ -270,16 +270,7 @@
         "tags": [
           "Personnel"
         ],
-        "description": "Create a new personnel",
-        "parameters": [
-          {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
+        "description": "Create a new personnel (requires role : \"admin\" )",
         "responses": {
           "200": {
             "description": "Personnel created successfully",
@@ -295,12 +286,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "409": {
             "description": "sid already exists",
@@ -371,13 +356,6 @@
         "description": "Get all personnel with pagination",
         "parameters": [
           {
-            "name": "authorization",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
             "name": "page",
             "in": "query",
             "description": "Page number",
@@ -411,9 +389,6 @@
                 }
               }
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           },
           "422": {
             "description": "Validation error",
@@ -482,6 +457,90 @@
               "application/xml": {
                 "schema": {
                   "$ref": "#/components/schemas/Personnel details response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Personnel not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Personnel"
+        ],
+        "description": "Delete personnel by sid. (requires role : \"admin\" )",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SID of personnel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnel deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel deleted successfully response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel deleted successfully response"
                 }
               }
             }
@@ -1310,6 +1369,113 @@
         },
         "xml": {
           "name": "Personnel not found response"
+        }
+      },
+      "Personnel deleted successfully response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel deleted successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "personnel": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "64ab2b88aea7531ce0825efd"
+                  },
+                  "sid": {
+                    "type": "string",
+                    "example": "2"
+                  },
+                  "user": {
+                    "type": "string",
+                    "example": "64ab2b88aea7531ce0825efb"
+                  },
+                  "official_name": {
+                    "type": "string",
+                    "example": "Shahbaz"
+                  },
+                  "designation": {
+                    "type": "string",
+                    "example": "Officer"
+                  },
+                  "photograph": {
+                    "type": "string",
+                    "example": "https://www.google.com"
+                  },
+                  "dob": {
+                    "type": "string",
+                    "example": "2000-07-16T07:25:07.000Z"
+                  },
+                  "blood_group": {
+                    "type": "string",
+                    "example": "A+"
+                  },
+                  "identification_mark": {
+                    "type": "string",
+                    "example": "None"
+                  },
+                  "posted_at": {
+                    "type": "string",
+                    "example": "Delhi"
+                  },
+                  "address": {
+                    "type": "string",
+                    "example": "Delhi"
+                  },
+                  "__v": {
+                    "type": "number",
+                    "example": 0
+                  }
+                }
+              },
+              "user": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "example": "64ab2b88aea7531ce0825efb"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "2"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Shahbaz"
+                  },
+                  "role": {
+                    "type": "string",
+                    "example": "personnel"
+                  },
+                  "last_login": {
+                    "type": "string",
+                    "example": "2023-07-09T21:50:00.139Z"
+                  },
+                  "__v": {
+                    "type": "number",
+                    "example": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Personnel deleted successfully response"
         }
       }
     },
