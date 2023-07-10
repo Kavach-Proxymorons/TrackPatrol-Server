@@ -1,0 +1,4 @@
+sid,temp_password,official_name,designation,photograph,dob,blood_group,identification_mark,posted_at,address
+101,123456789,Shahbaz Ali,officer,https://link.png,2000-07-16,B-,None,Delhi,Delhi
+102,123456789,Madhavan Mukund,officer,https://link.png,2000-07-16,B-,None,Delhi,Delhi
+103,123456789,Harish Guruprasad Ramaswamy,officer,https://link.png,2000-07-16,B-,None,Delhi,Delhi
