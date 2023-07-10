@@ -52,6 +52,11 @@ const bulkCreatePersonnel = async (req, res, next) => {
         // Save all the users
         const bulk_user_create_result = await User.insertMany(users);
 
+        // Remove the password from the bulk_user_create_result
+        bulk_user_create_result.forEach(user => {
+            user.password = undefined;
+        });
+
         // Create a new personnel for each user
         const personnels = parsedCSV.map(personnel => {
             return new Personnel({

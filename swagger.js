@@ -219,7 +219,6 @@ const doc = {
           {
             "username": "101",
             "name": "Shahbaz Ali",
-            "password": "123456789",
             "role": "personnel",
             "_id": "64ab5bb1e68088f3e004906e",
             "last_login": "2023-07-10T01:15:29.111Z",
