@@ -239,6 +239,33 @@ const searchPersonnel = async (req, res, next) => {
     }
 }
 
+const updateOnePersonnel = async (req, res, next) => {
+    try{
+        const { sid } = req.params;
+
+        const personnel = await Personnel.findOne({ sid });
+
+        if(!personnel){
+            const err = new Error('Personnel not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const updatedPersonnel = await Personnel.findOneAndUpdate({ sid }, {
+            ...req.body  // be careful here
+        }, { new: true });
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Personnel updated successfully',
+            data: updatedPersonnel
+        });
+    } catch(error){
+        next(error);
+    }
+}
+
 export {
     addPersonnel,
     bulkCreatePersonnel,
@@ -246,5 +273,6 @@ export {
     getOnePersonnel,
     bulkDeletePersonnel,
     deleteOnePersonnel,
-    searchPersonnel
+    searchPersonnel,
+    updateOnePersonnel
 }

@@ -6,7 +6,8 @@ import { addPersonnel,
         getOnePersonnel, 
         deleteOnePersonnel, 
         searchPersonnel,
-        bulkDeletePersonnel 
+        bulkDeletePersonnel,
+        updateOnePersonnel, 
 } from "../controllers/personnelController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
@@ -316,5 +317,61 @@ router.delete("/:sid",
     // checkAdmin,
     deleteOnePersonnel
 )
+
+router.put("/:sid",
+    /*  #swagger.tags = ['Personnel']
+        #swagger.description = 'Update personnel by sid. (requires role : "admin" )'
+        #swagger.parameters['sid'] = {
+            in: 'path',
+            description: 'SID of personnel',
+            required: true,
+            type: 'string'
+        }
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                "application/json": {
+                    schema: { $ref: "#/definitions/create personnel req.body" }
+                }
+            }
+        }
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: 'Personnel updated successfully',
+            schema: { $ref: "#/definitions/Personnel updated successfully response" }
+        }
+        #swagger.responses[404] = {
+            description: 'Personnel not found response',
+            schema: { $ref: "#/definitions/Personnel not found response" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        body("sid").exists().withMessage("SID is required"),
+        body("official_name").exists().withMessage("Official name is required"),
+        body("designation").exists().withMessage("Designation is required"),
+        body("photograph").exists().withMessage("Photograph is required"),
+        body("dob").exists().withMessage("Date of birth is required"),
+        body("blood_group").exists().withMessage("Blood group is required"),
+        body("identification_mark").exists().withMessage("Identification mark is required"),
+        body("posted_at").exists().withMessage("Posted at is required"),
+        body("address").exists().withMessage("Address is required"),
+    ],
+    validateRequest,
+    // checkAuth,
+    // checkAdmin,
+    updateOnePersonnel
+)
+        
+
 
 export default router;

@@ -348,6 +348,25 @@ const doc = {
           "__v": 0
         }
       }
+    },
+    "Personnel updated successfully response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel updated successfully",
+      "data": {
+        "_id": "64aafded69d38a1c547c36ac",
+        "sid": "123456789",
+        "user": "64aafded69d38a1c547c36aa",
+        "official_name": "Shahbaz",
+        "designation": "Officer",
+        "photograph": "https://www.google.com",
+        "dob": "2000-07-16T07:25:07.000Z",
+        "blood_group": "B-",
+        "identification_mark": "None",
+        "posted_at": "Delhi",
+        "address": "Delhi",
+        "__v": 0
+      }
     }
   },
   components: {

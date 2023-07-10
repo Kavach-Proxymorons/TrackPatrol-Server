@@ -434,21 +434,18 @@
           "Personnel"
         ],
         "description": "Endpoint to get the csv template for bulk personnel creation",
-        "responses": {
-          "200": {
-            "description": "Personnel bulk creation template",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Personnel bulk creation template"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "$ref": "#/components/schemas/Personnel bulk creation template"
-                }
-              }
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
             }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "security": [
@@ -779,6 +776,100 @@
             "bearerAuth": []
           }
         ]
+      },
+      "put": {
+        "tags": [
+          "Personnel"
+        ],
+        "description": "Update personnel by sid. (requires role : \"admin\" )",
+        "parameters": [
+          {
+            "name": "sid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "SID of personnel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnel updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel updated successfully response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel updated successfully response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Personnel not found response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel not found response"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/create personnel req.body"
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/personnel/bulk_delete": {
@@ -1934,6 +2025,79 @@
         },
         "xml": {
           "name": "Personnel deleted successfully response"
+        }
+      },
+      "Personnel updated successfully response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel updated successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "64aafded69d38a1c547c36ac"
+              },
+              "sid": {
+                "type": "string",
+                "example": "123456789"
+              },
+              "user": {
+                "type": "string",
+                "example": "64aafded69d38a1c547c36aa"
+              },
+              "official_name": {
+                "type": "string",
+                "example": "Shahbaz"
+              },
+              "designation": {
+                "type": "string",
+                "example": "Officer"
+              },
+              "photograph": {
+                "type": "string",
+                "example": "https://www.google.com"
+              },
+              "dob": {
+                "type": "string",
+                "example": "2000-07-16T07:25:07.000Z"
+              },
+              "blood_group": {
+                "type": "string",
+                "example": "B-"
+              },
+              "identification_mark": {
+                "type": "string",
+                "example": "None"
+              },
+              "posted_at": {
+                "type": "string",
+                "example": "Delhi"
+              },
+              "address": {
+                "type": "string",
+                "example": "Delhi"
+              },
+              "__v": {
+                "type": "number",
+                "example": 0
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Personnel updated successfully response"
         }
       }
     },
