@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-
+// To Do : Add field for mapped rfids
 const personnelSchema = new mongoose.Schema({
     sid: {
         type: String,
@@ -9,6 +9,13 @@ const personnelSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    gender: {
+        type: String,
+        required: true
+    },
+    rfid_tag: {
+        type: String,
     },
     official_name: {
         type: String,
