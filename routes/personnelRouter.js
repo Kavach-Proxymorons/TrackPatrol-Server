@@ -62,9 +62,23 @@ router.post("/",
     addPersonnel
 );
 
+router.get("/bulk_create/get_template",
+    /*  #swagger.tags = ['Personnel']
+        #swagger.description = 'Endpoint to get the csv template for bulk personnel creation'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+    */
+    checkAuth,
+    checkAdmin,
+    (req, res) => {
+        res.download("uploads/bulk_create_personnel_template.csv");
+    }
+)
+
 router.post("/bulk_create",
     /*  #swagger.tags = ['Personnel']
-        #swagger.description = 'Endpoint to create multiple personnel records from a csv file (requires role : "admin")'
+        #swagger.description = 'Endpoint to create multiple personnel records from a csv file (requires role : "admin") sample_file: https://docs.google.com/spreadsheets/d/1nREThXMnFuE5Rgo3XyY9hG5FYOPHe1J2o5NpZEsR26E/edit?usp=sharing'
         #swagger.security = [{
             "bearerAuth": []
         }]

@@ -428,12 +428,42 @@
         ]
       }
     },
+    "/api/v1/personnel/bulk_create/get_template": {
+      "get": {
+        "tags": [
+          "Personnel"
+        ],
+        "description": "Endpoint to get the csv template for bulk personnel creation",
+        "responses": {
+          "200": {
+            "description": "Personnel bulk creation template",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel bulk creation template"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel bulk creation template"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/v1/personnel/bulk_create": {
       "post": {
         "tags": [
           "Personnel"
         ],
-        "description": "Endpoint to create multiple personnel records from a csv file (requires role : \"admin\")",
+        "description": "Endpoint to create multiple personnel records from a csv file (requires role : \"admin\") sample_file: https://docs.google.com/spreadsheets/d/1nREThXMnFuE5Rgo3XyY9hG5FYOPHe1J2o5NpZEsR26E/edit?usp=sharing",
         "responses": {
           "200": {
             "description": "Personnel bulk created successfully",
