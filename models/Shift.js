@@ -29,7 +29,7 @@ const shiftSchema = new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Personnel'
             },
-            gps_data: [
+            gps_data: [  // create a new schema for gps_data
                 {
                     timestamp: {
                         type: Date,
