@@ -210,6 +210,40 @@ const doc = {
         "__v": 0
       }
     },
+    "Personnel bulk creation successful response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel created successfully",
+      "data": {
+        "bulk_user_create_result": [
+          {
+            "username": "101",
+            "name": "Shahbaz Ali",
+            "password": "123456789",
+            "role": "personnel",
+            "_id": "64ab5bb1e68088f3e004906e",
+            "last_login": "2023-07-10T01:15:29.111Z",
+            "__v": 0
+          },
+        ],
+        "bulk_personnel_create_result": [
+          {
+            "sid": "101",
+            "user": "64ab5bb1e68088f3e004906e",
+            "official_name": "Shahbaz Ali",
+            "designation": "officer",
+            "photograph": "https://link.png",
+            "dob": "2000-07-16T00:00:00.000Z",
+            "blood_group": "B-",
+            "identification_mark": "None",
+            "posted_at": "Delhi",
+            "address": "Delhi",
+            "_id": "64ab5bb1e68088f3e0049072",
+            "__v": 0
+          },
+        ]
+      }
+    },
     "Personnel list response": {
       "success": true,
       "status": 200,
