@@ -1,5 +1,6 @@
 import Personnel from "../models/Personnel.js";
 import User from "../models/User.js";
+import parseCSV from "../utils/csvParser.js";
 
 const addPersonnel = async (req, res, next) => {
     try{
@@ -31,6 +32,51 @@ const addPersonnel = async (req, res, next) => {
     } catch(error){
         next(error);
     }
+}
+
+const bulkCreatePersonnel = async (req, res, next) => {
+    // Todo : update the code to better handle the cases when the user already exists
+    try{
+        const parsedCSV = await parseCSV(req.file.path, true);
+        
+        // Create a new user for each personnel
+        const users = parsedCSV.map(personnel => {
+            return new User({
+                username: personnel.sid,
+                name: personnel.official_name,
+                password: personnel.temp_password,
+                role: "personnel"
+            });
+        });
+
+        // Save all the users
+        const bulk_user_create_result = await User.insertMany(users);
+
+        // Create a new personnel for each user
+        const personnels = parsedCSV.map(personnel => {
+            return new Personnel({
+                ...personnel,
+                user: users.find(user => user.username === personnel.sid)._id
+            });
+        });
+
+        // Save all the personnels
+        const bulk_personnel_create_result = await Personnel.insertMany(personnels);
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Personnel created successfully',
+            data: {
+                bulk_user_create_result,
+                bulk_personnel_create_result
+            }
+        });
+
+    } catch(error){
+        next(error);
+    }
+
 }
 
 const getPersonnelList = async (req, res, next) => {
@@ -195,6 +241,7 @@ const searchPersonnel = async (req, res, next) => {
 
 export {
     addPersonnel,
+    bulkCreatePersonnel,
     getPersonnelList,
     getOnePersonnel,
     bulkDeletePersonnel,

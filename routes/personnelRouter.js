@@ -1,6 +1,7 @@
 import express from "express";
 import { checkAuth, checkAdmin } from "../middlewares/authMiddleware.js";
-import { addPersonnel, 
+import { addPersonnel,
+        bulkCreatePersonnel, 
         getPersonnelList, 
         getOnePersonnel, 
         deleteOnePersonnel, 
@@ -9,6 +10,7 @@ import { addPersonnel,
 } from "../controllers/personnelController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
+import uploadFile from "../utils/uploads.js";
 
 const router = express.Router();
 
@@ -59,6 +61,46 @@ router.post("/",
     // checkAdmin,
     addPersonnel
 );
+
+router.post("/bulk_create",
+    /*  #swagger.tags = ['Personnel']
+        #swagger.description = 'Endpoint to create multiple personnel records from a csv file (requires role : "admin")'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.consumes = ['multipart/form-data']
+        #swagger.requestBody = {
+            required: true,
+            "@content": {
+                "multipart/form-data": {
+                    schema: {
+                        type: "object",
+                        properties: {
+                            csv_file: {
+                                type: "string",
+                                format: "binary"
+                            }
+                        },
+                        required: ["csv_file"]
+                    }
+                }
+            }
+        }
+        #swagger.responses[200] = {
+            description: 'Personnel bulk created successfully',
+            schema: { $ref: "#/definitions/Personnel bulk creation successful response" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    uploadFile("csv_file"),
+    validateRequest,
+    // checkAuth,
+    // checkAdmin,
+    bulkCreatePersonnel
+)
 
 router.get("/",
     /*  #swagger.tags = ['Personnel']
