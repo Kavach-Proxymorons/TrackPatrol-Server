@@ -46,16 +46,16 @@ const checkAuth = async (req, res, next) => {
 // use checkAdmin after checkAuth
 const checkAdmin = async (req, res, next) => {
     try {
-        next(); // remove in production
+        //next(); // remove in production
 
-        // if(req.role === 'admin')
-        //     return next();
+        if(req.role === 'admin')
+            return next();
 
-        // return res.status(403).json({
-        //     success: false,
-        //     status: 403,
-        //     message: 'Forbidden'
-        // });
+        return res.status(403).json({
+            success: false,
+            status: 403,
+            message: 'Forbidden'
+        });
     } catch (error) {
         next(error);
     }

@@ -265,7 +265,7 @@
         }
       }
     },
-    "/api/v1/personnel/": {
+    "/api/v1/admin/personnel/": {
       "post": {
         "tags": [
           "Personnel"
@@ -428,7 +428,7 @@
         ]
       }
     },
-    "/api/v1/personnel/bulk_create/get_template": {
+    "/api/v1/admin/personnel/bulk_create/get_template": {
       "get": {
         "tags": [
           "Personnel"
@@ -455,7 +455,7 @@
         ]
       }
     },
-    "/api/v1/personnel/bulk_create": {
+    "/api/v1/admin/personnel/bulk_create": {
       "post": {
         "tags": [
           "Personnel"
@@ -519,7 +519,7 @@
         }
       }
     },
-    "/api/v1/personnel/search": {
+    "/api/v1/admin/personnel/search": {
       "get": {
         "tags": [
           "Personnel"
@@ -608,7 +608,7 @@
         ]
       }
     },
-    "/api/v1/personnel/{sid}": {
+    "/api/v1/admin/personnel/{sid}": {
       "get": {
         "tags": [
           "Personnel"
@@ -872,7 +872,7 @@
         }
       }
     },
-    "/api/v1/personnel/bulk_delete": {
+    "/api/v1/admin/personnel/bulk_delete": {
       "delete": {
         "tags": [
           "Personnel"
@@ -1548,10 +1548,6 @@
                     "name": {
                       "type": "string",
                       "example": "Shahbaz Ali"
-                    },
-                    "password": {
-                      "type": "string",
-                      "example": "123456789"
                     },
                     "role": {
                       "type": "string",

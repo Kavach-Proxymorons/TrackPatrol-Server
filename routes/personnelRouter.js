@@ -58,14 +58,14 @@ router.post("/",
         body("address").exists().withMessage("Address is required"),
     ],
     validateRequest,
-    // checkAuth,
-    // checkAdmin,
+    checkAuth,
+    checkAdmin,
     addPersonnel
 );
 
 router.get("/bulk_create/get_template",
     /*  #swagger.tags = ['Personnel']
-        #swagger.description = 'Endpoint to get the csv template for bulk personnel creation'
+        #swagger.description = 'Endpoint to get the csv template for bulk personnel creation (requires role : "admin" )'
         #swagger.security = [{
             "bearerAuth": []
         }]
@@ -112,14 +112,14 @@ router.post("/bulk_create",
     */
     uploadFile("csv_file"),
     validateRequest,
-    // checkAuth,
-    // checkAdmin,
+    checkAuth,
+    checkAdmin,
     bulkCreatePersonnel
 )
 
 router.get("/",
     /*  #swagger.tags = ['Personnel']
-        #swagger.description = 'Get all personnel with pagination'
+        #swagger.description = 'Get all personnel with pagination (requires role : "admin" )'
         #swagger.parameters['page'] = {
             in: 'query',
             description: 'Page number',
@@ -153,13 +153,14 @@ router.get("/",
         query("limit").exists().withMessage("Limit per page is required"),
     ],
     validateRequest,
-    // checkAuth,
+    checkAuth,
+    checkAdmin,
     getPersonnelList
 );
 
 router.get("/search",
     /*  #swagger.tags = ['Personnel']
-        #swagger.description = 'Search personnel by sid or name'
+        #swagger.description = 'Search personnel by sid or name (requires role : "admin" )'
         #swagger.parameters['q'] = {
             in: 'query',
             description: 'Search query',
@@ -200,13 +201,14 @@ router.get("/search",
         query("limit").exists().withMessage("Limit per page is required"),
     ],
     validateRequest,
-    // checkAuth,
+    checkAuth,
+    checkAdmin,
     searchPersonnel
 );
 
 router.get("/:sid",
     /*  #swagger.tags = ['Personnel']
-        #swagger.description = 'Get personnel by sid'
+        #swagger.description = 'Get personnel by sid (requires role : "admin" )'
         #swagger.parameters['sid'] = {
             in: 'path',
             description: 'SID of personnel',
@@ -237,7 +239,8 @@ router.get("/:sid",
         param("sid").exists().withMessage("sid is required"),
     ],
     validateRequest,
-    // checkAuth,
+    checkAuth,
+    checkAdmin,
     getOnePersonnel
 )
 
@@ -276,7 +279,8 @@ router.delete("/bulk_delete",
         body("sids").exists().withMessage("sids is required"),
     ],
     validateRequest,
-    // checkAuth,
+    checkAuth,
+    checkAdmin,
     bulkDeletePersonnel 
 )
 
@@ -313,8 +317,8 @@ router.delete("/:sid",
         param("sid").exists().withMessage("sid is required"),
     ],
     validateRequest,
-    // checkAuth,
-    // checkAdmin,
+    checkAuth,
+    checkAdmin,
     deleteOnePersonnel
 )
 
@@ -367,8 +371,8 @@ router.put("/:sid",
         body("address").exists().withMessage("Address is required"),
     ],
     validateRequest,
-    // checkAuth,
-    // checkAdmin,
+    checkAuth,
+    checkAdmin,
     updateOnePersonnel
 )
         
