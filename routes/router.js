@@ -5,6 +5,6 @@ import personnelRouter from "./personnelRouter.js";
 const router = express.Router();
 
 router.use("/auth", authRouter);
-router.use("/personnel", personnelRouter);
+router.use("/admin/personnel", personnelRouter);
 
 export default router;
