@@ -434,7 +434,29 @@ const doc = {
       "end_time" : "2021-07-16T07:25:07.000Z",
       "note": "None",
     },
-    
+    "Get duty res.body": {
+      "success": true,
+      "status": 200,
+      "message": "Duty fetched successfully",
+      "data": {
+        "duty": [
+          {
+            "_id": "64adc1982a9b6864cc61b521",
+            "title": "Ghaziabad Mela Duty",
+            "description": "Ghaziabad Mela Duty",
+            "venue": "Ghaziabad",
+            "location": "28.6543728,77.409437",
+            "start_time": "2023-07-16T07:25:07.000Z",
+            "end_time": "2023-07-18T07:25:07.000Z",
+            "note": "None",
+            "shifts": [],
+            "__v": 0
+          }
+        ],
+        "totalPages": 2,
+        "currentPage": "1"
+      }
+    }
   },
   components: {
     schemas: {
