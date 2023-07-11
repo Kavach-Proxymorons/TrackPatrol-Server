@@ -1,7 +1,7 @@
 import express from "express";
 import authRouter from "./authRouter.js";
-import personnelRouter from "./personnelRouter.js";
-import adminHardwareRouter from "./adminHardwareRouter.js";
+import personnelRouter from "./admin/personnelRouter.js";
+import adminHardwareRouter from "./admin/adminHardwareRouter.js";
 
 const router = express.Router();
 

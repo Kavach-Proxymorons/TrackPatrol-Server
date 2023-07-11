@@ -1,10 +1,10 @@
 import express from 'express';
 import { body, query } from 'express-validator';
-import validateRequest from '../utils/requestValidator.js';
-import { checkAuth, checkAdmin } from '../middlewares/authMiddleware.js';
+import validateRequest from '../../utils/requestValidator.js';
+import { checkAuth, checkAdmin } from '../../middlewares/authMiddleware.js';
 import { hardwareRegisterController,
     fetchAllHardwareController
-} from '../controllers/adminHardwareController.js';
+} from '../../controllers/adminHardwareController.js';
 
 const Router = express.Router();
 

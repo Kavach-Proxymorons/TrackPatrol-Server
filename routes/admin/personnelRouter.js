@@ -1,5 +1,5 @@
 import express from "express";
-import { checkAuth, checkAdmin } from "../middlewares/authMiddleware.js";
+import { checkAuth, checkAdmin } from "../../middlewares/authMiddleware.js";
 import { addPersonnel,
         bulkCreatePersonnel, 
         getPersonnelList, 
@@ -8,10 +8,10 @@ import { addPersonnel,
         searchPersonnel,
         bulkDeletePersonnel,
         updateOnePersonnel, 
-} from "../controllers/personnelController.js";
+} from "../../controllers/personnelController.js";
 import { body, query, param } from "express-validator";
-import validateRequest from "../utils/requestValidator.js";
-import uploadFile from "../utils/uploads.js";
+import validateRequest from "../../utils/requestValidator.js";
+import uploadFile from "../../utils/uploads.js";
 
 const router = express.Router();
 
