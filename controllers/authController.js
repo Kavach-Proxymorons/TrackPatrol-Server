@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 
-const authController = async (req, res) => {
+const authController = async (req, res, next) => {
     try{
         // Remove the password from the user object
         req.user.password = undefined;
@@ -48,7 +48,7 @@ const registerController = async (req, res, next) => {
     }
 }
 
-const loginController = async (req, res) => {
+const loginController = async (req, res, next) => {
     try{
         const { username, password } = req.body;
 
