@@ -33,7 +33,7 @@ const hardwareSchema = new mongoose.Schema({
 });
 
 hardwareSchema.post('save', function(error, doc, next) {
-    if (error.name === 'MongoError' && error.code === 11000) {
+    if (error.name === 'MongoServerError' && error.code === 11000) {
         const err = new Error('hardware_id already exists');
         err.status = 409;
         next(err);

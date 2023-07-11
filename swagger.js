@@ -366,7 +366,58 @@ const doc = {
         "address": "Delhi",
         "__v": 0
       }
+    },
+    "create hardware req.body": {
+      "hardware_id": "1",
+      "secret": "123456789",
+      "name": "uhf rfid unit 1",
+      "description": "uhf rfid unit 1",
+      "type": "uhf rfid",
+      "status": "idle"
+    },
+    "Hardware created successfully response": {
+      "success": true,
+      "status": 200,
+      "message": "Hardware registered successfully",
+      "data": {
+        "hardware_id": "2",
+        "secret": "123456789",
+        "name": "uhf rfid unit 1",
+        "description": "uhf rfid unit 1",
+        "type": "uhf rfid",
+        "status": "idle",
+        "_id": "64adad835080ec7a50ea369f",
+        "__v": 0
+      }
+    },
+    "Hardware_id already exists response": {
+      "success": false,
+      "status": 409,
+      "message": "Hardware id already exists",
+      "stack": ""
+    },
+    "Hardware fetched successfully response": {
+      "success": true,
+      "status": 200,
+      "message": "Hardware fetched successfully",
+      "data": {
+        "hardware": [
+          {
+            "_id": "64ac934f0a1b0e81592ef533",
+            "hardware_id": "1",
+            "secret": "123456789",
+            "name": "uhf rfid unit 1",
+            "description": "uhf rfid unit 1",
+            "type": "uhf rfid",
+            "status": "idle",
+            "__v": 0
+          }
+        ],
+        "totalPages": 2,
+        "currentPage": "1"
+      }
     }
+    
   },
   components: {
     schemas: {
