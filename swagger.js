@@ -49,7 +49,7 @@ const doc = {
     Success: {
       success: true,
       status: 200,
-      message: "Success message",
+      message: "Successful",
       data: {}
     },
     "Internal server error": {
@@ -144,49 +144,6 @@ const doc = {
         }
       }
     },
-    /**const personnelSchema = new mongoose.Schema({
-    sid: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-    },
-    official_name: {
-        type: String,
-        required: true
-    },
-    designation: {
-        type: String,
-        required: true
-    },
-    photograph: {
-        type: String,
-        required: true
-    },
-    dob: {
-        type: Date,
-        required: true
-    },
-    blood_group: {
-        type: String,
-        required: true
-    },
-    identification_mark: {
-        type: String,
-        required: true
-    },
-    posted_at: {
-        type: String,
-        required: true
-    },
-    address: {
-        type: String,
-        required: true
-    }
-}); */
     "create personnel req.body": {
       $sid: "123456789",
       $temp_password: "123456789",

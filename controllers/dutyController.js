@@ -1,4 +1,4 @@
-import Duty from '../models/Duty.js'
+import Duty from '../models/Duty.js';
 
 const createDuty = async (req, res, next) => {
     try{
