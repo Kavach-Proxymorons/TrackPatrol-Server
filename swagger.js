@@ -15,9 +15,17 @@ const doc = {
     description: 'Authentication endpoints'
   },
   {
-    name: 'Personnel',
+    name: 'Admin : Personnel',
     description: 'Personnel endpoints'
-  }
+  },
+  {
+    name: 'Admin : Duty',
+    description: 'Duty endpoints'
+  },
+  {
+    name: 'Admin : Hardware',
+    description: 'Admin hardware endpoints'
+  },
   ],
   servers: [
     {
@@ -416,7 +424,16 @@ const doc = {
         "totalPages": 2,
         "currentPage": "1"
       }
-    }
+    },
+    "Create duty req.body": {
+      "title" : "Ghaziabad Mela Duty",
+      "description" : "Ghaziabad Mela Duty",
+      "venue" : "Ghaziabad",
+      "location" : "28.6543728,77.409437",
+      "start_time" : "2021-07-16T07:25:07.000Z",
+      "end_time" : "2021-07-16T07:25:07.000Z",
+      "note": "None",
+    },
     
   },
   components: {

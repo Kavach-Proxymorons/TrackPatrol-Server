@@ -8,8 +8,8 @@ import { hardwareRegisterController,
 
 const Router = express.Router();
 
-Router.post("/register",
-    /*  #swagger.tags = ['Admin-Hardware']
+Router.post("/",
+    /*  #swagger.tags = ['Admin : Hardware']
         #swagger description = 'Endpoint to register a new Hardware',
         #swagger.security = [{
             "bearerAuth": []
@@ -59,7 +59,7 @@ Router.post("/register",
 );
 
 Router.get("/",
-    /*  #swagger.tags = ['Admin-Hardware']
+    /*  #swagger.tags = ['Admin : Hardware']
         #swagger.description = 'Endpoint to fetch all Hardware',
         #swagger.security = [{
             "bearerAuth": []

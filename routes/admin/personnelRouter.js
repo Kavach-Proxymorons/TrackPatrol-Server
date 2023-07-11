@@ -16,7 +16,7 @@ import uploadFile from "../../utils/uploads.js";
 const router = express.Router();
 
 router.post("/",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Create a new personnel (requires role : "admin" )'
         #swagger.security = [{
             "bearerAuth": []
@@ -64,7 +64,7 @@ router.post("/",
 );
 
 router.get("/bulk_create/get_template",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Endpoint to get the csv template for bulk personnel creation (requires role : "admin" )'
         #swagger.security = [{
             "bearerAuth": []
@@ -78,7 +78,7 @@ router.get("/bulk_create/get_template",
 )
 
 router.post("/bulk_create",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Endpoint to create multiple personnel records from a csv file (requires role : "admin") sample_file: https://docs.google.com/spreadsheets/d/1nREThXMnFuE5Rgo3XyY9hG5FYOPHe1J2o5NpZEsR26E/edit?usp=sharing'
         #swagger.security = [{
             "bearerAuth": []
@@ -118,7 +118,7 @@ router.post("/bulk_create",
 )
 
 router.get("/",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Get all personnel with pagination (requires role : "admin" )'
         #swagger.parameters['page'] = {
             in: 'query',
@@ -159,7 +159,7 @@ router.get("/",
 );
 
 router.get("/search",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Search personnel by sid or name (requires role : "admin" )'
         #swagger.parameters['q'] = {
             in: 'query',
@@ -207,7 +207,7 @@ router.get("/search",
 );
 
 router.get("/:sid",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Get personnel by sid (requires role : "admin" )'
         #swagger.parameters['sid'] = {
             in: 'path',
@@ -245,7 +245,7 @@ router.get("/:sid",
 )
 
 router.delete("/bulk_delete",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Delete multiple personnel by sid. (requires role : "admin" )'
         #swagger.requestBody = {
             required: true,
@@ -285,7 +285,7 @@ router.delete("/bulk_delete",
 )
 
 router.delete("/:sid",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Delete personnel by sid. (requires role : "admin" )'
         #swagger.parameters['sid'] = {
             in: 'path',
@@ -323,7 +323,7 @@ router.delete("/:sid",
 )
 
 router.put("/:sid",
-    /*  #swagger.tags = ['Personnel']
+    /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Update personnel by sid. (requires role : "admin" )'
         #swagger.parameters['sid'] = {
             in: 'path',

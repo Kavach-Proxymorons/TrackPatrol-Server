@@ -21,8 +21,16 @@
       "description": "Authentication endpoints"
     },
     {
-      "name": "Personnel",
+      "name": "Admin : Personnel",
       "description": "Personnel endpoints"
+    },
+    {
+      "name": "Admin : Duty",
+      "description": "Duty endpoints"
+    },
+    {
+      "name": "Admin : Hardware",
+      "description": "Admin hardware endpoints"
     }
   ],
   "paths": {
@@ -268,7 +276,7 @@
     "/api/v1/admin/personnel/": {
       "post": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Create a new personnel (requires role : \"admin\" )",
         "parameters": [
@@ -366,7 +374,7 @@
       },
       "get": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Get all personnel with pagination (requires role : \"admin\" )",
         "parameters": [
@@ -459,7 +467,7 @@
     "/api/v1/admin/personnel/bulk_create/get_template": {
       "get": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Endpoint to get the csv template for bulk personnel creation (requires role : \"admin\" )",
         "parameters": [
@@ -489,7 +497,7 @@
     "/api/v1/admin/personnel/bulk_create": {
       "post": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Endpoint to create multiple personnel records from a csv file (requires role : \"admin\") sample_file: https://docs.google.com/spreadsheets/d/1nREThXMnFuE5Rgo3XyY9hG5FYOPHe1J2o5NpZEsR26E/edit?usp=sharing",
         "parameters": [
@@ -568,7 +576,7 @@
     "/api/v1/admin/personnel/search": {
       "get": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Search personnel by sid or name (requires role : \"admin\" )",
         "parameters": [
@@ -670,7 +678,7 @@
     "/api/v1/admin/personnel/{sid}": {
       "get": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Get personnel by sid (requires role : \"admin\" )",
         "parameters": [
@@ -767,7 +775,7 @@
       },
       "delete": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Delete personnel by sid. (requires role : \"admin\" )",
         "parameters": [
@@ -864,7 +872,7 @@
       },
       "put": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Update personnel by sid. (requires role : \"admin\" )",
         "parameters": [
@@ -973,7 +981,7 @@
     "/api/v1/admin/personnel/bulk_delete": {
       "delete": {
         "tags": [
-          "Personnel"
+          "Admin : Personnel"
         ],
         "description": "Delete multiple personnel by sid. (requires role : \"admin\" )",
         "parameters": [
@@ -1070,10 +1078,10 @@
         }
       }
     },
-    "/api/v1/admin/hardware/register": {
+    "/api/v1/admin/hardware/": {
       "post": {
         "tags": [
-          "Admin-Hardware"
+          "Admin : Hardware"
         ],
         "description": "",
         "parameters": [
@@ -1180,12 +1188,10 @@
             }
           }
         }
-      }
-    },
-    "/api/v1/admin/hardware/": {
+      },
       "get": {
         "tags": [
-          "Admin-Hardware"
+          "Admin : Hardware"
         ],
         "description": "Endpoint to fetch all Hardware",
         "parameters": [
@@ -1285,6 +1291,59 @@
             "bearerAuth": []
           }
         ]
+      }
+    },
+    "/api/v1/admin/duty/": {
+      "post": {
+        "tags": [
+          "Admin : Duty"
+        ],
+        "description": "Endpoint to create a new duty.",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Create duty req.body"
+              }
+            }
+          }
+        }
       }
     }
   },
@@ -2610,6 +2669,42 @@
         },
         "xml": {
           "name": "Hardware fetched successfully response"
+        }
+      },
+      "Create duty req.body": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "example": "Ghaziabad Mela Duty"
+          },
+          "description": {
+            "type": "string",
+            "example": "Ghaziabad Mela Duty"
+          },
+          "venue": {
+            "type": "string",
+            "example": "Ghaziabad"
+          },
+          "location": {
+            "type": "string",
+            "example": "28.6543728,77.409437"
+          },
+          "start_time": {
+            "type": "string",
+            "example": "2021-07-16T07:25:07.000Z"
+          },
+          "end_time": {
+            "type": "string",
+            "example": "2021-07-16T07:25:07.000Z"
+          },
+          "note": {
+            "type": "string",
+            "example": "None"
+          }
+        },
+        "xml": {
+          "name": "Create duty req.body"
         }
       }
     },
