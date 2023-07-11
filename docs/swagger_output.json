@@ -1365,6 +1365,7 @@
         "tags": [
           "Admin : Duty"
         ],
+        "summary": "Get all duty in sorted order.",
         "description": "Endpoint to get all duty in sorted order.",
         "parameters": [
           {
@@ -1454,6 +1455,87 @@
                 "schema": {
                   "$ref": "#/components/schemas/Internal server error"
                 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/shift/": {
+      "post": {
+        "tags": [
+          "Admin : Shift"
+        ],
+        "summary": "creates a new shift for a duty.",
+        "description": "Endpoint to create a new shift.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Create shift req.body"
               }
             }
           }
@@ -2901,6 +2983,89 @@
         },
         "xml": {
           "name": "Get duty res.body"
+        }
+      },
+      "Create shift req.body": {
+        "type": "object",
+        "properties": {
+          "shift_name": {
+            "type": "string",
+            "example": "Ghaziabad Mela Duty Shift 1"
+          },
+          "start_time": {
+            "type": "string",
+            "example": "2023-07-18T07:25:07.000Z"
+          },
+          "end_time": {
+            "type": "string",
+            "example": "2023-07-18T07:25:07.000Z"
+          },
+          "duty": {
+            "type": "string",
+            "example": "64adc1982a9b6864cc61b521"
+          }
+        },
+        "xml": {
+          "name": "Create shift req.body"
+        }
+      },
+      "Shift created successfully response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Shift created successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "shift_name": {
+                "type": "string",
+                "example": "Ghaziabad Mela Duty Shift 3"
+              },
+              "duty": {
+                "type": "string",
+                "example": "64adc1982a9b6864cc61b521"
+              },
+              "start_time": {
+                "type": "string",
+                "example": "2023-07-18T07:25:07.000Z"
+              },
+              "end_time": {
+                "type": "string",
+                "example": "2023-07-18T07:25:07.000Z"
+              },
+              "hardwares_attached": {
+                "type": "array",
+                "example": [],
+                "items": {}
+              },
+              "_id": {
+                "type": "string",
+                "example": "64ade0eabd76d9ec1d2dd9c9"
+              },
+              "personnel_assigned": {
+                "type": "array",
+                "example": [],
+                "items": {}
+              },
+              "__v": {
+                "type": "number",
+                "example": 0
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Shift created successfully response"
         }
       }
     },

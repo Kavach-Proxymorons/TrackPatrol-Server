@@ -456,7 +456,29 @@ const doc = {
         "totalPages": 2,
         "currentPage": "1"
       }
-    }
+    },
+    "Create shift req.body": {
+      "shift_name": "Ghaziabad Mela Duty Shift 1",
+      "start_time": "2023-07-18T07:25:07.000Z",
+      "end_time": "2023-07-18T07:25:07.000Z",
+      "duty": "64adc1982a9b6864cc61b521"
+    },
+    "Shift created successfully response": {
+      "success": true,
+      "status": 200,
+      "message": "Shift created successfully",
+      "data": {
+        "shift_name": "Ghaziabad Mela Duty Shift 3",
+        "duty": "64adc1982a9b6864cc61b521",
+        "start_time": "2023-07-18T07:25:07.000Z",
+        "end_time": "2023-07-18T07:25:07.000Z",
+        "hardwares_attached": [],
+        "_id": "64ade0eabd76d9ec1d2dd9c9",
+        "personnel_assigned": [],
+        "__v": 0
+      }
+    },
+
   },
   components: {
     schemas: {

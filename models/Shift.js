@@ -58,3 +58,5 @@ const shiftSchema = new mongoose.Schema({
 });
 
 const Shift = mongoose.model('Shift', shiftSchema);
+
+export default Shift;
