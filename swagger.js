@@ -436,7 +436,7 @@ const doc = {
       }
     },
     "Add personnel to shift req.body": {
-      "personnel_array": ["64aafded69d38a1c547c36ac"]
+      "personnel_array": ["64aafded69d38a1c547c36ac", "64ab66a2035b6ed93140a9d0", "64aafded69d38a1c547c36ad"]
     },
     "Personnel added to the shift response": {
       "success": true,
@@ -452,7 +452,20 @@ const doc = {
         ]
       }
     },
-
+    "Personnel removed from the shift response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel removed from shift successfully",
+      "data": {
+        "personnel_removed": [
+          "64aafded69d38a1c547c36ac",
+          "64ab66a2035b6ed93140a9d0"
+        ],
+        "personnel_not_removed": [
+          "64aafded69d38a1c547c36ad"
+        ]
+      }
+    }
   },
   components: {
     schemas: {
