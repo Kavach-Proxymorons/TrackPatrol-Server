@@ -435,7 +435,32 @@ const doc = {
         "__v": 0
       }
     },
-
+    "Add personnel to shift req.body": {
+      "personnel_id": "64aafded69d38a1c547c36ac"
+    },
+    "Personnel added to the shift response": {
+      "success": true,
+      "status": 200,
+      "message": "Personnel added to shift successfully",
+      "data": {
+        "_id": "64ade0559894e08d2ee18b03",
+        "shift_name": "Ghaziabad Mela Duty Shift 1",
+        "duty": "64adc1982a9b6864cc61b521",
+        "start_time": "2023-07-18T07:25:07.000Z",
+        "end_time": "2023-07-18T07:25:07.000Z",
+        "hardwares_attached": [],
+        "personnel_assigned": [
+          {
+            "personnel": "64aafded69d38a1c547c36ac",
+            "_id": "64adeb250351fa6bee899789",
+            "gps_data": [],
+            "rfid_data": []
+          }
+        ],
+        "__v": 1
+      }
+    }
+    
   },
   components: {
     schemas: {

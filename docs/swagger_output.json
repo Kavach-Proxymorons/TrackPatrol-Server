@@ -1645,6 +1645,123 @@
           }
         }
       }
+    },
+    "/api/v1/admin/shift/{id}/add_personnel": {
+      "post": {
+        "tags": [
+          "Admin : Shift"
+        ],
+        "summary": "adds personnel to a shift.",
+        "description": "Endpoint to add personnel to a shift.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Shift ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personnel added to shift successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel added to the shift response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Personnel added to the shift response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Shift not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Add personnel to shift req.body"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -3170,6 +3287,98 @@
         },
         "xml": {
           "name": "Shift created successfully response"
+        }
+      },
+      "Add personnel to shift req.body": {
+        "type": "object",
+        "properties": {
+          "personnel_id": {
+            "type": "string",
+            "example": "64aafded69d38a1c547c36ac"
+          }
+        },
+        "xml": {
+          "name": "Add personnel to shift req.body"
+        }
+      },
+      "Personnel added to the shift response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Personnel added to shift successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "64ade0559894e08d2ee18b03"
+              },
+              "shift_name": {
+                "type": "string",
+                "example": "Ghaziabad Mela Duty Shift 1"
+              },
+              "duty": {
+                "type": "string",
+                "example": "64adc1982a9b6864cc61b521"
+              },
+              "start_time": {
+                "type": "string",
+                "example": "2023-07-18T07:25:07.000Z"
+              },
+              "end_time": {
+                "type": "string",
+                "example": "2023-07-18T07:25:07.000Z"
+              },
+              "hardwares_attached": {
+                "type": "array",
+                "example": [],
+                "items": {}
+              },
+              "personnel_assigned": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "personnel": {
+                      "type": "string",
+                      "example": "64aafded69d38a1c547c36ac"
+                    },
+                    "_id": {
+                      "type": "string",
+                      "example": "64adeb250351fa6bee899789"
+                    },
+                    "gps_data": {
+                      "type": "array",
+                      "example": [],
+                      "items": {}
+                    },
+                    "rfid_data": {
+                      "type": "array",
+                      "example": [],
+                      "items": {}
+                    }
+                  }
+                }
+              },
+              "__v": {
+                "type": "number",
+                "example": 1
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Personnel added to the shift response"
         }
       }
     },
