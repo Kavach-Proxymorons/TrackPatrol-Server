@@ -1,11 +1,12 @@
 import express from 'express';
-import { body } from 'express-validator';
+import { body, param } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
 import { checkAuth, 
          checkAdmin 
 } from '../../middlewares/authMiddleware.js';
 import { createDuty,
-         getDuty
+         getDuty,
+         getOneDuty,
 } from '../../controllers/dutyController.js';
 
 const Router = express.Router();
@@ -87,6 +88,45 @@ Router.get('/',
     checkAuth,
     checkAdmin,
     getDuty
+)
+
+Router.get('/:id',
+    /*  #swagger.tags = ['Admin : Duty']
+        #swagger.description = 'Endpoint to get a duty by id.'
+        #swagger.summary = 'Get a duty by id.'
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'Duty id',
+            required: true
+        }
+        #swagger.responses[200] = {
+            description: 'Duty fetched successfully',
+            schema: { $ref: "#/definitions/Get duty res.body" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[404] = {
+            description: 'Duty not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param('id').exists().withMessage('id is required'),
+    ],
+    validateRequest,
+    checkAuth,
+    checkAdmin,
+    getOneDuty
 )
 
 export default Router;

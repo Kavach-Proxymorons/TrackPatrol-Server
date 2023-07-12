@@ -414,6 +414,73 @@ const doc = {
         "currentPage": "1"
       }
     },
+    "Get duty res.body": {
+      "success": true,
+      "status": 200,
+      "message": "Duty fetched successfully",
+      "data": {
+        "_id": "64ae09937175eb1e6e067663",
+        "title": "Bycycle Marathon",
+        "description": "Annual Bycycle Marathon",
+        "venue": "Ghaziabad",
+        "location": "28.6543728,77.409437",
+        "start_time": "2023-07-15T07:25:07.000Z",
+        "end_time": "2023-07-16T07:25:07.000Z",
+        "note": "None",
+        "shifts": [
+          {
+            "_id": "64ae09d47175eb1e6e067665",
+            "shift_name": "Morning Shift",
+            "duty": "64ae09937175eb1e6e067663",
+            "start_time": "2023-07-15T07:25:07.000Z",
+            "end_time": "2023-07-15T07:25:07.000Z",
+            "hardwares_attached": [],
+            "personnel_assigned": [
+              {
+                "personnel": {
+                  "_id": "64ab66a2035b6ed93140a9d0",
+                  "sid": "102",
+                  "user": "64ab66a2035b6ed93140a9cc",
+                  "official_name": "Madhavan Mukund",
+                  "designation": "officer",
+                  "photograph": "https://link.png",
+                  "dob": "2000-07-16T00:00:00.000Z",
+                  "blood_group": "B-",
+                  "identification_mark": "None",
+                  "posted_at": "Delhi",
+                  "address": "Delhi",
+                  "__v": 0
+                },
+                "_id": "64ae0a957175eb1e6e06766b",
+                "gps_data": [],
+                "rfid_data": []
+              },
+              {
+                "personnel": {
+                  "_id": "64ab66a2035b6ed93140a9d1",
+                  "sid": "103",
+                  "user": "64ab66a2035b6ed93140a9cd",
+                  "official_name": "Harish Guruprasad Ramaswamy",
+                  "designation": "officer",
+                  "photograph": "https://link.png",
+                  "dob": "2000-07-16T00:00:00.000Z",
+                  "blood_group": "B-",
+                  "identification_mark": "None",
+                  "posted_at": "Delhi",
+                  "address": "Delhi",
+                  "__v": 0
+                },
+                "_id": "64ae0a957175eb1e6e06766c",
+                "gps_data": [],
+                "rfid_data": []
+              }
+            ],
+            "__v": 1
+          }
+        ],
+        "__v": 1
+      }
+    },
     "Create shift req.body": {
       "shift_name": "Ghaziabad Mela Duty Shift 1",
       "start_time": "2023-07-18T07:25:07.000Z",

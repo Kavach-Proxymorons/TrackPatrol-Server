@@ -1,7 +1,7 @@
 import Duty from '../models/Duty.js';
 
 const createDuty = async (req, res, next) => {
-    try{
+    try {
         const { title, description, venue, location, start_time, end_time, note } = req.body;
 
         // Create a new duty
@@ -24,13 +24,13 @@ const createDuty = async (req, res, next) => {
             message: 'Duty created successfully',
             data: newDuty
         });
-    } catch(error) {
+    } catch (error) {
         next(error);
     }
 }
 
-const getDuty = async(req, res, next) => {
-    try{
+const getDuty = async (req, res, next) => {
+    try {
         const { page, limit } = req.query;
 
         // Find all the duty sorted by start_date 
@@ -52,13 +52,46 @@ const getDuty = async(req, res, next) => {
                 currentPage: page
             }
         });
-        
-    } catch(error){
+
+    } catch (error) {
         next(error);
     }
 }
 
-export  {
-    createDuty, 
-    getDuty
+const getOneDuty = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        // Find the duty populate shifts array
+        const duty = await Duty.findOne({ _id: id })
+            .populate({
+                path: 'shifts',
+                populate: {
+                    path: 'personnel_assigned.personnel',
+                    model: 'Personnel'
+                }
+            })
+            .exec();
+
+        if (!duty) {
+            const err = new Error('Duty not found');
+            err.status = 404;
+            throw err;
+        }
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Duty fetched successfully',
+            data: duty
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
+export {
+    createDuty,
+    getDuty,
+    getOneDuty
 }
