@@ -1651,8 +1651,8 @@
         "tags": [
           "Admin : Shift"
         ],
-        "summary": "adds personnel to a shift.",
-        "description": "Endpoint to add personnel to a shift.",
+        "summary": "adds personnels to a shift.",
+        "description": "Endpoint to add one or more personnel to a shift.",
         "parameters": [
           {
             "name": "id",
@@ -1673,7 +1673,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Personnel added to shift successfully",
+            "description": "Personnels added to shift successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -3292,9 +3292,14 @@
       "Add personnel to shift req.body": {
         "type": "object",
         "properties": {
-          "personnel_id": {
-            "type": "string",
-            "example": "64aafded69d38a1c547c36ac"
+          "personnel_array": {
+            "type": "array",
+            "example": [
+              "64aafded69d38a1c547c36ac"
+            ],
+            "items": {
+              "type": "string"
+            }
           }
         },
         "xml": {

@@ -61,7 +61,7 @@ const deleteShift = async (req, res, next) => {
 const addPersonnelToShift = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { personnel_id } = req.body;
+        const { personnel_array } = req.body;
 
         // Find the shift
         const shift = await Shift.findOne({ _id: id });
@@ -73,18 +73,24 @@ const addPersonnelToShift = async (req, res, next) => {
         }
 
         // Find the personnel
-        const personnel = await Personnel.findOne({ _id: personnel_id });
+        // check if all personnel exist
+        const personnel = await Personnel.find({ _id: { $in: personnel_array } });
 
-        if(!personnel) { // To-do to check if personnel has already been assigned to shift
-            const err = new Error('Personnel not found');
+        if(personnel.length < 1 ) {
+            const err = new Error('No Personnel found/added');
             err.status = 404;
             throw err;
         }
 
+        const found_personnel_ids = personnel.map(p => p._id+"");
+        const not_found_personnel_ids = personnel_array.filter(p => !found_personnel_ids.includes(p));
+
         // Add personnel to shift
-        shift.personnel_assigned.push({
-            personnel : personnel._id
-        });
+        for(let i = 0; i < found_personnel_ids.length; i++) {
+            shift.personnel_assigned.push({
+                personnel: found_personnel_ids[i]
+            })
+        }
 
         // Save the shift
         await shift.save();
@@ -93,7 +99,10 @@ const addPersonnelToShift = async (req, res, next) => {
             success: true,
             status: 200,
             message: 'Personnel added to shift successfully',
-            data: shift
+            data: {
+                personnel_added: found_personnel_ids,
+                personnel_not_added: not_found_personnel_ids
+            }
         });
 
     } catch (error) {

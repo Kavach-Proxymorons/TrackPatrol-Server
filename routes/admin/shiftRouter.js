@@ -94,8 +94,8 @@ Router.delete('/:id',
 
 Router.post('/:id/add_personnel',
     /*  #swagger.tags = ['Admin : Shift']
-        #swagger.description = 'Endpoint to add personnel to a shift.'
-        #swagger.summary = 'adds personnel to a shift.'
+        #swagger.description = 'Endpoint to add one or more personnel to a shift.'
+        #swagger.summary = 'adds personnels to a shift.'
 
         #swagger.parameters['id'] = {
             in: 'path',
@@ -116,7 +116,7 @@ Router.post('/:id/add_personnel',
         }
 
         #swagger.responses[200] = {
-            description: 'Personnel added to shift successfully',
+            description: 'Personnels added to shift successfully',
             schema: { $ref: "#/definitions/Personnel added to the shift response" }
         }
 
@@ -142,7 +142,7 @@ Router.post('/:id/add_personnel',
     */
     [
         param('id').exists().withMessage('Shift ID is required'),
-        body('personnel_id').exists().withMessage('Personnel is required'),
+        body('personnel_array').exists().withMessage('Personnel_array is required'),
     ],
     
     validateRequest,
@@ -150,8 +150,6 @@ Router.post('/:id/add_personnel',
     checkAdmin,
     addPersonnelToShift
 );
-
-
 
 
 export default Router;
