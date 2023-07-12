@@ -49,6 +49,36 @@ const createShift = async (req, res, next) => {
     }
 }
 
+const getOneShift = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+
+        // Find the shift
+        const shift = await Shift.findOne({ _id: id })
+            .populate({
+                path: 'personnel_assigned.personnel',
+                model: 'Personnel'
+            })
+            .exec();
+
+        if(!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Shift fetched successfully',
+            data: shift
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 const deleteShift = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -229,5 +259,6 @@ export {
     createShift,
     deleteShift,
     addPersonnelToShift,
-    removePersonnelFromShift
+    removePersonnelFromShift,
+    getOneShift,
 }

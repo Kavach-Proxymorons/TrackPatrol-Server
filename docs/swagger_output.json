@@ -29,6 +29,10 @@
       "description": "Duty endpoints"
     },
     {
+      "name": "Admin : Shift",
+      "description": "Shift endpoints"
+    },
+    {
       "name": "Admin : Hardware",
       "description": "Admin hardware endpoints"
     }
@@ -1662,6 +1666,96 @@
       }
     },
     "/api/v1/admin/shift/{id}": {
+      "get": {
+        "tags": [
+          "Admin : Shift"
+        ],
+        "summary": "fetches a shift from a duty.",
+        "description": "Endpoint to fetch a shift.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Shift ID"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Shift fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shift fetched successfully response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Shift fetched successfully response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Shift not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Admin : Shift"
@@ -3602,6 +3696,135 @@
         },
         "xml": {
           "name": "Shift created successfully response"
+        }
+      },
+      "Shift fetched successfully response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Shift fetched successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "example": "64ae09d47175eb1e6e067665"
+              },
+              "shift_name": {
+                "type": "string",
+                "example": "Morning Shift"
+              },
+              "duty": {
+                "type": "string",
+                "example": "64ae09937175eb1e6e067663"
+              },
+              "start_time": {
+                "type": "string",
+                "example": "2023-07-15T07:25:07.000Z"
+              },
+              "end_time": {
+                "type": "string",
+                "example": "2023-07-15T07:25:07.000Z"
+              },
+              "hardwares_attached": {
+                "type": "array",
+                "example": [],
+                "items": {}
+              },
+              "personnel_assigned": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "personnel": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "64aafded69d38a1c547c36ac"
+                        },
+                        "sid": {
+                          "type": "string",
+                          "example": "123456789"
+                        },
+                        "user": {
+                          "type": "string",
+                          "example": "64aafded69d38a1c547c36aa"
+                        },
+                        "official_name": {
+                          "type": "string",
+                          "example": "Shahbaz"
+                        },
+                        "designation": {
+                          "type": "string",
+                          "example": "Officer"
+                        },
+                        "photograph": {
+                          "type": "string",
+                          "example": "https://www.google.com"
+                        },
+                        "dob": {
+                          "type": "string",
+                          "example": "2000-07-16T07:25:07.000Z"
+                        },
+                        "blood_group": {
+                          "type": "string",
+                          "example": "B-"
+                        },
+                        "identification_mark": {
+                          "type": "string",
+                          "example": "None"
+                        },
+                        "posted_at": {
+                          "type": "string",
+                          "example": "Delhi"
+                        },
+                        "address": {
+                          "type": "string",
+                          "example": "Delhi"
+                        },
+                        "__v": {
+                          "type": "number",
+                          "example": 0
+                        }
+                      }
+                    },
+                    "_id": {
+                      "type": "string",
+                      "example": "64ae1052c1d6d3af043b8299"
+                    },
+                    "gps_data": {
+                      "type": "array",
+                      "example": [],
+                      "items": {}
+                    },
+                    "rfid_data": {
+                      "type": "array",
+                      "example": [],
+                      "items": {}
+                    }
+                  }
+                }
+              },
+              "__v": {
+                "type": "number",
+                "example": 2
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Shift fetched successfully response"
         }
       },
       "Add personnel to shift req.body": {

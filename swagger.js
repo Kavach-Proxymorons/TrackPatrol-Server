@@ -23,6 +23,10 @@ const doc = {
     description: 'Duty endpoints'
   },
   {
+    name: 'Admin : Shift',
+    description: 'Shift endpoints'
+  },
+  {
     name: 'Admin : Hardware',
     description: 'Admin hardware endpoints'
   },
@@ -383,12 +387,12 @@ const doc = {
       }
     },
     "Create duty req.body": {
-      "title" : "Ghaziabad Mela Duty",
-      "description" : "Ghaziabad Mela Duty",
-      "venue" : "Ghaziabad",
-      "location" : "28.6543728,77.409437",
-      "start_time" : "2021-07-16T07:25:07.000Z",
-      "end_time" : "2021-07-16T07:25:07.000Z",
+      "title": "Ghaziabad Mela Duty",
+      "description": "Ghaziabad Mela Duty",
+      "venue": "Ghaziabad",
+      "location": "28.6543728,77.409437",
+      "start_time": "2021-07-16T07:25:07.000Z",
+      "end_time": "2021-07-16T07:25:07.000Z",
       "note": "None",
     },
     "Get duty res.body": {
@@ -500,6 +504,79 @@ const doc = {
         "_id": "64ade0eabd76d9ec1d2dd9c9",
         "personnel_assigned": [],
         "__v": 0
+      }
+    },
+    "Shift fetched successfully response": {
+      "success": true,
+      "status": 200,
+      "message": "Shift fetched successfully",
+      "data": {
+        "_id": "64ae09d47175eb1e6e067665",
+        "shift_name": "Morning Shift",
+        "duty": "64ae09937175eb1e6e067663",
+        "start_time": "2023-07-15T07:25:07.000Z",
+        "end_time": "2023-07-15T07:25:07.000Z",
+        "hardwares_attached": [],
+        "personnel_assigned": [
+          {
+            "personnel": {
+              "_id": "64ab66a2035b6ed93140a9d0",
+              "sid": "102",
+              "user": "64ab66a2035b6ed93140a9cc",
+              "official_name": "Madhavan Mukund",
+              "designation": "officer",
+              "photograph": "https://link.png",
+              "dob": "2000-07-16T00:00:00.000Z",
+              "blood_group": "B-",
+              "identification_mark": "None",
+              "posted_at": "Delhi",
+              "address": "Delhi",
+              "__v": 0
+            },
+            "_id": "64ae0a957175eb1e6e06766b",
+            "gps_data": [],
+            "rfid_data": []
+          },
+          {
+            "personnel": {
+              "_id": "64ab66a2035b6ed93140a9d1",
+              "sid": "103",
+              "user": "64ab66a2035b6ed93140a9cd",
+              "official_name": "Harish Guruprasad Ramaswamy",
+              "designation": "officer",
+              "photograph": "https://link.png",
+              "dob": "2000-07-16T00:00:00.000Z",
+              "blood_group": "B-",
+              "identification_mark": "None",
+              "posted_at": "Delhi",
+              "address": "Delhi",
+              "__v": 0
+            },
+            "_id": "64ae0a957175eb1e6e06766c",
+            "gps_data": [],
+            "rfid_data": []
+          },
+          {
+            "personnel": {
+              "_id": "64aafded69d38a1c547c36ac",
+              "sid": "123456789",
+              "user": "64aafded69d38a1c547c36aa",
+              "official_name": "Shahbaz",
+              "designation": "Officer",
+              "photograph": "https://www.google.com",
+              "dob": "2000-07-16T07:25:07.000Z",
+              "blood_group": "B-",
+              "identification_mark": "None",
+              "posted_at": "Delhi",
+              "address": "Delhi",
+              "__v": 0
+            },
+            "_id": "64ae1052c1d6d3af043b8299",
+            "gps_data": [],
+            "rfid_data": []
+          }
+        ],
+        "__v": 2
       }
     },
     "Add personnel to shift req.body": {

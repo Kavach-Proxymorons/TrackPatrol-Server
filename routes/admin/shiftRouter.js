@@ -3,7 +3,7 @@ import { body, param } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
 import { checkAuth, checkAdmin } from '../../middlewares/authMiddleware.js';
 
-import { createShift, deleteShift, addPersonnelToShift, removePersonnelFromShift } from '../../controllers/shiftController.js';
+import { createShift, getOneShift, deleteShift, addPersonnelToShift, removePersonnelFromShift } from '../../controllers/shiftController.js';
 
 const Router = express.Router();
 
@@ -49,6 +49,48 @@ Router.post('/',
     checkAuth,
     checkAdmin,
     createShift
+);
+
+Router.get('/:id',
+    /*  #swagger.tags = ['Admin : Shift']
+        #swagger.description = 'Endpoint to fetch a shift.'
+        #swagger.summary = 'fetches a shift from a duty.'
+
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'Shift ID',
+            required: true,
+            type: 'string'
+        }
+
+        #swagger.responses[200] = {
+            description: 'Shift fetched successfully',
+            schema: { $ref: "#/definitions/Shift fetched successfully response" }
+        }
+
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+
+        #swagger.responses[404] = {
+            description: 'Shift not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
+
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+
+    [
+        param('id').exists().withMessage('Shift ID is required'),
+    ],
+    validateRequest,
+    checkAuth,
+    checkAdmin,
+    getOneShift
 );
 
 Router.delete('/:id',
