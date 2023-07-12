@@ -198,13 +198,11 @@ Router.post('/:id/remove_personnel',
             description: 'Internal server error',
             schema: { $ref: "#/definitions/Internal server error" }
         }
-
-    
+    */
     [
         param('id').exists().withMessage('Shift ID is required'),
         body('personnel_array').exists().withMessage('Personnel_array is required'),
     ],
-    */
     validateRequest,
     checkAuth,
     checkAdmin,

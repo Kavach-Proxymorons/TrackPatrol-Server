@@ -1,4 +1,5 @@
 import Shift from '../models/Shift.js';
+import Duty from '../models/Duty.js';
 import Personnel from '../models/Personnel.js';
 
 const createShift = async (req, res, next) => {
@@ -18,8 +19,23 @@ const createShift = async (req, res, next) => {
             end_time
         });
 
+        // Find the duty
+        const found_duty = await Duty.findOne({ _id: duty });
+
+        if(!found_duty) {
+            const err = new Error('Duty not found');
+            err.status = 404;
+            throw err;
+        }
+
+        // Attach the shift to the duty
+        found_duty.shifts.push(newShift._id);
+
         // Save the shift
         await newShift.save();
+
+        // Save the duty
+        await found_duty.save();
 
         return res.status(200).json({
             success: true,
