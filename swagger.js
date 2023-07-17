@@ -666,7 +666,22 @@ const doc = {
         "end_time": "2023-07-18T06:30:00.000Z",
         "__v": 1
       }
-    }
+    },
+    "App start_stop duty req.body": {
+      "time": "2023-07-18T01:30:00.000Z"
+    },
+    "Duty started successfully": {
+      "success": true,
+      "status": 200,
+      "message": "Duty started successfully",
+      "data": { }
+    },
+    "Duty stopped successfully": {
+      "success": true,
+      "status": 200,
+      "message": "Duty stopped successfully",
+      "data": { }
+    },
   },
   components: {
     schemas: {
