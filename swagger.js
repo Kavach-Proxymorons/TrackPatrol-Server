@@ -398,8 +398,8 @@ const doc = {
       "description": "Ghaziabad Mela Duty",
       "venue": "Ghaziabad",
       "location": "28.6543728,77.409437",
-      "start_time": "2021-07-16T07:25:07.000Z",
-      "end_time": "2021-07-16T07:25:07.000Z",
+      "start_time": "2025-07-20T07:25:07.000Z",
+      "end_time": "2025-07-21T07:25:07.000Z",
       "note": "None",
     },
     "Get duty res.body": {
@@ -414,8 +414,8 @@ const doc = {
             "description": "Ghaziabad Mela Duty",
             "venue": "Ghaziabad",
             "location": "28.6543728,77.409437",
-            "start_time": "2023-07-16T07:25:07.000Z",
-            "end_time": "2023-07-18T07:25:07.000Z",
+            "start_time": "2025-07-20T07:25:07.000Z",
+            "end_time": "2025-07-21T07:25:07.000Z",
             "note": "None",
             "shifts": [],
             "__v": 0
@@ -435,16 +435,16 @@ const doc = {
         "description": "Annual Bycycle Marathon",
         "venue": "Ghaziabad",
         "location": "28.6543728,77.409437",
-        "start_time": "2023-07-15T07:25:07.000Z",
-        "end_time": "2023-07-16T07:25:07.000Z",
+        "start_time": "2025-07-20T07:25:07.000Z",
+        "end_time": "2025-07-21T07:25:07.000Z",
         "note": "None",
         "shifts": [
           {
             "_id": "64ae09d47175eb1e6e067665",
             "shift_name": "Morning Shift",
             "duty": "64ae09937175eb1e6e067663",
-            "start_time": "2023-07-15T07:25:07.000Z",
-            "end_time": "2023-07-15T07:25:07.000Z",
+            "start_time": "2025-07-20T07:25:07.000Z",
+            "end_time": "2025-07-21T07:25:07.000Z",
             "hardwares_attached": [],
             "personnel_assigned": [
               {
@@ -494,8 +494,8 @@ const doc = {
     },
     "Create shift req.body": {
       "shift_name": "Ghaziabad Mela Duty Shift 1",
-      "start_time": "2023-07-18T07:25:07.000Z",
-      "end_time": "2023-07-18T07:25:07.000Z",
+      "start_time": "2025-07-20T07:25:07.000Z",
+      "end_time": "2025-07-21T07:25:07.000Z",
       "duty": "64adc1982a9b6864cc61b521"
     },
     "Shift created successfully response": {
@@ -505,8 +505,8 @@ const doc = {
       "data": {
         "shift_name": "Ghaziabad Mela Duty Shift 3",
         "duty": "64adc1982a9b6864cc61b521",
-        "start_time": "2023-07-18T07:25:07.000Z",
-        "end_time": "2023-07-18T07:25:07.000Z",
+        "start_time": "2025-07-20T07:25:07.000Z",
+        "end_time": "2025-07-21T07:25:07.000Z",
         "hardwares_attached": [],
         "_id": "64ade0eabd76d9ec1d2dd9c9",
         "personnel_assigned": [],
@@ -521,8 +521,8 @@ const doc = {
         "_id": "64ae09d47175eb1e6e067665",
         "shift_name": "Morning Shift",
         "duty": "64ae09937175eb1e6e067663",
-        "start_time": "2023-07-15T07:25:07.000Z",
-        "end_time": "2023-07-15T07:25:07.000Z",
+        "start_time": "2025-07-20T07:25:07.000Z",
+        "end_time": "2025-07-21T07:25:07.000Z",
         "hardwares_attached": [],
         "personnel_assigned": [
           {

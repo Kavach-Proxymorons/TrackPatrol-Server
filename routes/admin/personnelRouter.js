@@ -18,6 +18,7 @@ const router = express.Router();
 router.post("/",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Create a new personnel (requires role : "admin" )'
+        #swagger.summary = 'Create a new personnel'
         #swagger.security = [{
             "bearerAuth": []
         }]
@@ -67,6 +68,7 @@ router.post("/",
 router.get("/bulk_create/get_template",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Endpoint to get the csv template for bulk personnel creation (requires role : "admin" )'
+        #swagger.summary = 'Get the csv template for bulk personnel creation'
         #swagger.security = [{
             "bearerAuth": []
         }]
@@ -81,6 +83,7 @@ router.get("/bulk_create/get_template",
 router.post("/bulk_create",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Endpoint to create multiple personnel records from a csv file (requires role : "admin") sample_file: https://docs.google.com/spreadsheets/d/1nREThXMnFuE5Rgo3XyY9hG5FYOPHe1J2o5NpZEsR26E/edit?usp=sharing'
+        #swagger.summary = 'Create multiple personnel records from a csv file'
         #swagger.security = [{
             "bearerAuth": []
         }]
@@ -121,6 +124,10 @@ router.post("/bulk_create",
 router.get("/",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Get all personnel with pagination (requires role : "admin" )'
+        #swagger.summary = 'Get all personnel with pagination'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.parameters['page'] = {
             in: 'query',
             description: 'Page number',
@@ -133,9 +140,6 @@ router.get("/",
             required: true,
             type: 'integer'
         }
-        #swagger.security = [{
-            "bearerAuth": []
-        }]
         #swagger.responses[200] = {
             description: 'Personnel list',
             schema: { $ref: "#/definitions/Personnel list response" }
@@ -162,6 +166,10 @@ router.get("/",
 router.get("/search",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Search personnel by sid or name (requires role : "admin" )'
+        #swagger.summary = 'Search personnel by sid or name'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.parameters['q'] = {
             in: 'query',
             description: 'Search query',
@@ -180,9 +188,6 @@ router.get("/search",
             required: true,
             type: 'integer'
         }
-        #swagger.security = [{
-            "bearerAuth": []
-        }]
         #swagger.responses[200] = {
             description: 'Personnel list',
             schema: { $ref: "#/definitions/Personnel list response" }
@@ -210,15 +215,16 @@ router.get("/search",
 router.get("/:sid",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Get personnel by sid (requires role : "admin" )'
+        #swagger.summary = 'Get personnel by sid'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.parameters['sid'] = {
             in: 'path',
             description: 'SID of personnel',
             required: true,
             type: 'string'
         }
-        #swagger.security = [{
-            "bearerAuth": []
-        }]
         #swagger.responses[200] = {
             description: 'Personnel details',
             schema: { $ref: "#/definitions/Personnel details response" }
@@ -248,6 +254,10 @@ router.get("/:sid",
 router.delete("/bulk_delete",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Delete multiple personnel by sid. (requires role : "admin" )'
+        #swagger.summary = 'Delete multiple personnel by sid'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.requestBody = {
             required: true,
             content: {
@@ -256,9 +266,6 @@ router.delete("/bulk_delete",
                 }
             }
         }
-        #swagger.security = [{
-            "bearerAuth": []
-        }]
         #swagger.responses[200] = {
             description: 'Personnel deleted in bulk response',
             schema: { $ref: "#/definitions/Personnel deleted in bulk response" }
@@ -288,15 +295,16 @@ router.delete("/bulk_delete",
 router.delete("/:sid",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Delete personnel by sid. (requires role : "admin" )'
+        #swagger.summary = 'Delete personnel by sid'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.parameters['sid'] = {
             in: 'path',
             description: 'SID of personnel',
             required: true,
             type: 'string'
         }
-        #swagger.security = [{
-            "bearerAuth": []
-        }]
         #swagger.responses[200] = {
             description: 'Personnel deleted successfully',
             schema: { $ref: "#/definitions/Personnel deleted successfully response" }
@@ -326,6 +334,10 @@ router.delete("/:sid",
 router.put("/:sid",
     /*  #swagger.tags = ['Admin : Personnel']
         #swagger.description = 'Update personnel by sid. (requires role : "admin" )'
+        #swagger.summary = 'Update personnel by sid'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.parameters['sid'] = {
             in: 'path',
             description: 'SID of personnel',
@@ -340,9 +352,6 @@ router.put("/:sid",
                 }
             }
         }
-        #swagger.security = [{
-            "bearerAuth": []
-        }]
         #swagger.responses[200] = {
             description: 'Personnel updated successfully',
             schema: { $ref: "#/definitions/Personnel updated successfully response" }

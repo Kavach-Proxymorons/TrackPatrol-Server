@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/",
     /*  #swagger.tags = ['Auth']
         #swagger.description = 'Endpoint to get user auth details. Pass the JWT token in the authorization header as "Bearer <token>"'
-
+        #swagger.summary = 'Get user auth details'
         #swagger.security = [{
             "bearerAuth": []
         }]
@@ -36,7 +36,7 @@ router.get("/",
 router.post("/register",
     /*  #swagger.tags = ['Auth']
         #swagger.description = 'Endpoint to register a new user'
-
+        #swagger.summary = 'Register a new user'
         #swagger.requestBody = {
             required: true,
             content: {
@@ -79,7 +79,7 @@ router.post("/register",
 router.post("/login",
     /*  #swagger.tags = ['Auth']
         #swagger.description = 'Endpoint to login a user'
-
+        #swagger.summary = 'Login a user'
         #swagger.requestBody = {
             required: true,
             content: {

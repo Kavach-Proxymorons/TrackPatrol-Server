@@ -11,6 +11,7 @@ const Router = express.Router();
 Router.post("/",
     /*  #swagger.tags = ['Admin : Hardware']
         #swagger description = 'Endpoint to register a new Hardware',
+        #swagger.summary = 'Register a new Hardware',
         #swagger.security = [{
             "bearerAuth": []
         }]
@@ -61,6 +62,7 @@ Router.post("/",
 Router.get("/",
     /*  #swagger.tags = ['Admin : Hardware']
         #swagger.description = 'Endpoint to fetch all Hardware',
+        #swagger.summary = 'Endpoint to fetch all Hardware',
         #swagger.security = [{
             "bearerAuth": []
         }]

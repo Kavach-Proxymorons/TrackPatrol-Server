@@ -15,6 +15,9 @@ Router.post('/',
     /*  #swagger.tags = ['Admin : Duty']
         #swagger.description = 'Endpoint to create a new duty.' 
         #swagger.summary = 'create a new duty.'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
 
         #swagger.requestBody = {
             required: true,
@@ -54,6 +57,9 @@ Router.get('/',
     /*  #swagger.tags = ['Admin : Duty']
         #swagger.description = 'Endpoint to get all duty in sorted order.'
         #swagger.summary = 'Get all duty in sorted order.'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.parameters['page'] = {
             in: 'query',
             description: 'Page number',
@@ -94,6 +100,9 @@ Router.get('/:id',
     /*  #swagger.tags = ['Admin : Duty']
         #swagger.description = 'Endpoint to get a duty by id.'
         #swagger.summary = 'Get a duty by id.'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
         #swagger.parameters['id'] = {
             in: 'path',
             description: 'Duty id',

@@ -53,6 +53,7 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Get user auth details",
         "description": "Endpoint to get user auth details. Pass the JWT token in the authorization header as \"Bearer <token>\"",
         "parameters": [
           {
@@ -122,6 +123,7 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Register a new user",
         "description": "Endpoint to register a new user",
         "responses": {
           "200": {
@@ -202,6 +204,7 @@
         "tags": [
           "Auth"
         ],
+        "summary": "Login a user",
         "description": "Endpoint to login a user",
         "responses": {
           "200": {
@@ -282,6 +285,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Create a new personnel",
         "description": "Create a new personnel (requires role : \"admin\" )",
         "parameters": [
           {
@@ -380,6 +384,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Get all personnel with pagination",
         "description": "Get all personnel with pagination (requires role : \"admin\" )",
         "parameters": [
           {
@@ -473,6 +478,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Get the csv template for bulk personnel creation",
         "description": "Endpoint to get the csv template for bulk personnel creation (requires role : \"admin\" )",
         "parameters": [
           {
@@ -503,6 +509,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Create multiple personnel records from a csv file",
         "description": "Endpoint to create multiple personnel records from a csv file (requires role : \"admin\") sample_file: https://docs.google.com/spreadsheets/d/1nREThXMnFuE5Rgo3XyY9hG5FYOPHe1J2o5NpZEsR26E/edit?usp=sharing",
         "parameters": [
           {
@@ -582,6 +589,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Search personnel by sid or name",
         "description": "Search personnel by sid or name (requires role : \"admin\" )",
         "parameters": [
           {
@@ -684,6 +692,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Get personnel by sid",
         "description": "Get personnel by sid (requires role : \"admin\" )",
         "parameters": [
           {
@@ -781,6 +790,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Delete personnel by sid",
         "description": "Delete personnel by sid. (requires role : \"admin\" )",
         "parameters": [
           {
@@ -878,6 +888,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Update personnel by sid",
         "description": "Update personnel by sid. (requires role : \"admin\" )",
         "parameters": [
           {
@@ -987,6 +998,7 @@
         "tags": [
           "Admin : Personnel"
         ],
+        "summary": "Delete multiple personnel by sid",
         "description": "Delete multiple personnel by sid. (requires role : \"admin\" )",
         "parameters": [
           {
@@ -1087,6 +1099,7 @@
         "tags": [
           "Admin : Hardware"
         ],
+        "summary": "Register a new Hardware",
         "description": "",
         "parameters": [
           {
@@ -1197,6 +1210,7 @@
         "tags": [
           "Admin : Hardware"
         ],
+        "summary": "Endpoint to fetch all Hardware",
         "description": "Endpoint to fetch all Hardware",
         "parameters": [
           {
@@ -1354,6 +1368,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1462,7 +1481,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/admin/duty/{id}": {
@@ -1569,7 +1593,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/admin/shift/": {
@@ -3512,11 +3541,11 @@
           },
           "start_time": {
             "type": "string",
-            "example": "2021-07-16T07:25:07.000Z"
+            "example": "2025-07-20T07:25:07.000Z"
           },
           "end_time": {
             "type": "string",
-            "example": "2021-07-16T07:25:07.000Z"
+            "example": "2025-07-21T07:25:07.000Z"
           },
           "note": {
             "type": "string",
@@ -3567,11 +3596,11 @@
               },
               "start_time": {
                 "type": "string",
-                "example": "2023-07-15T07:25:07.000Z"
+                "example": "2025-07-20T07:25:07.000Z"
               },
               "end_time": {
                 "type": "string",
-                "example": "2023-07-16T07:25:07.000Z"
+                "example": "2025-07-21T07:25:07.000Z"
               },
               "note": {
                 "type": "string",
@@ -3596,11 +3625,11 @@
                     },
                     "start_time": {
                       "type": "string",
-                      "example": "2023-07-15T07:25:07.000Z"
+                      "example": "2025-07-20T07:25:07.000Z"
                     },
                     "end_time": {
                       "type": "string",
-                      "example": "2023-07-15T07:25:07.000Z"
+                      "example": "2025-07-21T07:25:07.000Z"
                     },
                     "hardwares_attached": {
                       "type": "array",
@@ -3709,11 +3738,11 @@
           },
           "start_time": {
             "type": "string",
-            "example": "2023-07-18T07:25:07.000Z"
+            "example": "2025-07-20T07:25:07.000Z"
           },
           "end_time": {
             "type": "string",
-            "example": "2023-07-18T07:25:07.000Z"
+            "example": "2025-07-21T07:25:07.000Z"
           },
           "duty": {
             "type": "string",
@@ -3752,11 +3781,11 @@
               },
               "start_time": {
                 "type": "string",
-                "example": "2023-07-18T07:25:07.000Z"
+                "example": "2025-07-20T07:25:07.000Z"
               },
               "end_time": {
                 "type": "string",
-                "example": "2023-07-18T07:25:07.000Z"
+                "example": "2025-07-21T07:25:07.000Z"
               },
               "hardwares_attached": {
                 "type": "array",
@@ -3815,11 +3844,11 @@
               },
               "start_time": {
                 "type": "string",
-                "example": "2023-07-15T07:25:07.000Z"
+                "example": "2025-07-20T07:25:07.000Z"
               },
               "end_time": {
                 "type": "string",
-                "example": "2023-07-15T07:25:07.000Z"
+                "example": "2025-07-21T07:25:07.000Z"
               },
               "hardwares_attached": {
                 "type": "array",
