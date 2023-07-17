@@ -2080,6 +2080,49 @@
           }
         }
       }
+    },
+    "/api/v1/app/duty/": {
+      "get": {
+        "tags": [
+          "App : Duty"
+        ],
+        "description": "Endpoint to get all/upcoming duty in sorted order.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit per page",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
     }
   },
   "components": {
