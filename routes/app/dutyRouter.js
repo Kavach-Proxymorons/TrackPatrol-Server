@@ -2,12 +2,13 @@ import express from 'express';
 import { body, param } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
 import { 
-    checkAuth,
-    checkAdmin
+    checkAuth
 } from '../../middlewares/authMiddleware.js';
 import {
     getAssignedDuties,
-    getShiftDetails
+    getShiftDetails,
+    startDuty,
+    stopDuty,
 } from '../../controllers/appDutyController.js';
 
 const Router = express.Router();
@@ -64,8 +65,99 @@ Router.get('/',
         body('start_time').optional().isISO8601().withMessage('start_time must be a valid ISO8601 date'),
         body('end_time').optional().isISO8601().withMessage('end_time must be a valid ISO8601 date'),
     ],
+    validateRequest,
     checkAuth,
     getAssignedDuties
+)
+
+Router.post("/:shift_id/start_duty",
+    /*  #swagger.tags = ['App : Duty']
+        #swagger.summary = 'start a duty shift by shift_id'
+        #swagger.description = 'Endpoint to start a duty shift by shift_id'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.parameters['shift_id'] = {
+            in: 'path',
+            description: 'shift_id',
+            required: true,
+            type: 'string'
+        }
+        #swagger.requestBody = {
+            in: 'body',
+            description: 'Duty start_stop request body',
+            required: true,
+            schema: { $ref: "#/definitions/App start_stop duty req.body" }
+        }
+        #swagger.responses[200] = {
+            description: 'Duty started successfully',
+            schema: { $ref: "#/definitions/Duty started successfully" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param('shift_id').exists().withMessage('id is required'),
+        body('time').exists().withMessage('start_time is required'),
+    ],
+    validateRequest,
+    checkAuth,
+    startDuty
+)
+
+Router.post("/:shift_id/stop_duty",
+    /*  #swagger.tags = ['App : Duty']
+        #swagger.summary = 'stop a duty shift by shift_id'
+        #swagger.description = 'Endpoint to stop a duty shift by shift_id'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.parameters['shift_id'] = {
+            in: 'path',
+            description: 'shift_id',
+            required: true,
+            type: 'string'
+        }
+        #swagger.requestBody = {
+            in: 'body',
+            description: 'Duty start_stop request body',
+            required: true,
+            schema: { $ref: "#/definitions/App start_stop duty req.body" }
+        }
+        #swagger.responses[200] = {
+            description: 'Duty stopped successfully',
+            schema: { $ref: "#/definitions/Duty stopped successfully" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param('shift_id').exists().withMessage('id is required'),
+        body('time').exists().withMessage('stop_time is required'),
+    ],
+    validateRequest,
+    checkAuth,
+    stopDuty
 )
 
 Router.get("/:shift_id",
@@ -101,8 +193,10 @@ Router.get("/:shift_id",
     [
         param('shift_id').exists().withMessage('id is required'),
     ],
+    validateRequest,
     checkAuth,
     getShiftDetails
 )
+
 
 export default Router;

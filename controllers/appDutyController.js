@@ -81,7 +81,87 @@ const getShiftDetails = async (req, res, next) => {
     }
 }
 
+const startDuty = async (req, res, next) => {
+    const { shift_id,  } = req.params;
+    const { personnel_id } = req.user;
+    const { time } = req.body;
+
+    try {
+        const shift = await Shift.findById(shift_id);
+        
+        if (!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const index = shift.personnel_assigned.findIndex(personnel => personnel.personnel+"" == personnel_id);
+
+        if (index == -1) {
+            const err = new Error('Personnel not assigned to shift');
+            err.status = 404;
+            throw err;
+        }
+
+        shift.personnel_assigned[index].starting_time = time;
+        shift.personnel_assigned[index].status = 'started';
+
+        await shift.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Shift started successfully',
+            data: {}
+        });
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+const stopDuty = async (req, res, next) => {
+    const { shift_id } = req.params;
+    const { personnel_id } = req.user;
+    const { time } = req.body;
+
+    try {
+        const shift = await Shift.findById(shift_id);
+
+        if (!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const index = shift.personnel_assigned.findIndex(personnel => personnel.personnel+"" == personnel_id);
+
+        if (index == -1) {
+            const err = new Error('Personnel not assigned to shift');
+            err.status = 404;
+            throw err;
+        }
+
+        shift.personnel_assigned[index].ending_time = time;
+        shift.personnel_assigned[index].status = 'completed';
+
+        await shift.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Shift stopped successfully',
+            data: {}
+        });
+
+    } catch (err) {
+        next(err);
+    }
+}
+
 export {
     getAssignedDuties,
-    getShiftDetails
+    getShiftDetails,
+    startDuty,
+    stopDuty,
 }
