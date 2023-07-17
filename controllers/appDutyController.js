@@ -159,9 +159,54 @@ const stopDuty = async (req, res, next) => {
     }
 }
 
+const pushGpsData = async (req, res, next) => {
+    const { shift_id } = req.params;
+    const { personnel_id } = req.user;
+    const {
+        latitude,
+        longitude,
+        timestamp,
+    } = req.body;
+    try {
+        const shift = await Shift.findById(shift_id);
+
+        if (!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const index = shift.personnel_assigned.findIndex(personnel => personnel.personnel+"" == personnel_id);
+
+        if (index == -1) {
+            const err = new Error('Personnel not assigned to shift');
+            err.status = 404;
+            throw err;
+        }
+
+        shift.personnel_assigned[index].gps_data.push({
+            location: `${latitude},${longitude}`,
+            timestamp
+        });
+
+        await shift.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'GPS data pushed successfully',
+            data: {}
+        });
+
+    } catch (err) {
+        next(err);
+    }
+}
+
 export {
     getAssignedDuties,
     getShiftDetails,
     startDuty,
     stopDuty,
+    pushGpsData
 }

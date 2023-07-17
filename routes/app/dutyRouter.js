@@ -9,6 +9,7 @@ import {
     getShiftDetails,
     startDuty,
     stopDuty,
+    pushGpsData
 } from '../../controllers/appDutyController.js';
 
 const Router = express.Router();
@@ -49,6 +50,10 @@ Router.get('/',
         #swagger.responses[401] = {
             description: 'Unauthorized',
             schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[404] = {
+            description: 'Resouce not found',
+            schema: { $ref: "#/definitions/Resource not found" }
         }
         #swagger.responses[422] = {
             description: 'Validation error',
@@ -97,6 +102,10 @@ Router.post("/:shift_id/start_duty",
             description: 'Unauthorized',
             schema: { $ref: "#/definitions/Unauthorized" }
         }
+        #swagger.responses[404] = {
+            description: 'Resouce not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
         #swagger.responses[422] = {
             description: 'Validation error',
             schema: { $ref: "#/definitions/Validation error" }
@@ -142,6 +151,10 @@ Router.post("/:shift_id/stop_duty",
             description: 'Unauthorized',
             schema: { $ref: "#/definitions/Unauthorized" }
         }
+        #swagger.responses[404] = {
+            description: 'Resouce not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
         #swagger.responses[422] = {
             description: 'Validation error',
             schema: { $ref: "#/definitions/Validation error" }
@@ -181,6 +194,10 @@ Router.get("/:shift_id",
             description: 'Unauthorized',
             schema: { $ref: "#/definitions/Unauthorized" }
         }
+        #swagger.responses[404] = {
+            description: 'Resouce not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
         #swagger.responses[422] = {
             description: 'Validation error',
             schema: { $ref: "#/definitions/Validation error" }
@@ -198,5 +215,53 @@ Router.get("/:shift_id",
     getShiftDetails
 )
 
+Router.post("/:shift_id/push_gps_data",
+    /*  #swagger.tags = ['App : Duty']
+        #swagger.summary = 'push gps data of a duty shift by shift_id'
+        #swagger.description = 'Endpoint to push gps data of a duty shift by shift_id'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.parameters['shift_id'] = {
+            in: 'path',
+            description: 'Duty id',
+            required: true,
+            type: 'string'
+        }
+        #swagger.requestBody = {
+            in: 'body',
+            description: 'Gps data push request body',
+            required: true,
+            schema: { $ref: "#/definitions/App push gps data req.body" }
+        }
+        #swagger.responses[200] = {
+            description: 'Gps data pushed successfully',
+            schema: { $ref: "#/definitions/Gps data pushed successfully" }
+        }
+        #swagger.responses[404] = {
+            description: 'Resouce not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param('shift_id').exists().withMessage('id is required'),
+        body('').exists().withMessage('gps_data is required'),
+    ],
+    validateRequest,
+    checkAuth,
+    pushGpsData
+)
 
 export default Router;
