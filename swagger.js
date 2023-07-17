@@ -682,6 +682,17 @@ const doc = {
       "message": "Duty stopped successfully",
       "data": { }
     },
+    "App push gps data req.body": {
+      latitude: "28.6129166",
+      longitude: "77.2246388",
+      timestamp: "2023-07-18T04:18:00.000+05:30"
+    },
+    "Gps data pushed successfully": {
+      "success": true,
+      "status": 200,
+      "message": "Gps data pushed successfully",
+      "data": {}
+    },
   },
   components: {
     schemas: {
