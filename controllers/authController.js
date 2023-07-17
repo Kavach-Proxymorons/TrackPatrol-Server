@@ -60,7 +60,7 @@ const loginController = async (req, res, next) => {
             return res.status(401).json({
                 success: false,
                 status: 401,
-                message: 'Unauthorized : incorrect username or password'
+                message: 'Incorrect username or password'
             });
 
         // If user found
@@ -72,7 +72,7 @@ const loginController = async (req, res, next) => {
             return res.status(401).json({
                 success: false,
                 status: 401,
-                message: 'Unauthorized : incorrect username or password'
+                message: 'Incorrect username or password'
             });
 
         // If password matches
