@@ -6,7 +6,8 @@ import {
     checkAdmin
 } from '../../middlewares/authMiddleware.js';
 import {
-    getAssignedDuties
+    getAssignedDuties,
+    getShiftDetails
 } from '../../controllers/appDutyController.js';
 
 const Router = express.Router();
@@ -65,6 +66,43 @@ Router.get('/',
     ],
     checkAuth,
     getAssignedDuties
+)
+
+Router.get("/:shift_id",
+    /*  #swagger.tags = ['App : Duty']
+        #swagger.summary = 'get a details of a duty shift by shift_id'
+        #swagger.description = 'Endpoint to get details of a duty shift by shift_id'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.parameters['shift_id'] = {
+            in: 'path',
+            description: 'Duty id',
+            required: true,
+            type: 'string'
+        }
+        #swagger.responses[200] = {
+            description: 'Duty fetched successfully',
+            schema: { $ref: "#/definitions/App get duty res.body" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param('shift_id').exists().withMessage('id is required'),
+    ],
+    checkAuth,
+    getShiftDetails
 )
 
 export default Router;

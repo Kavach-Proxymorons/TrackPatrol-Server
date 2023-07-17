@@ -646,6 +646,26 @@ const doc = {
         "totalPages": 1,
         "currentPage": "1"
       }
+    },
+    "App get duty res.body": {
+      "success": true,
+      "status": 200,
+      "message": "Shift fetched successfully",
+      "data": {
+        "_id": "64b59093c47b6793eb6ed233",
+        "shift_name": "Ghaziabad Mela Duty Day 1 Shift 1",
+        "duty": {
+          "_id": "64b59062c47b6793eb6ed22d",
+          "title": "Ghaziabad Mela Duty",
+          "description": "Ghaziabad Mela Duty",
+          "venue": "Ghaziabad",
+          "location": "28.6543728,77.409437",
+          "note": "None"
+        },
+        "start_time": "2023-07-18T01:30:00.000Z",
+        "end_time": "2023-07-18T06:30:00.000Z",
+        "__v": 1
+      }
     }
   },
   components: {

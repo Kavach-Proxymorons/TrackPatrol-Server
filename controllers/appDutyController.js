@@ -52,6 +52,36 @@ const getAssignedDuties = async (req, res, next) => {
     }
 }
 
+const getShiftDetails = async (req, res, next) => {
+    const { shift_id } = req.params;
+
+    try {
+        const shift = await Shift.findById(shift_id)
+            .populate({
+                path: 'duty',
+                select: 'title description venue location note'
+            })
+            .select('-hardwares_attached -personnel_assigned')
+            .exec();
+
+        if (!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Shift fetched successfully',
+            data: shift
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
 export {
-    getAssignedDuties
+    getAssignedDuties,
+    getShiftDetails
 }
