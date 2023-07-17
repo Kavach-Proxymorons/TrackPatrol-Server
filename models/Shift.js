@@ -29,6 +29,17 @@ const shiftSchema = new mongoose.Schema({
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'Personnel'
             },
+            status: {
+                type: String,
+                enum: ['pending', 'started', 'paused', 'completed'],
+                default: 'pending'
+            },
+            starting_time: {
+                type: Date
+            },
+            ending_time: {
+                type: Date
+            },
             gps_data: [  // create a new schema for gps_data
                 {
                     timestamp: {
