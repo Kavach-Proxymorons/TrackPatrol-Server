@@ -35,6 +35,10 @@
     {
       "name": "Admin : Hardware",
       "description": "Admin hardware endpoints"
+    },
+    {
+      "name": "App : Duty",
+      "description": "App duty endpoints"
     }
   ],
   "paths": {
@@ -2140,8 +2144,8 @@
         "tags": [
           "App : Duty"
         ],
-        "summary": "get all upcoming assigned duties in sorted order.",
-        "description": "Endpoint to get upcoming assigned duties in sorted order.",
+        "summary": "get all upcoming assigned duty shifts in sorted order",
+        "description": "Endpoint to get upcoming assigned duty shifts in sorted order between start_time and end_time",
         "parameters": [
           {
             "name": "authorization",
@@ -2149,14 +2153,102 @@
             "schema": {
               "type": "string"
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "description": "Page number",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Limit per page",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "start_time",
+            "in": "query",
+            "description": "Start time",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end_time",
+            "in": "query",
+            "description": "End time",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "Duty fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/App get duty res.body"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/App get duty res.body"
+                }
+              }
+            }
           },
           "401": {
-            "description": "Unauthorized"
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
           }
         },
         "security": [
@@ -4046,6 +4138,96 @@
         },
         "xml": {
           "name": "Personnel removed from the shift response"
+        }
+      },
+      "App get duty res.body": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Shifts fetched successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "shifts": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "64b59093c47b6793eb6ed233"
+                    },
+                    "shift_name": {
+                      "type": "string",
+                      "example": "Ghaziabad Mela Duty Day 1 Shift 1"
+                    },
+                    "duty": {
+                      "type": "object",
+                      "properties": {
+                        "_id": {
+                          "type": "string",
+                          "example": "64b59062c47b6793eb6ed22d"
+                        },
+                        "title": {
+                          "type": "string",
+                          "example": "Ghaziabad Mela Duty"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "Ghaziabad Mela Duty"
+                        },
+                        "venue": {
+                          "type": "string",
+                          "example": "Ghaziabad"
+                        },
+                        "location": {
+                          "type": "string",
+                          "example": "28.6543728,77.409437"
+                        },
+                        "note": {
+                          "type": "string",
+                          "example": "None"
+                        }
+                      }
+                    },
+                    "start_time": {
+                      "type": "string",
+                      "example": "2023-07-18T01:30:00.000Z"
+                    },
+                    "end_time": {
+                      "type": "string",
+                      "example": "2023-07-18T06:30:00.000Z"
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": 1
+                    }
+                  }
+                }
+              },
+              "totalPages": {
+                "type": "number",
+                "example": 1
+              },
+              "currentPage": {
+                "type": "string",
+                "example": "1"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "App get duty res.body"
         }
       }
     },
