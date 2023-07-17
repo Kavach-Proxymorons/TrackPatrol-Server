@@ -3154,6 +3154,10 @@
                     "type": "string",
                     "example": "Shahbaz"
                   },
+                  "gender": {
+                    "type": "string",
+                    "example": "M"
+                  },
                   "designation": {
                     "type": "string",
                     "example": "Officer"
@@ -3257,6 +3261,10 @@
               "official_name": {
                 "type": "string",
                 "example": "Shahbaz"
+              },
+              "gender": {
+                "type": "string",
+                "example": "M"
               },
               "designation": {
                 "type": "string",

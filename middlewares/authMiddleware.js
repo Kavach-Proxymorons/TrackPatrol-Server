@@ -46,7 +46,7 @@ const checkAuth = async (req, res, next) => {
 // use checkAdmin after checkAuth
 const checkAdmin = async (req, res, next) => {
     try {
-        //next(); // remove in production
+        // return next(); // remove in production
 
         if(req.role === 'admin')
             return next();
