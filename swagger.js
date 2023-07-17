@@ -332,6 +332,7 @@ const doc = {
         "sid": "123456789",
         "user": "64aafded69d38a1c547c36aa",
         "official_name": "Shahbaz",
+        "gender": "M",
         "designation": "Officer",
         "photograph": "https://www.google.com",
         "dob": "2000-07-16T07:25:07.000Z",
