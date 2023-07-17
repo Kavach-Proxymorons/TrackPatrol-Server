@@ -12,6 +12,10 @@ Router.post('/',
         #swagger.description = 'Endpoint to create a new shift.'
         #swagger.summary = 'creates a new shift for a duty.'
 
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+
         #swagger.requestBody = {
             required: true,
             content: {
@@ -56,6 +60,10 @@ Router.get('/:id',
         #swagger.description = 'Endpoint to fetch a shift.'
         #swagger.summary = 'fetches a shift from a duty.'
 
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+
         #swagger.parameters['id'] = {
             in: 'path',
             description: 'Shift ID',
@@ -98,6 +106,10 @@ Router.delete('/:id',
         #swagger.description = 'Endpoint to delete a shift.'
         #swagger.summary = 'deletes a shift from a duty.'
 
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+
         #swagger.parameters['id'] = {
             in: 'path',
             description: 'Shift ID',
@@ -138,6 +150,10 @@ Router.post('/:id/add_personnel',
     /*  #swagger.tags = ['Admin : Shift']
         #swagger.description = 'Endpoint to add one or more personnel to a shift.'
         #swagger.summary = 'adds personnels to a shift.'
+
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
 
         #swagger.parameters['id'] = {
             in: 'path',
@@ -197,6 +213,10 @@ Router.post('/:id/remove_personnel',
     /*  #swagger.tags = ['Admin : Shift']
         #swagger.description = 'Endpoint to remove one or more personnel from a shift.'
         #swagger.summary = 'removes personnels from a shift.'
+
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
 
         #swagger.parameters['id'] = {
             in: 'path',

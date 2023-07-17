@@ -220,7 +220,7 @@
             }
           },
           "401": {
-            "description": "Unauthorized incorrect username or password",
+            "description": "incorrect username or password",
             "content": {
               "application/json": {
                 "schema": {
@@ -1653,6 +1653,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1754,7 +1759,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -1844,7 +1854,12 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     },
     "/api/v1/admin/shift/{id}/add_personnel": {
@@ -1952,6 +1967,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2069,6 +2089,11 @@
             }
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -2086,7 +2111,8 @@
         "tags": [
           "App : Duty"
         ],
-        "description": "Endpoint to get all/upcoming duty in sorted order.",
+        "summary": "get all upcoming assigned duties in sorted order.",
+        "description": "Endpoint to get upcoming assigned duties in sorted order.",
         "parameters": [
           {
             "name": "authorization",
@@ -2094,34 +2120,21 @@
             "schema": {
               "type": "string"
             }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "description": "Page number",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "Limit per page",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   },
@@ -2567,6 +2580,10 @@
             "type": "string",
             "example": "Shahbaz"
           },
+          "gender": {
+            "type": "string",
+            "example": "male"
+          },
           "designation": {
             "type": "string",
             "example": "Officer"
@@ -2600,6 +2617,7 @@
           "sid",
           "temp_password",
           "official_name",
+          "gender",
           "designation",
           "photograph",
           "dob",
@@ -2641,6 +2659,10 @@
               "official_name": {
                 "type": "string",
                 "example": "Shahbaz"
+              },
+              "gender": {
+                "type": "string",
+                "example": "M"
               },
               "designation": {
                 "type": "string",
@@ -2752,6 +2774,10 @@
                       "type": "string",
                       "example": "Shahbaz Ali"
                     },
+                    "gender": {
+                      "type": "string",
+                      "example": "M"
+                    },
                     "designation": {
                       "type": "string",
                       "example": "officer"
@@ -2843,12 +2869,20 @@
                         "name": {
                           "type": "string",
                           "example": "Shahbaz"
+                        },
+                        "gender": {
+                          "type": "string",
+                          "example": "M"
                         }
                       }
                     },
                     "official_name": {
                       "type": "string",
                       "example": "Shahbaz"
+                    },
+                    "gender": {
+                      "type": "string",
+                      "example": "M"
                     },
                     "designation": {
                       "type": "string",

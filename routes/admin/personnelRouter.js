@@ -49,6 +49,7 @@ router.post("/",
     [
         body("sid").exists().withMessage("SID is required"),
         body("official_name").exists().withMessage("Official name is required"),
+        body("gender").exists().withMessage("gender is required"),
         body("designation").exists().withMessage("Designation is required"),
         body("photograph").exists().withMessage("Photograph is required"),
         body("dob").exists().withMessage("Date of birth is required"),

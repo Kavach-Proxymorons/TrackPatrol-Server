@@ -95,7 +95,7 @@ router.post("/login",
         }
 
         #swagger.responses[401] = {
-            description: 'Unauthorized incorrect username or password',
+            description: 'incorrect username or password',
             schema: { $ref: "#/definitions/Unauthorized incorrect username or password" }
         }
 

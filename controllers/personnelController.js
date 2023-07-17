@@ -13,8 +13,6 @@ const addPersonnel = async (req, res, next) => {
             role: "personnel"
         });
 
-        await user.save();
-
         const personnel = new Personnel({
             ...req.body,
             user : user._id
@@ -22,6 +20,10 @@ const addPersonnel = async (req, res, next) => {
 
         await personnel.save();
 
+        // update the user with the personnel id
+        user.personnel_id = personnel._id; // Assign the personnel ID to the user record
+        await user.save();
+        
         return res.status(200).json({
             success: true,
             status: 200,
@@ -40,33 +42,37 @@ const bulkCreatePersonnel = async (req, res, next) => {
         const parsedCSV = await parseCSV(req.file.path, true);
         
         // Create a new user for each personnel
-        const users = parsedCSV.map(personnel => {
-            return new User({
+        const userPersonnelPair = parsedCSV.map(personnel => {
+            const newUser = new User({
                 username: personnel.sid,
                 name: personnel.official_name,
                 password: personnel.temp_password,
                 role: "personnel"
             });
+
+            const newPersonnel = new Personnel({
+                ...personnel,
+                user: newUser._id
+            });
+
+            newUser.personnel_id = newPersonnel._id;
+
+            return {
+                user: newUser,
+                personnel: newPersonnel
+            }
         });
 
-        // Save all the users
-        const bulk_user_create_result = await User.insertMany(users);
+        // Save all the users using insertMany
+        const bulk_user_create_result = await User.insertMany(userPersonnelPair.map(pair => pair.user));
 
         // Remove the password from the bulk_user_create_result
         bulk_user_create_result.forEach(user => {
             user.password = undefined;
         });
 
-        // Create a new personnel for each user
-        const personnels = parsedCSV.map(personnel => {
-            return new Personnel({
-                ...personnel,
-                user: users.find(user => user.username === personnel.sid)._id
-            });
-        });
-
-        // Save all the personnels
-        const bulk_personnel_create_result = await Personnel.insertMany(personnels);
+        // Save all the personnels using insertMany
+        const bulk_personnel_create_result = await Personnel.insertMany(userPersonnelPair.map(pair => pair.personnel));
 
         return res.status(200).json({
             success: true,

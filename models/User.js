@@ -7,6 +7,10 @@ const authSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    personnel_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Personnel'
+    },
     name: {
         type: String,
         required: true
