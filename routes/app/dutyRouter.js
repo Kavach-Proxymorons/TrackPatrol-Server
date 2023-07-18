@@ -1,5 +1,5 @@
 import express from 'express';
-import { body, param } from 'express-validator';
+import { body, param, query } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
 import { 
     checkAuth
@@ -65,10 +65,10 @@ Router.get('/',
         }
     */
     [
-        body('page').exists().withMessage('page is required'),
-        body('limit').exists().withMessage('limit is required'),
-        body('start_time').optional().isISO8601().withMessage('start_time must be a valid ISO8601 date'),
-        body('end_time').optional().isISO8601().withMessage('end_time must be a valid ISO8601 date'),
+        query('page').exists().withMessage('page is required'),
+        query('limit').exists().withMessage('limit is required'),
+        query('start_time').optional().isISO8601().withMessage('start_time must be a valid ISO8601 date'),
+        query('end_time').optional().isISO8601().withMessage('end_time must be a valid ISO8601 date'),
     ],
     validateRequest,
     checkAuth,
