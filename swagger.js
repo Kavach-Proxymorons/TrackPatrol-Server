@@ -693,6 +693,12 @@ const doc = {
       "message": "Gps data pushed successfully",
       "data": {}
     },
+    "Duty_state_conflict" : {
+      "success" : false,
+      "status" : 400,
+      "message" : "Duty already started or stopped",
+      "data" : {}
+    }
   },
   components: {
     schemas: {

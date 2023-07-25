@@ -242,6 +242,10 @@ Router.post("/:shift_id/push_gps_data",
             description: 'Resouce not found',
             schema: { $ref: "#/definitions/Resource not found" }
         }
+        #swagger.responses[400] = {
+            description: 'Duty state conflict',
+            schema: { $ref: "#/definitions/Duty_state_conflict" }
+        }
         #swagger.responses[401] = {
             description: 'Unauthorized',
             schema: { $ref: "#/definitions/Unauthorized" }

@@ -2675,6 +2675,21 @@
               }
             }
           },
+          "400": {
+            "description": "Duty state conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Duty_state_conflict"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Duty_state_conflict"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -4818,6 +4833,30 @@
         },
         "xml": {
           "name": "Gps data pushed successfully"
+        }
+      },
+      "Duty_state_conflict": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "status": {
+            "type": "number",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "example": "Duty already started or stopped"
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "xml": {
+          "name": "Duty_state_conflict"
         }
       }
     },
