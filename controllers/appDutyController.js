@@ -184,6 +184,19 @@ const pushGpsData = async (req, res, next) => {
             throw err;
         }
 
+        // if duty is stopped or pending
+        if(shift.personnel_assigned[index].status == "stopped"){
+            const err = new Error('Duty already stopped');
+            err.status = 400;
+            throw err; 
+        }
+
+        if(shift.personnel_assigned[index].status == "pending"){
+            const err = new Error('Duty not started yet.');
+            err.status = 400;
+            throw err; 
+        }
+
         shift.personnel_assigned[index].gps_data.push({
             location: `${latitude},${longitude}`,
             timestamp
