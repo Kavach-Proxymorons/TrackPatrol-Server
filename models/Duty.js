@@ -26,8 +26,7 @@ const dutySchema = new mongoose.Schema({
         required: true
     },
     note:{
-        type: String,
-        required: true
+        type: String
     },
     shifts: [
         {
