@@ -58,6 +58,7 @@ router.post("/",
         body("identification_mark").exists().withMessage("Identification mark is required"),
         body("posted_at").exists().withMessage("Posted at is required"),
         body("address").exists().withMessage("Address is required"),
+        body("temp_password").exists().withMessage("Temporary password is required")
     ],
     validateRequest,
     checkAuth,
