@@ -1703,6 +1703,67 @@
         }
       }
     },
+    "/api/v1/admin/shift/ongoing": {
+      "get": {
+        "tags": [
+          "Admin : Shift"
+        ],
+        "summary": "Get all ongoing duty.",
+        "description": "Endpoint to get all ongoing shifts.",
+        "responses": {
+          "200": {
+            "description": "Ongoing Duty fetched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Get ongoing duty res.body"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Get ongoing duty res.body"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/v1/admin/shift/{id}": {
       "get": {
         "tags": [

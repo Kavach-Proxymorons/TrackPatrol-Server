@@ -517,6 +517,30 @@ const doc = {
         "__v": 0
       }
     },
+    "Get ongoing shifts res.body" : {
+      "success": true,
+      "status": 200,
+      "message": "Ongoing shifts fetched successfully",
+      "data": [
+        {
+          "_id": "64c91ce556698aa048844324",
+          "shift_name": "Year Long Duty : Shift 1",
+          "duty": {
+            "_id": "64c90e5753ab1fddbaf7f7e7",
+            "title": "Year Long Duty",
+            "description": "Duty ends in 2025",
+            "venue": "India Gate",
+            "location": "28.6129166,77.2246388",
+            "start_time": "2023-08-01T03:30:00.000Z",
+            "end_time": "2025-08-01T03:30:00.000Z",
+            "note": "For testing",
+            "__v": 1
+          },
+          "start_time": "2023-08-01T03:30:00.000Z",
+          "end_time": "2025-08-01T03:30:00.000Z"
+        }
+      ]
+    },
     "Shift fetched successfully response": {
       "success": true,
       "status": 200,
