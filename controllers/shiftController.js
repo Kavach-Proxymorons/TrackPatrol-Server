@@ -49,6 +49,35 @@ const createShift = async (req, res, next) => {
     }
 }
 
+const getOngoingShifts = async (req, res, next) => {
+    try {
+        // ongoing duty is a duty whose start_time is less than or equal to the current time and end_time is greater than or equal to the current time
+        const ongoingShifts = await Shift.find({
+            start_time: {
+                $lte: new Date()
+            },
+            end_time: {
+                $gte: new Date()
+            }
+        })
+            .populate({
+                path: 'duty',
+                select: '-shifts'
+            })
+            .select('-hardwares_attached -personnel_assigned -__v')
+            .exec();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Ongoing shifts fetched successfully',
+            data: ongoingShifts
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 const getOneShift = async (req, res, next) => {
     try {
         const { id } = req.params;
@@ -257,6 +286,7 @@ const removePersonnelFromShift = async (req, res, next) => {
 
 export {
     createShift,
+    getOngoingShifts,
     deleteShift,
     addPersonnelToShift,
     removePersonnelFromShift,

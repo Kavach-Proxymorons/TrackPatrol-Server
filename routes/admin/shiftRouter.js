@@ -3,7 +3,7 @@ import { body, param } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
 import { checkAuth, checkAdmin } from '../../middlewares/authMiddleware.js';
 
-import { createShift, getOneShift, deleteShift, addPersonnelToShift, removePersonnelFromShift } from '../../controllers/shiftController.js';
+import { createShift, getOngoingShifts, getOneShift, deleteShift, addPersonnelToShift, removePersonnelFromShift } from '../../controllers/shiftController.js';
 
 const Router = express.Router();
 
@@ -54,6 +54,31 @@ Router.post('/',
     checkAdmin,
     createShift
 );
+
+Router.get('/ongoing',
+    /*  #swagger.tags = ['Admin : Shift']
+        #swagger.description = 'Endpoint to get all ongoing shifts.'
+        #swagger.summary = 'Get all ongoing shifts.'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: 'Ongoing Duty fetched successfully',
+            schema: { $ref: "#/definitions/Get ongoing shifts res.body" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    checkAuth,
+    checkAdmin,
+    getOngoingShifts,
+)
 
 Router.get('/:id',
     /*  #swagger.tags = ['Admin : Shift']
