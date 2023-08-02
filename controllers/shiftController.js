@@ -214,7 +214,10 @@ const addHardwareToShift = async (req, res, next) => {
             throw err;
         }
 
-        const found_hardware_ids = hardware.map(p => p._id+"");
+        // filter out all hardwares with status occupied
+        const unoccupied_hardware = hardware.filter(h => h.status == 'idle'); 
+        const found_hardware_ids = unoccupied_hardware.map(p => p._id+"");
+
         const not_found_hardware_ids = hardware_array.filter(p => !found_hardware_ids.includes(p));
 
         // Add hardware to shift
@@ -226,6 +229,12 @@ const addHardwareToShift = async (req, res, next) => {
 
         // Save the shift
         await shift.save();
+
+        // update status of hardware to 'occupied'
+        await Hardware.updateMany({ _id: { $in: found_hardware_ids } }, { status: 'occupied' });
+
+        // update attached_to_shift
+        await Hardware.updateMany({ _id: { $in: found_hardware_ids } }, { attached_to_shift: id });
 
         return res.status(200).json({
             success: true,
@@ -412,7 +421,6 @@ const removeHardwareFromShift = async (req, res, next) => {
         }
 
         const to_remove_hardwares = shift.hardwares_attached.filter(p => hardware_array.includes(p+""));
-        console.log({to_remove_hardwares});
         shift.hardwares_attached = shift.hardwares_attached.filter(p => !hardware_array.includes(p+""));
         
         const removed_hardwares_ids = to_remove_hardwares.map(p => p+"");
@@ -420,6 +428,12 @@ const removeHardwareFromShift = async (req, res, next) => {
 
         // Save the shift
         await shift.save();
+
+        // reset status of all removed hardwares to idle
+        await Hardware.updateMany({ _id: { $in: removed_hardwares_ids } }, { status: 'idle' });
+
+        // reset attached_to_duty of all removed hardwares to null
+        await Hardware.updateMany({ _id: { $in: removed_hardwares_ids } }, { attached_to_shift: null });
 
         return res.status(200).json({
             success: true,
