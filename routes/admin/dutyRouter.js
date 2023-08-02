@@ -71,7 +71,7 @@ Router.get('/',
         }
         #swagger.responses[200] = {
             description: 'Duty fetched successfully',
-            schema: { $ref: "#/definitions/Get duty res.body" }
+            schema: { $ref: "#/definitions/Get all duty res.body" }
         }
         #swagger.responses[401] = {
             description: 'Unauthorized',

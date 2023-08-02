@@ -406,7 +406,7 @@ const doc = {
       "end_time": "2025-07-21T07:25:07.000Z",
       "note": "None",
     },
-    "Get duty res.body": {
+    "Get all duty res.body": {
       "success": true,
       "status": 200,
       "message": "Duty fetched successfully",
