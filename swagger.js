@@ -661,6 +661,19 @@ const doc = {
         ]
       }
     },
+    "Hardware removed from the shift response": {
+      "success": true,
+      "status": 200,
+      "message": "Hardwares removed from shift successfully",
+      "data": {
+        "hardwares_removed": [
+          "64c7ec70b50ee9144129caa0",
+          "64c6cc5551619abc4c55557f",
+          "64c6acd7b50ee9144129c6d8"
+        ],
+        "hardwares_not_removed": []
+      }
+    },
     "App get duty res.body": {
       "success": true,
       "status": 200,

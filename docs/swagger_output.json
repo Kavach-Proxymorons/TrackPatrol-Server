@@ -2324,6 +2324,118 @@
         }
       }
     },
+    "/api/v1/admin/shift/{id}/remove_hardware": {
+      "post": {
+        "tags": [
+          "Admin : Shift"
+        ],
+        "summary": "removes hardwares from a shift.",
+        "description": "Endpoint to remove one or more hardware from a shift.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Shift ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hardwares removed from shift successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware removed from the shift response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware removed from the shift response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shift not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Add hardwares to shift req.body"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/app/duty/": {
       "get": {
         "tags": [
@@ -4985,6 +5097,47 @@
         },
         "xml": {
           "name": "Personnel removed from the shift response"
+        }
+      },
+      "Hardware removed from the shift response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Hardwares removed from shift successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "hardwares_removed": {
+                "type": "array",
+                "example": [
+                  "64c7ec70b50ee9144129caa0",
+                  "64c6cc5551619abc4c55557f",
+                  "64c6acd7b50ee9144129c6d8"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hardwares_not_removed": {
+                "type": "array",
+                "example": [],
+                "items": {}
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Hardware removed from the shift response"
         }
       },
       "App get duty res.body": {
