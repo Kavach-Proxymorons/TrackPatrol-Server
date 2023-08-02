@@ -204,8 +204,8 @@ const addHardwareToShift = async (req, res, next) => {
             throw err;
         }
 
-        // Find the personnel
-        // check if all personnel exist
+        // Find the hardware
+        // check if all hardware exist
         const hardware = await Hardware.find({ _id: { $in: hardware_array } });
 
         if(hardware.length < 1 ) {
@@ -217,7 +217,7 @@ const addHardwareToShift = async (req, res, next) => {
         const found_hardware_ids = hardware.map(p => p._id+"");
         const not_found_hardware_ids = hardware_array.filter(p => !found_hardware_ids.includes(p));
 
-        // Add personnel to shift
+        // Add hardware to shift
         for(let i = 0; i < found_hardware_ids.length; i++) {
             // if not already added
             if(!shift.hardwares_attached.includes(found_hardware_ids[i]))
@@ -339,6 +339,103 @@ const removePersonnelFromShift = async (req, res, next) => {
     }
 }
 
+const removeHardwareFromShift = async (req, res, next) => {
+    try {
+        /*
+        
+    shift_name: {
+        type: String,
+        required: true
+    },
+    duty: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Duty'
+    },
+    start_time:{
+        type: Date,
+        required: true
+    },
+    end_time:{
+        type: Date,
+        required: true
+    },
+    hardwares_attached: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Hardware'
+        }
+    ],
+    personnel_assigned: [
+        {
+            personnel: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Personnel'
+            },
+            gps_data: [  // create a new schema for gps_data
+                {
+                    timestamp: {
+                        type: Date,
+                        required: true
+                    },
+                    location: {
+                        type: String,
+                        required: true
+                    }
+                }
+            ],
+            rfid_data: [
+                {
+                    timestamp: {
+                        type: Date,
+                        required: true
+                    },
+                    hardware_id: {
+                        type: mongoose.Schema.Types.ObjectId,
+                        ref: 'Hardware'
+                    }
+                }
+            ]
+        }
+    ]
+}
+        */
+        const { id } = req.params;
+        const { hardware_array } = req.body;
+
+        // Find the shift
+        const shift = await Shift.findOne({ _id: id });
+
+        if(!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const to_remove_hardwares = shift.hardwares_attached.filter(p => hardware_array.includes(p+""));
+        console.log({to_remove_hardwares});
+        shift.hardwares_attached = shift.hardwares_attached.filter(p => !hardware_array.includes(p+""));
+        
+        const removed_hardwares_ids = to_remove_hardwares.map(p => p+"");
+        const not_removed_hardwares_ids = hardware_array.filter(p => !removed_hardwares_ids.includes(p));
+
+        // Save the shift
+        await shift.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Hardwares removed from shift successfully',
+            data: {
+                hardwares_removed: removed_hardwares_ids,
+                hardwares_not_removed: not_removed_hardwares_ids
+            }
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
 
 
 export {
@@ -348,5 +445,6 @@ export {
     addPersonnelToShift,
     removePersonnelFromShift,
     addHardwareToShift,
+    removeHardwareFromShift,
     getOneShift,
 }
