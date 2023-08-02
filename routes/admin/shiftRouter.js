@@ -3,7 +3,7 @@ import { body, param } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
 import { checkAuth, checkAdmin } from '../../middlewares/authMiddleware.js';
 
-import { createShift, getOngoingShifts, getOneShift, deleteShift, addPersonnelToShift, removePersonnelFromShift } from '../../controllers/shiftController.js';
+import { createShift, getOngoingShifts, getOneShift, deleteShift, addPersonnelToShift, addHardwareToShift, removePersonnelFromShift } from '../../controllers/shiftController.js';
 
 const Router = express.Router();
 
@@ -295,5 +295,69 @@ Router.post('/:id/remove_personnel',
     checkAdmin,
     removePersonnelFromShift
 );
+
+Router.post('/:id/add_hardware',
+    /*  #swagger.tags = ['Admin : Shift']
+        #swagger.description = 'Endpoint to add one or more hardwares to a shift.'
+        #swagger.summary = 'adds hardwares to a shift.'
+
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'shift id',
+            required: true,
+            type: 'string'
+        }
+
+        #swagger.requestBody = {
+            required: true,
+            content: {
+                'application/json': {
+                    schema: {
+                        $ref: "#/definitions/Add hardwares to shift req.body"
+                    }
+                }
+            }
+        }
+
+        #swagger.responses[200] = {
+            description: 'Hardware added to shift successfully',
+            schema: { $ref: "#/definitions/hardware added to the shift response" }
+        }
+
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+
+        #swagger.responses[404] = {
+            description: 'Hardware not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
+
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param('id').exists().withMessage('id (shift_id) is required'),
+        body('hardware_array').exists().withMessage('Hardware_array is required'),
+    ],
+    
+    validateRequest,
+    // checkAuth,
+    // checkAdmin,
+    addHardwareToShift
+);
+
 
 export default Router;

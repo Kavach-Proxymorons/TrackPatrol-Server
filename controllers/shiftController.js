@@ -1,4 +1,5 @@
 import Shift from '../models/Shift.js';
+import Hardware from '../models/Hardware.js'
 import Duty from '../models/Duty.js';
 import Personnel from '../models/Personnel.js';
 
@@ -162,6 +163,10 @@ const addPersonnelToShift = async (req, res, next) => {
 
         // Add personnel to shift
         for(let i = 0; i < found_personnel_ids.length; i++) {
+            // if not already added
+            if(shift.personnel_assigned.filter(p => p.personnel == found_personnel_ids[i]).length > 0) {
+                continue;
+            }
             shift.personnel_assigned.push({
                 personnel: found_personnel_ids[i]
             })
@@ -177,6 +182,58 @@ const addPersonnelToShift = async (req, res, next) => {
             data: {
                 personnel_added: found_personnel_ids,
                 personnel_not_added: not_found_personnel_ids
+            }
+        });
+
+    } catch (error) {
+        next(error);
+    }
+}
+
+const addHardwareToShift = async (req, res, next) => {
+    try {
+        const { id } = req.params; // shift_id
+        const { hardware_array } = req.body;
+
+        // Find the shift
+        const shift = await Shift.findOne({ _id: id });
+
+        if(!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        // Find the personnel
+        // check if all personnel exist
+        const hardware = await Hardware.find({ _id: { $in: hardware_array } });
+
+        if(hardware.length < 1 ) {
+            const err = new Error('No hardware found/added');
+            err.status = 404;
+            throw err;
+        }
+
+        const found_hardware_ids = hardware.map(p => p._id+"");
+        const not_found_hardware_ids = hardware_array.filter(p => !found_hardware_ids.includes(p));
+
+        // Add personnel to shift
+        for(let i = 0; i < found_hardware_ids.length; i++) {
+            // if not already added
+            if(!shift.hardwares_attached.includes(found_hardware_ids[i]))
+                shift.hardwares_attached.push(found_hardware_ids[i])
+        }
+
+        // Save the shift
+        await shift.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Hardware added to shift successfully',
+            data: {
+                hardware_added: found_hardware_ids,
+                hardware_not_added: not_found_hardware_ids
             }
         });
 
@@ -290,5 +347,6 @@ export {
     deleteShift,
     addPersonnelToShift,
     removePersonnelFromShift,
+    addHardwareToShift,
     getOneShift,
 }
