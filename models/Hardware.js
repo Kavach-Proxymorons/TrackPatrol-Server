@@ -22,9 +22,9 @@ const hardwareSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    attached_To_duty:{
+    attached_to_shift:{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Duty'
+        ref: 'Shift'
     },
     status:{
         type: String,
