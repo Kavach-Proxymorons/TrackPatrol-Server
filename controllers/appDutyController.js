@@ -10,12 +10,12 @@ const getAssignedDuties = async (req, res, next) => {
             'personnel_assigned.personnel': personnel_id
         };
 
-        query.start_time = {
+        query.end_time = {
             $gte: new Date()
         };
 
         if (start_time && end_time) {
-            query.start_time = {
+            query.end_time = {
                 $gte: start_time,
                 $lte: end_time
             };
