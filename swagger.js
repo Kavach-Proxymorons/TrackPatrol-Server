@@ -617,6 +617,9 @@ const doc = {
     "Add personnel to shift req.body": {
       "personnel_array": ["64aafded69d38a1c547c36ac", "64ab66a2035b6ed93140a9d0", "64aafded69d38a1c547c36ad"]
     },
+    "Add hardwares to shift req.body": {
+      "hardware_array": ["64c6acd7b50ee9144129c6d8", "64c6cc5551619abc4c55557f", "64c7ec70b50ee9144129caa0"]
+    },
     "Personnel added to the shift response": {
       "success": true,
       "status": 200,
@@ -629,6 +632,19 @@ const doc = {
         "personnel_not_added": [
           "64aafded69d38a1c547c36ad"
         ]
+      }
+    },
+    "hardware added to the shift response": {
+      "success": true,
+      "status": 200,
+      "message": "Hardware added to shift successfully",
+      "data": {
+        "hardware_added": [
+          "64c6acd7b50ee9144129c6d8",
+          "64c6cc5551619abc4c55557f",
+          "64c7ec70b50ee9144129caa0"
+        ],
+        "hardware_not_added": []
       }
     },
     "Personnel removed from the shift response": {

@@ -1708,20 +1708,29 @@
         "tags": [
           "Admin : Shift"
         ],
-        "summary": "Get all ongoing duty.",
+        "summary": "Get all ongoing shifts.",
         "description": "Endpoint to get all ongoing shifts.",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Ongoing Duty fetched successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Get ongoing duty res.body"
+                  "$ref": "#/components/schemas/Get ongoing shifts res.body"
                 }
               },
               "application/xml": {
                 "schema": {
-                  "$ref": "#/components/schemas/Get ongoing duty res.body"
+                  "$ref": "#/components/schemas/Get ongoing shifts res.body"
                 }
               }
             }
@@ -1740,6 +1749,9 @@
                 }
               }
             }
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal server error",
@@ -2194,6 +2206,118 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/Add personnel to shift req.body"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/admin/shift/{id}/add_hardware": {
+      "post": {
+        "tags": [
+          "Admin : Shift"
+        ],
+        "summary": "adds hardwares to a shift.",
+        "description": "Endpoint to add one or more hardwares to a shift.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "shift id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Hardware added to shift successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/hardware added to the shift response"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/hardware added to the shift response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Hardware not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Add hardwares to shift req.body"
               }
             }
           }
@@ -4482,6 +4606,91 @@
           "name": "Shift created successfully response"
         }
       },
+      "Get ongoing shifts res.body": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Ongoing shifts fetched successfully"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "64c91ce556698aa048844324"
+                },
+                "shift_name": {
+                  "type": "string",
+                  "example": "Year Long Duty : Shift 1"
+                },
+                "duty": {
+                  "type": "object",
+                  "properties": {
+                    "_id": {
+                      "type": "string",
+                      "example": "64c90e5753ab1fddbaf7f7e7"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "Year Long Duty"
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": "Duty ends in 2025"
+                    },
+                    "venue": {
+                      "type": "string",
+                      "example": "India Gate"
+                    },
+                    "location": {
+                      "type": "string",
+                      "example": "28.6129166,77.2246388"
+                    },
+                    "start_time": {
+                      "type": "string",
+                      "example": "2023-08-01T03:30:00.000Z"
+                    },
+                    "end_time": {
+                      "type": "string",
+                      "example": "2025-08-01T03:30:00.000Z"
+                    },
+                    "note": {
+                      "type": "string",
+                      "example": "For testing"
+                    },
+                    "__v": {
+                      "type": "number",
+                      "example": 1
+                    }
+                  }
+                },
+                "start_time": {
+                  "type": "string",
+                  "example": "2023-08-01T03:30:00.000Z"
+                },
+                "end_time": {
+                  "type": "string",
+                  "example": "2025-08-01T03:30:00.000Z"
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Get ongoing shifts res.body"
+        }
+      },
       "Shift fetched successfully response": {
         "type": "object",
         "properties": {
@@ -4630,6 +4839,25 @@
           "name": "Add personnel to shift req.body"
         }
       },
+      "Add hardwares to shift req.body": {
+        "type": "object",
+        "properties": {
+          "hardware_array": {
+            "type": "array",
+            "example": [
+              "64c6acd7b50ee9144129c6d8",
+              "64c6cc5551619abc4c55557f",
+              "64c7ec70b50ee9144129caa0"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "xml": {
+          "name": "Add hardwares to shift req.body"
+        }
+      },
       "Personnel added to the shift response": {
         "type": "object",
         "properties": {
@@ -4672,6 +4900,47 @@
         },
         "xml": {
           "name": "Personnel added to the shift response"
+        }
+      },
+      "hardware added to the shift response": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Hardware added to shift successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "hardware_added": {
+                "type": "array",
+                "example": [
+                  "64c6acd7b50ee9144129c6d8",
+                  "64c6cc5551619abc4c55557f",
+                  "64c7ec70b50ee9144129caa0"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              },
+              "hardware_not_added": {
+                "type": "array",
+                "example": [],
+                "items": {}
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "hardware added to the shift response"
         }
       },
       "Personnel removed from the shift response": {
