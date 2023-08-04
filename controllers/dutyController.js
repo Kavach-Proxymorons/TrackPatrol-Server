@@ -62,14 +62,18 @@ const getOneDuty = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        // Find the duty populate shifts array
+        // Find the duty populate shifts array and personnel and hardwares_attached
         const duty = await Duty.findOne({ _id: id })
             .populate({
                 path: 'shifts',
-                populate: {
-                    path: 'personnel_assigned.personnel',
-                    model: 'Personnel'
-                }
+                populate: [
+                    {
+                        path: 'personnel_assigned.personnel',
+                    },
+                    {
+                        path: 'hardwares_attached',
+                    }
+                ]
             })
             .exec();
 
