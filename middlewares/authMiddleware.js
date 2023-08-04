@@ -38,8 +38,15 @@ const checkAuth = async (req, res, next) => {
 
         next();
 
-    } catch (error) {
-        next(error);
+    } // catch jsonwebtoken.JsonWebTokenError
+    catch (err) {
+        if (err instanceof jwt.JsonWebTokenError) {
+            const err = new Error('Unauthorized');
+            err.status = 401;
+            next(err);
+        } else {
+            next(err);
+        }
     }
 }
 
