@@ -89,6 +89,10 @@ const getOneShift = async (req, res, next) => {
                 path: 'personnel_assigned.personnel',
                 model: 'Personnel'
             })
+            .populate({
+                path: 'hardwares_attached',
+                model: 'Hardware'
+            })
             .exec();
 
         if(!shift) {
