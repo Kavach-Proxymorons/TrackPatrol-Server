@@ -93,6 +93,10 @@ const getOneShift = async (req, res, next) => {
                 path: 'hardwares_attached',
                 model: 'Hardware'
             })
+            .populate({
+                path: 'duty',
+                select: '-shifts'
+            })
             .exec();
 
         if(!shift) {
