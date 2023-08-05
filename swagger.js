@@ -31,6 +31,10 @@ const doc = {
     description: 'Admin hardware endpoints'
   },
   {
+    name: "Hardware",
+    description: "Hardware endpoints"
+  },
+  {
     name: 'App : Duty',
     description: 'App duty endpoints'
   }
@@ -751,7 +755,31 @@ const doc = {
       "status" : 400,
       "message" : "Duty already started or stopped",
       "data" : {}
-    }
+    },
+    "Hardware data push req.body": {
+      "hardware_id" : "123",
+      "secret" : "123456789",
+      "timestamp" : "2023-07-18T04:18:00.000+05:30",
+      "data" : "64b580ecce6f2178b5a5c963"
+    },
+    "Hardware data successfully pushed": {
+      "success": true,
+      "status": 200,
+      "message": "Data pushed successfully",
+      "data": {}
+    },
+    "Hardware not attached to any shift": {
+      "success": false,
+      "status": 400,
+      "message": "Hardware not attached to any shift",
+      "stack": "Error: Hardware not attached to any shift\n    at pushDataController (file:///C:/Users/Shahbaz/Desktop/Kawach/TrackPatrol-Server/controllers/hardwareController.js:39:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
+    "Hardware not found": {
+      "success": false,
+      "status": 404,
+      "message": "Hardware not found",
+      "stack": "Error: Hardware not found\n    at pushDataController (file:///C:/Users/Shahbaz/Desktop/Kawach/TrackPatrol-Server/controllers/hardwareController.js:39:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+    },
   },
   components: {
     schemas: {

@@ -37,6 +37,10 @@
       "description": "Admin hardware endpoints"
     },
     {
+      "name": "Hardware",
+      "description": "Hardware endpoints"
+    },
+    {
       "name": "App : Duty",
       "description": "App duty endpoints"
     }
@@ -3091,6 +3095,102 @@
           }
         }
       }
+    },
+    "/api/v1/hardware/pushData": {
+      "post": {
+        "tags": [
+          "Hardware"
+        ],
+        "summary": "Endpoint to push data from hardware to server.",
+        "description": "Endpoint to push data from hardware to server.",
+        "responses": {
+          "200": {
+            "description": "Hardware data successfully pushed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware data successfully pushed"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware data successfully pushed"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Hardware not attached to any shift",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware not attached to any shift"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware not attached to any shift"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Hardware not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hardware not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Hardware data push req.body"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5442,6 +5542,102 @@
         },
         "xml": {
           "name": "Duty_state_conflict"
+        }
+      },
+      "Hardware data push req.body": {
+        "type": "object",
+        "properties": {
+          "hardware_id": {
+            "type": "string",
+            "example": "123"
+          },
+          "secret": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "timestamp": {
+            "type": "string",
+            "example": "2023-07-18T04:18:00.000+05:30"
+          },
+          "data": {
+            "type": "string",
+            "example": "64b580ecce6f2178b5a5c963"
+          }
+        },
+        "xml": {
+          "name": "Hardware data push req.body"
+        }
+      },
+      "Hardware data successfully pushed": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Data pushed successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "xml": {
+          "name": "Hardware data successfully pushed"
+        }
+      },
+      "Hardware not attached to any shift": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "status": {
+            "type": "number",
+            "example": 400
+          },
+          "message": {
+            "type": "string",
+            "example": "Hardware not attached to any shift"
+          },
+          "stack": {
+            "type": "string",
+            "example": "Error: Hardware not attached to any shift\n    at pushDataController (file:///C:/Users/Shahbaz/Desktop/Kawach/TrackPatrol-Server/controllers/hardwareController.js:39:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+          }
+        },
+        "xml": {
+          "name": "Hardware not attached to any shift"
+        }
+      },
+      "Hardware not found": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": false
+          },
+          "status": {
+            "type": "number",
+            "example": 404
+          },
+          "message": {
+            "type": "string",
+            "example": "Hardware not found"
+          },
+          "stack": {
+            "type": "string",
+            "example": "Error: Hardware not found\n    at pushDataController (file:///C:/Users/Shahbaz/Desktop/Kawach/TrackPatrol-Server/controllers/hardwareController.js:39:25)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)"
+          }
+        },
+        "xml": {
+          "name": "Hardware not found"
         }
       }
     },
