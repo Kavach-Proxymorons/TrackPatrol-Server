@@ -90,6 +90,13 @@ const getOneDuty = async (req, res, next) => {
             data: duty
         });
     } catch (error) {
+        // catch mongoose cast errors
+        if (error.name === 'CastError') {
+            const err = new Error('Duty not found');
+            err.status = 404;
+            next(err);
+        }
+
         next(error);
     }
 }
