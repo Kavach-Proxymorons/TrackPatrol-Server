@@ -11,10 +11,24 @@ const pushDataController = async (req, res, next) => {
     }
     */
 
-    const { hardware_id, secret, timestamp, data } = req.body;
+    let { hardware_id, secret, timestamp, data } = req.body;
+    const { useMap } = req.query;
     // data is the personnel_id
+    console.log(data, useMap);
+
+    const hardware_personnel_map = {
+        "565642991063" : "64b580ecce6f2178b5a5c965" // ram Charan
+    }
 
     try {
+
+        if (useMap) {
+            data = hardware_personnel_map[data];
+            console.log(data);
+        }
+
+
+
         // find hardware
         const hardware = await Hardware.findOne({ hardware_id });
 
