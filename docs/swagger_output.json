@@ -3103,6 +3103,15 @@
         ],
         "summary": "Endpoint to push data from hardware to server.",
         "description": "Endpoint to push data from hardware to server.",
+        "parameters": [
+          {
+            "name": "useMap",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Hardware data successfully pushed",
@@ -4855,6 +4864,10 @@
           "duty": {
             "type": "string",
             "example": "64adc1982a9b6864cc61b521"
+          },
+          "distance_radius": {
+            "type": "number",
+            "example": 250
           }
         },
         "xml": {
