@@ -504,7 +504,8 @@ const doc = {
       "shift_name": "Ghaziabad Mela Duty Shift 1",
       "start_time": "2025-07-20T07:25:07.000Z",
       "end_time": "2025-07-21T07:25:07.000Z",
-      "duty": "64adc1982a9b6864cc61b521"
+      "duty": "64adc1982a9b6864cc61b521",
+      "distance_radius": 250,
     },
     "Shift created successfully response": {
       "success": true,

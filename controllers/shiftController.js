@@ -9,7 +9,8 @@ const createShift = async (req, res, next) => {
             shift_name,
             duty,
             start_time,
-            end_time
+            end_time,
+            distance_radius,
         } = req.body;
 
         // Create a new shift
@@ -17,7 +18,8 @@ const createShift = async (req, res, next) => {
             shift_name,
             duty,
             start_time,
-            end_time
+            end_time,
+            distance_radius,
         });
 
         // Find the duty
