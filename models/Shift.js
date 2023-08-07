@@ -9,15 +9,25 @@ const shiftSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Duty'
     },
-    start_time:{
+    start_time: {
         type: Date,
         required: true
     },
-    distance_radius:{
+    issue_reported: [
+        {
+            issue_category : {
+                type: String,
+            },
+            issue_description : {
+                type: String,
+            },
+        }
+    ],
+    distance_radius: {
         type: Number, // in meters by default it is 250 meters.
         default: 250
     },
-    end_time:{
+    end_time: {
         type: Date,
         required: true
     },
