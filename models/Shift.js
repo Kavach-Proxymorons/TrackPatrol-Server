@@ -49,6 +49,10 @@ const shiftSchema = new mongoose.Schema({
                     location: {
                         type: String,
                         required: true
+                    },
+                    distance_from_duty_location: {
+                        type: Number,
+                        required: true
                     }
                 }
             ],
