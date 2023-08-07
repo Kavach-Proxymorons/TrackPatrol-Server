@@ -177,6 +177,51 @@ const stopDuty = async (req, res, next) => {
     }
 }
 
+const postIssueController = async (req, res, next) => {
+    const { shift_id } = req.params;
+    const { personnel_id } = req.user;
+    const { issue_category, description } = req.body;
+
+    try {
+        const shift = await Shift.findById(shift_id);
+
+        if (!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const index = shift.personnel_assigned.findIndex(personnel => personnel.personnel+"" == personnel_id);
+
+        if (index == -1) {
+            const err = new Error('Personnel not assigned to shift');
+            err.status = 404;
+            throw err;
+        }
+
+        shift.issue_reported.push({
+            issue_category,
+            description,
+            reported_by: personnel_id + ""
+        });
+
+        await shift.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Issue reported successfully',
+            data: {
+                issue_category,
+                description,
+                reported_by: personnel_id + ""
+            }
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
 const pushGpsData = async (req, res, next) => {
     const { shift_id } = req.params;
     const { personnel_id } = req.user;
@@ -248,5 +293,6 @@ export {
     getShiftDetails,
     startDuty,
     stopDuty,
-    pushGpsData
+    postIssueController,
+    pushGpsData,
 }

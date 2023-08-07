@@ -9,7 +9,8 @@ import {
     getShiftDetails,
     startDuty,
     stopDuty,
-    pushGpsData
+    pushGpsData,
+    postIssueController
 } from '../../controllers/appDutyController.js';
 
 const Router = express.Router();
@@ -171,6 +172,55 @@ Router.post("/:shift_id/stop_duty",
     validateRequest,
     checkAuth,
     stopDuty
+)
+
+Router.post("/:shift_id/post_issue",
+    /*
+        #swagger.tags = ['App : Duty']
+        #swagger.summary = 'post an issue for a duty shift by shift_id'
+        #swagger.description = 'Endpoint to post an issue for a duty shift by shift_id'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.parameters['shift_id'] = {
+            in: 'path',
+            description: 'shift_id',
+        }
+        #swagger.requestBody = {
+            in: 'body',
+            description: 'Duty post issue request body',
+            required: true,
+            schema: { $ref: "#/definitions/App post issue req.body" }
+        }
+        #swagger.responses[200] = {
+            description: 'Issue posted successfully',
+            schema: { $ref: "#/definitions/Issue posted successfully" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[404] = {
+            description: 'Resouce not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+   [
+    param('shift_id').exists().withMessage('shift_id is required'),
+    body('issue_category').exists().withMessage('issue is required'),
+    body('description').exists().withMessage('description is required'),
+   ],
+    validateRequest,
+    checkAuth,
+    postIssueController
 )
 
 Router.get("/:shift_id",
