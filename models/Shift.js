@@ -13,6 +13,10 @@ const shiftSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    distance_radius:{
+        type: Number, // in meters by default it is 250 meters.
+        default: 250
+    },
     end_time:{
         type: Date,
         required: true
