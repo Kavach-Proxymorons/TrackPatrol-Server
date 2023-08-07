@@ -1,5 +1,24 @@
 import Shift from '../models/Shift.js';
 
+const calculateDistance = (lat1, lon1, lat2, lon2) => {
+    const earthRadius = 6371; // Radius of the Earth in kilometers
+    
+    const degToRad = (deg) => deg * (Math.PI / 180);
+
+    const dLat = degToRad(lat2 - lat1);
+    const dLon = degToRad(lon2 - lon1);
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(degToRad(lat1)) * Math.cos(degToRad(lat2)) *
+        Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = earthRadius * c; // Distance in kilometers
+
+    return distance*1000;
+}
+
 const getAssignedDuties = async (req, res, next) => {
     const { personnel_id } = req.user;
     const { page, limit, start_time, end_time } = req.query;
@@ -44,7 +63,6 @@ const getAssignedDuties = async (req, res, next) => {
                 currentPage: page
             }
         });
-
 
     } catch (err) {
         console.log(err);
@@ -168,7 +186,10 @@ const pushGpsData = async (req, res, next) => {
         timestamp,
     } = req.body;
     try {
-        const shift = await Shift.findById(shift_id);
+        const shift = await Shift.findById(shift_id).populate({ // duty 
+            path: 'duty',
+            select: 'location'
+        }).exec();
 
         if (!shift) {
             const err = new Error('Shift not found');
@@ -197,9 +218,15 @@ const pushGpsData = async (req, res, next) => {
             throw err; 
         }
 
+        // 26.2334,78.2191
+        const duty_location_lat = Number(shift.duty.location.split(',')[0]);
+        const duty_location_long = Number(shift.duty.location.split(',')[1]);
+        const distance = calculateDistance(Number(latitude), Number(longitude), duty_location_lat, duty_location_long);
+
         shift.personnel_assigned[index].gps_data.push({
             location: `${latitude},${longitude}`,
-            timestamp
+            timestamp,
+            distance_from_duty_location: distance,
         });
 
         await shift.save();

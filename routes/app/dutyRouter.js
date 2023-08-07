@@ -261,7 +261,6 @@ Router.post("/:shift_id/push_gps_data",
     */
     [
         param('shift_id').exists().withMessage('id is required'),
-        body('').exists().withMessage('gps_data is required'),
     ],
     validateRequest,
     checkAuth,
