@@ -18,8 +18,12 @@ const shiftSchema = new mongoose.Schema({
             issue_category : {
                 type: String,
             },
-            issue_description : {
+            description : {
                 type: String,
+            },
+            reported_by : {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Personnel'
             },
         }
     ],
@@ -66,7 +70,6 @@ const shiftSchema = new mongoose.Schema({
                     },
                     distance_from_duty_location: {
                         type: Number,
-                        required: true
                     }
                 }
             ],
