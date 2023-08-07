@@ -745,6 +745,11 @@ const doc = {
       longitude: "77.2246388",
       timestamp: "2023-07-18T04:18:00.000+05:30"
     },
+    "App post issue req.body": {
+      "issue_category": "Electricity",
+      "description": "No electricity in the area"
+    },
+    "Issue posted successfully": {},
     "Gps data pushed successfully": {
       "success": true,
       "status": 200,

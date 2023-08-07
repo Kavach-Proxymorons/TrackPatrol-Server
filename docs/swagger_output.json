@@ -2846,6 +2846,125 @@
         }
       }
     },
+    "/api/v1/app/duty/{shift_id}/post_issue": {
+      "post": {
+        "tags": [
+          "App : Duty"
+        ],
+        "summary": "post an issue for a duty shift by shift_id",
+        "description": "Endpoint to post an issue for a duty shift by shift_id",
+        "parameters": [
+          {
+            "name": "shift_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "shift_id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Issue posted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Issue posted successfully"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Issue posted successfully"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resouce not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "in": "body",
+          "description": "Duty post issue request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/App post issue req.body"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/App post issue req.body"
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/app/duty/{shift_id}": {
       "get": {
         "tags": [
@@ -5507,6 +5626,29 @@
         },
         "xml": {
           "name": "App push gps data req.body"
+        }
+      },
+      "App post issue req.body": {
+        "type": "object",
+        "properties": {
+          "issue_category": {
+            "type": "string",
+            "example": "Electricity"
+          },
+          "description": {
+            "type": "string",
+            "example": "No electricity in the area"
+          }
+        },
+        "xml": {
+          "name": "App post issue req.body"
+        }
+      },
+      "Issue posted successfully": {
+        "type": "object",
+        "properties": {},
+        "xml": {
+          "name": "Issue posted successfully"
         }
       },
       "Gps data pushed successfully": {
