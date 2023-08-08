@@ -679,6 +679,12 @@ const doc = {
         "hardwares_not_removed": []
       }
     },
+    "Report generated successfully": {
+      "success": true,
+      "status": 200,
+      "message": "Report generated successfully",
+      "data": {}
+    },
     "App get duty res.body": {
       "success": true,
       "status": 200,

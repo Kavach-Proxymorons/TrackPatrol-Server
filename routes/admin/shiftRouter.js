@@ -422,6 +422,42 @@ Router.post('/:id/remove_hardware',
 );
 
 Router.get("/:id/report",
+    /* #swagger.tags = ['Admin : Shift']
+        #swagger.description = 'Endpoint to generate report API'
+        #swagger.summary = 'report API'
+
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'Shift ID',
+            required: true,
+            type: 'string'
+        }
+
+        #swgger.responses[200] = {
+            description: 'Report generated successfully',
+            schema: { $ref: "#/definitions/Report generated successfully" }
+        }
+
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+
+        #swagger.responses[404] = {
+            description: 'Shift not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
+
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
     generateReport
 )
 
