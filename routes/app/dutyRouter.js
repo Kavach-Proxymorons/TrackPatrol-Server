@@ -10,6 +10,7 @@ import {
     startDuty,
     stopDuty,
     pushGpsData,
+    bulkPushGpsData,
     postIssueController
 } from '../../controllers/appDutyController.js';
 
@@ -315,6 +316,55 @@ Router.post("/:shift_id/push_gps_data",
     validateRequest,
     checkAuth,
     pushGpsData
+)
+
+Router.post("/:shift_id/push_gps_data_bulk",
+    /*
+        #swagger.tags = ['App : Duty']
+        #swagger.summary = 'push gps data of a duty after app become online. '
+        #swagger.description = 'Endpoint to push gps data of a duty after app become online. '
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.parameters['shift_id'] = {
+            in: 'path',
+            description: 'Duty id',
+            required: true,
+            type: 'string'
+        }
+        #swagger.requestBody = {
+            in: 'body',
+            description: 'Gps bulk data push request body',
+            required: true,
+            schema: { $ref: "#/definitions/App bulk push gps data req.body" }
+        }
+        #swagger.responses[200] = {
+            description: 'Gps data pushed successfully',
+            schema: { $ref: "#/definitions/Gps data pushed successfully" }
+        }
+        #swagger.responses[404] = {
+            description: 'Resouce not found',
+            schema: { $ref: "#/definitions/Resource not found" }
+        }
+        #swagger.responses[401] = {
+            description: 'Unauthorized',
+            schema: { $ref: "#/definitions/Unauthorized" }
+        }
+        #swagger.responses[422] = {
+            description: 'Validation error',
+            schema: { $ref: "#/definitions/Validation error" }
+        }
+        #swagger.responses[500] = {
+            description: 'Internal server error',
+            schema: { $ref: "#/definitions/Internal server error" }
+        }
+    */
+    [
+        param('shift_id').exists().withMessage('id is required'),
+    ],
+    validateRequest,
+    checkAuth,
+    bulkPushGpsData,
 )
 
 export default Router;

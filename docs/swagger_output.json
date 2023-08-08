@@ -2460,6 +2460,88 @@
         }
       }
     },
+    "/api/v1/admin/shift/{id}/report": {
+      "get": {
+        "tags": [
+          "Admin : Shift"
+        ],
+        "summary": "report API",
+        "description": "Endpoint to generate report API",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Shift ID"
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Shift not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/v1/app/duty/": {
       "get": {
         "tags": [
@@ -2862,6 +2944,13 @@
               "type": "string"
             },
             "description": "shift_id"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -3209,6 +3298,132 @@
             "application/xml": {
               "schema": {
                 "$ref": "#/components/schemas/App push gps data req.body"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/app/duty/{shift_id}/push_gps_data_bulk": {
+      "post": {
+        "tags": [
+          "App : Duty"
+        ],
+        "summary": "push gps data of a duty after app become online. ",
+        "description": "Endpoint to push gps data of a duty after app become online. ",
+        "parameters": [
+          {
+            "name": "shift_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Duty id"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gps data pushed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gps data pushed successfully"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Gps data pushed successfully"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Unauthorized"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resouce not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Resource not found"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Validation error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Internal server error"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "in": "body",
+          "description": "Gps bulk data push request body",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/App bulk push gps data req.body"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/App bulk push gps data req.body"
               }
             }
           }
@@ -5474,6 +5689,30 @@
           "name": "Hardware removed from the shift response"
         }
       },
+      "Report generated successfully": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "Report generated successfully"
+          },
+          "data": {
+            "type": "object",
+            "properties": {}
+          }
+        },
+        "xml": {
+          "name": "Report generated successfully"
+        }
+      },
       "App get duty res.body": {
         "type": "object",
         "properties": {
@@ -5626,6 +5865,34 @@
         },
         "xml": {
           "name": "App push gps data req.body"
+        }
+      },
+      "App bulk push gps data req.body": {
+        "type": "object",
+        "properties": {
+          "gps_data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "latitude": {
+                  "type": "string",
+                  "example": "28.6129166"
+                },
+                "longitude": {
+                  "type": "string",
+                  "example": "77.2246388"
+                },
+                "timestamp": {
+                  "type": "string",
+                  "example": "2023-07-18T04:18:00.000+05:30"
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "App bulk push gps data req.body"
         }
       },
       "App post issue req.body": {

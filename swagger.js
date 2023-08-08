@@ -679,6 +679,12 @@ const doc = {
         "hardwares_not_removed": []
       }
     },
+    "Report generated successfully": {
+      "success": true,
+      "status": 200,
+      "message": "Report generated successfully",
+      "data": {}
+    },
     "App get duty res.body": {
       "success": true,
       "status": 200,
@@ -744,6 +750,15 @@ const doc = {
       latitude: "28.6129166",
       longitude: "77.2246388",
       timestamp: "2023-07-18T04:18:00.000+05:30"
+    },
+    "App bulk push gps data req.body": {
+      "gps_data": [
+        {
+          "latitude": "28.6129166",
+          "longitude": "77.2246388",
+          "timestamp": "2023-07-18T04:18:00.000+05:30"
+        }
+      ]
     },
     "App post issue req.body": {
       "issue_category": "Electricity",
