@@ -522,7 +522,7 @@ const doc = {
         "__v": 0
       }
     },
-    "Get ongoing shifts res.body" : {
+    "Get ongoing shifts res.body": {
       "success": true,
       "status": 200,
       "message": "Ongoing shifts fetched successfully",
@@ -631,11 +631,25 @@ const doc = {
       "message": "Personnel added to shift successfully",
       "data": {
         "personnel_added": [
-          "64aafded69d38a1c547c36ac",
-          "64ab66a2035b6ed93140a9d0"
+          "64b580ecce6f2178b5a5c965"
         ],
-        "personnel_not_added": [
-          "64aafded69d38a1c547c36ad"
+        "personnel_not_added": [],
+        "sid_not_added_because_clashing_shifts": [
+          {
+            "sid": "102",
+            "clashing_shift_name": "Year Long Duty : Shift 1",
+            "clashing_shift_duty": "64c90e5753ab1fddbaf7f7e7"
+          },
+          {
+            "sid": "102",
+            "clashing_shift_name": "Year Long Duty : Shift 3",
+            "clashing_shift_duty": "64c90e5753ab1fddbaf7f7e7"
+          },
+          {
+            "sid": "102",
+            "clashing_shift_name": "Kavach Bandobast : Shift 1",
+            "clashing_shift_duty": "64d2107becd13bea3cbfefab"
+          }
         ]
       }
     },
@@ -738,13 +752,13 @@ const doc = {
       "success": true,
       "status": 200,
       "message": "Duty started successfully",
-      "data": { }
+      "data": {}
     },
     "Duty stopped successfully": {
       "success": true,
       "status": 200,
       "message": "Duty stopped successfully",
-      "data": { }
+      "data": {}
     },
     "App push gps data req.body": {
       latitude: "28.6129166",
@@ -771,17 +785,17 @@ const doc = {
       "message": "Gps data pushed successfully",
       "data": {}
     },
-    "Duty_state_conflict" : {
-      "success" : false,
-      "status" : 400,
-      "message" : "Duty already started or stopped",
-      "data" : {}
+    "Duty_state_conflict": {
+      "success": false,
+      "status": 400,
+      "message": "Duty already started or stopped",
+      "data": {}
     },
     "Hardware data push req.body": {
-      "hardware_id" : "123",
-      "secret" : "123456789",
-      "timestamp" : "2023-07-18T04:18:00.000+05:30",
-      "data" : "64b580ecce6f2178b5a5c963"
+      "hardware_id": "123",
+      "secret": "123456789",
+      "timestamp": "2023-07-18T04:18:00.000+05:30",
+      "data": "64b580ecce6f2178b5a5c963"
     },
     "Hardware data successfully pushed": {
       "success": true,

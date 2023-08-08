@@ -167,9 +167,18 @@ const addPersonnelToShift = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { personnel_array } = req.body;
+        const all_personnel = await Personnel.find({});
+
+        const personnel_id_to_sid_map = {};
+        
+        all_personnel.forEach(p => {
+            personnel_id_to_sid_map[p._id] = p.sid;
+        });
 
         // Find the shift
         const shift = await Shift.findOne({ _id: id });
+        const selected_shift_start_time = shift.start_time;
+        const selected_shift_end_time = shift.end_time;
 
         if (!shift) {
             const err = new Error('Shift not found');
@@ -190,12 +199,40 @@ const addPersonnelToShift = async (req, res, next) => {
         const found_personnel_ids = personnel.map(p => p._id + "");
         const not_found_personnel_ids = personnel_array.filter(p => !found_personnel_ids.includes(p));
 
+        const not_added_because_clashing_shifts = [];
+
         // Add personnel to shift
         for (let i = 0; i < found_personnel_ids.length; i++) {
             // if not already added
             if (shift.personnel_assigned.filter(p => p.personnel == found_personnel_ids[i]).length > 0) {
                 continue;
             }
+
+            // s1_start < s2_end and s2_start < s1_end
+            const clashing_shifts = await Shift.find({
+                $or: [
+                  { start_time: { $lt: selected_shift_end_time }, end_time: { $gt: selected_shift_start_time } },
+                  { start_time: { $gte: selected_shift_start_time, $lt: selected_shift_end_time } },
+                  { end_time: { $gt: selected_shift_start_time, $lte: selected_shift_end_time } }
+                ]
+              });
+            
+            clashing_shifts.forEach(clashing_shift => {
+                if(clashing_shift.personnel_assigned.filter(p => p.personnel == found_personnel_ids[i]).length > 0) {
+                    not_added_because_clashing_shifts.push({
+                        personnel : found_personnel_ids[i],
+                        shift: clashing_shift._id+"",
+                        clashing_duty_id: clashing_shift.duty+"",
+                        shift_name : clashing_shift.shift_name
+                    });
+                }
+            })
+
+            // check if found_personnel_ids[i] is not in not_added_because_clashing_shifts
+            if(not_added_because_clashing_shifts.filter(p => p.personnel == found_personnel_ids[i]).length > 0) {
+                continue;
+            } 
+
             shift.personnel_assigned.push({
                 personnel: found_personnel_ids[i]
             })
@@ -203,14 +240,24 @@ const addPersonnelToShift = async (req, res, next) => {
 
         // Save the shift
         await shift.save();
+        const sid_added = found_personnel_ids.map(p => personnel_id_to_sid_map[p]);
+        const sid_not_added = not_found_personnel_ids.map(p => personnel_id_to_sid_map[p]);
+        const sid_not_added_because_clashing_shifts = not_added_because_clashing_shifts.map(p => {
+            return {
+                sid: personnel_id_to_sid_map[p.personnel+""],
+                clashing_shift_name: p.shift_name,
+                clashing_shift_duty: p.clashing_duty_id+""
+            }
+        });
 
         return res.status(200).json({
             success: true,
             status: 200,
             message: 'Personnel added to shift successfully',
             data: {
-                personnel_added: found_personnel_ids,
-                personnel_not_added: not_found_personnel_ids
+                sid_added,
+                sid_not_added,
+                sid_not_added_because_clashing_shifts,
             }
         });
 

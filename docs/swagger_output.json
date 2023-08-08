@@ -2479,6 +2479,21 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Report generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Report generated successfully"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Report generated successfully"
+                }
+              }
+            }
+          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -5540,8 +5555,7 @@
               "personnel_added": {
                 "type": "array",
                 "example": [
-                  "64aafded69d38a1c547c36ac",
-                  "64ab66a2035b6ed93140a9d0"
+                  "64b580ecce6f2178b5a5c965"
                 ],
                 "items": {
                   "type": "string"
@@ -5549,11 +5563,27 @@
               },
               "personnel_not_added": {
                 "type": "array",
-                "example": [
-                  "64aafded69d38a1c547c36ad"
-                ],
+                "example": [],
+                "items": {}
+              },
+              "sid_not_added_because_clashing_shifts": {
+                "type": "array",
                 "items": {
-                  "type": "string"
+                  "type": "object",
+                  "properties": {
+                    "sid": {
+                      "type": "string",
+                      "example": "102"
+                    },
+                    "clashing_shift_name": {
+                      "type": "string",
+                      "example": "Kavach Bandobast : Shift 1"
+                    },
+                    "clashing_shift_duty": {
+                      "type": "string",
+                      "example": "64d2107becd13bea3cbfefab"
+                    }
+                  }
                 }
               }
             }

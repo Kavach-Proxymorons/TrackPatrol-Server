@@ -433,7 +433,7 @@ Router.get("/:id/report",
             type: 'string'
         }
 
-        #swgger.responses[200] = {
+        #swagger.responses[200] = {
             description: 'Report generated successfully',
             schema: { $ref: "#/definitions/Report generated successfully" }
         }
