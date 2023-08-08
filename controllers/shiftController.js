@@ -726,7 +726,7 @@ const generateReport = async (req, res, next) => {
                 designation: personnel.personnel.designation,
                 posted_at: personnel.personnel.posted_at,
                 status: status,
-                gender: gender,
+                gender: personnel.personnel.gender,
                 start_time: start_time,
                 end_time: end_time,
                 score: score,
