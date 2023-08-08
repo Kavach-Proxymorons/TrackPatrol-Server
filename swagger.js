@@ -751,6 +751,15 @@ const doc = {
       longitude: "77.2246388",
       timestamp: "2023-07-18T04:18:00.000+05:30"
     },
+    "App bulk push gps data req.body": {
+      "gps_data": [
+        {
+          "latitude": "28.6129166",
+          "longitude": "77.2246388",
+          "timestamp": "2023-07-18T04:18:00.000+05:30"
+        }
+      ]
+    },
     "App post issue req.body": {
       "issue_category": "Electricity",
       "description": "No electricity in the area"
