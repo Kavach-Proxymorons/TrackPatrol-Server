@@ -3,7 +3,18 @@ import { body, param } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
 import { checkAuth, checkAdmin } from '../../middlewares/authMiddleware.js';
 
-import { createShift, getOngoingShifts, getOneShift, deleteShift, addPersonnelToShift, addHardwareToShift, removePersonnelFromShift, removeHardwareFromShift, generateReport } from '../../controllers/shiftController.js';
+import { 
+    createShift, 
+    getOngoingShifts, 
+    getOneShift, 
+    deleteShift, 
+    addPersonnelToShift, 
+    addHardwareToShift, 
+    removePersonnelFromShift, 
+    removeHardwareFromShift, 
+    generateReport, 
+    findAvailablePersonnels
+} from '../../controllers/shiftController.js';
 
 const Router = express.Router();
 
@@ -459,6 +470,12 @@ Router.get("/:id/report",
         }
     */
     generateReport
+)
+
+Router.get("/:id/availablePersonnel",
+    checkAuth,
+    checkAdmin,
+    findAvailablePersonnels,
 )
 
 export default Router;

@@ -764,6 +764,36 @@ const generateReport = async (req, res, next) => {
     }
 }
 
+const findAvailablePersonnels = async (req, res, next) => {
+    const { id } = req.params; // shift_id
+
+    // Find the shift 
+    const referenceShift = await Shift.findOne({ _id: id });
+    const referenceShiftStartTime = referenceShift.start_time;
+    const referenceShiftEndTime = referenceShift.end_time;
+
+    // Find all shifts that clash with referenceShift
+    const clashingShifts = await Shift.find({
+        $or: [
+            { start_time: { $lt: referenceShiftEndTime }, end_time: { $gt: referenceShiftStartTime } },
+            { start_time: { $gte: referenceShiftStartTime, $lt: referenceShiftEndTime } },
+            { end_time: { $gt: referenceShiftStartTime, $lte: referenceShiftEndTime } }
+        ]
+    });
+
+    // Find all personnel assigned to clashing shifts using set
+    const clashingPersonnel = new Set(); // using set to avoid duplicates
+    clashingShifts.forEach(shift => {
+        shift.personnel_assigned.forEach(personnel => {
+            clashingPersonnel.add(personnel.personnel + "");
+        })
+    });
+
+    const availablePersonnel = await Personnel.find({ _id: { $nin: Array.from(clashingPersonnel) } });
+    res.send(availablePersonnel);
+}
+
+
 export {
     createShift,
     getOngoingShifts,
@@ -773,5 +803,6 @@ export {
     addHardwareToShift,
     removeHardwareFromShift,
     getOneShift,
-    generateReport
+    generateReport,
+    findAvailablePersonnels
 }
