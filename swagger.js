@@ -109,6 +109,7 @@ const doc = {
       $username: "Shahbaz",
       $name: "Shahbaz",
       $password: "123456789",
+      $police_station: "ghaziabad",
       $role: "admin"
     },
     "Registration successful": {

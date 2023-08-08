@@ -2557,6 +2557,36 @@
         }
       }
     },
+    "/api/v1/admin/shift/{id}/availablePersonnel": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
     "/api/v1/app/duty/": {
       "get": {
         "tags": [
@@ -3788,6 +3818,10 @@
             "type": "string",
             "example": "123456789"
           },
+          "police_station": {
+            "type": "string",
+            "example": "ghaziabad"
+          },
           "role": {
             "type": "string",
             "example": "admin"
@@ -3797,6 +3831,7 @@
           "username",
           "name",
           "password",
+          "police_station",
           "role"
         ],
         "xml": {

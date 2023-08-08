@@ -20,13 +20,14 @@ const authController = async (req, res, next) => {
 
 const registerController = async (req, res, next) => {
     try {
-        const { username, name, password, role } = req.body;
+        const { username, name, password, role, police_station } = req.body;
 
         // Create a new user
         const newUser = new User({
             username,
             name,
             password,
+            police_station,
             role
         });
 

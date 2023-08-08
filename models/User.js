@@ -23,6 +23,10 @@ const authSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    police_station: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: "ghaziabad",
+    },
     last_login: {
         type: Date,
         default: Date.now
