@@ -5552,16 +5552,16 @@
           "data": {
             "type": "object",
             "properties": {
-              "personnel_added": {
+              "sid_added": {
                 "type": "array",
                 "example": [
-                  "64b580ecce6f2178b5a5c965"
+                  "401"
                 ],
                 "items": {
                   "type": "string"
                 }
               },
-              "personnel_not_added": {
+              "sid_not_added": {
                 "type": "array",
                 "example": [],
                 "items": {}
@@ -5573,15 +5573,15 @@
                   "properties": {
                     "sid": {
                       "type": "string",
-                      "example": "102"
+                      "example": "401"
                     },
                     "clashing_shift_name": {
                       "type": "string",
-                      "example": "Kavach Bandobast : Shift 1"
+                      "example": "shift 1"
                     },
                     "clashing_shift_duty": {
                       "type": "string",
-                      "example": "64d2107becd13bea3cbfefab"
+                      "example": "64d24eac8c423c29c9a2715e"
                     }
                   }
                 }

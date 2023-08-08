@@ -630,25 +630,15 @@ const doc = {
       "status": 200,
       "message": "Personnel added to shift successfully",
       "data": {
-        "personnel_added": [
-          "64b580ecce6f2178b5a5c965"
+        "sid_added": [
+          "401"
         ],
-        "personnel_not_added": [],
+        "sid_not_added": [],
         "sid_not_added_because_clashing_shifts": [
           {
-            "sid": "102",
-            "clashing_shift_name": "Year Long Duty : Shift 1",
-            "clashing_shift_duty": "64c90e5753ab1fddbaf7f7e7"
-          },
-          {
-            "sid": "102",
-            "clashing_shift_name": "Year Long Duty : Shift 3",
-            "clashing_shift_duty": "64c90e5753ab1fddbaf7f7e7"
-          },
-          {
-            "sid": "102",
-            "clashing_shift_name": "Kavach Bandobast : Shift 1",
-            "clashing_shift_duty": "64d2107becd13bea3cbfefab"
+            "sid": "401",
+            "clashing_shift_name": "shift 1",
+            "clashing_shift_duty": "64d24eac8c423c29c9a2715e"
           }
         ]
       }
