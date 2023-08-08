@@ -288,6 +288,74 @@ const pushGpsData = async (req, res, next) => {
     }
 }
 
+const bulkPushGpsData = async (req, res, next) => {
+    const { shift_id } = req.params;
+    const { personnel_id } = req.user;
+    const {
+        gps_data
+    } = req.body;
+    const data_to_push = [];
+    try {
+        const shift = await Shift.findById(shift_id).populate({ // duty
+            path: 'duty',
+            select: 'location'
+        }).exec();
+
+        if (!shift) {
+            const err = new Error('Shift not found');
+            err.status = 404;
+            throw err;
+        }
+
+        const index = shift.personnel_assigned.findIndex(personnel => personnel.personnel+"" == personnel_id);
+
+        if (index == -1) {
+            const err = new Error('Personnel not assigned to shift');
+            err.status = 404;
+            throw err;
+        }
+
+        // if duty is stopped or pending
+        if(shift.personnel_assigned[index].status == "stopped"){
+            const err = new Error('Duty already stopped');
+            err.status = 400;
+            throw err; 
+        }
+
+        if(shift.personnel_assigned[index].status == "pending"){
+            const err = new Error('Duty not started yet.');
+            err.status = 400;
+            throw err; 
+        }
+
+        const duty_location_lat = Number(shift.duty.location.split(',')[0]);
+        const duty_location_long = Number(shift.duty.location.split(',')[1]);
+
+        // calculate distance for each gps data
+        gps_data.forEach(gps_record => {
+            const distance = calculateDistance(Number(gps_record.latitude), Number(gps_record.longitude), duty_location_lat, duty_location_long);
+            data_to_push.push({
+                location: `${gps_record.latitude},${gps_record.longitude}`,
+                timestamp: gps_record.timestamp,
+                distance_from_duty_location: distance,
+            });
+        });
+
+        shift.personnel_assigned[index].gps_data.push(...data_to_push);
+
+        await shift.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'GPS data pushed successfully',
+            data: {}
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
 export {
     getAssignedDuties,
     getShiftDetails,
@@ -295,4 +363,5 @@ export {
     stopDuty,
     postIssueController,
     pushGpsData,
+    bulkPushGpsData
 }
