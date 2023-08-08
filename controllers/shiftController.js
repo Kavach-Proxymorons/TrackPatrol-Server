@@ -719,13 +719,14 @@ const generateReport = async (req, res, next) => {
                 
                 score = Math.min(score + rfid_score, 100);
             }
-
+            
             const personnel_data_row = {
                 sid: personnel.personnel.sid,
                 name: personnel.personnel.official_name,
                 designation: personnel.personnel.designation,
                 posted_at: personnel.personnel.posted_at,
                 status: status,
+                gender: gender,
                 start_time: start_time,
                 end_time: end_time,
                 score: score,
