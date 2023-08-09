@@ -24,7 +24,7 @@ const authSchema = new mongoose.Schema({
         required: true
     },
     police_station: {
-        type: mongoose.Schema.Types.ObjectId,
+        type : String,
         default: "ghaziabad",
     },
     last_login: {

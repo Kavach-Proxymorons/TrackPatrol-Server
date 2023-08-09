@@ -21,6 +21,10 @@ const dutySchema = new mongoose.Schema({
         type: Date,
         required: true
     },
+    police_station: {
+        type: String,
+        default: "ghaziabad",
+    },
     end_time:{
         type: Date,
         required: true

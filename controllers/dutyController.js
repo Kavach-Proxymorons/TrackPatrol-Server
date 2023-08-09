@@ -4,6 +4,12 @@ const createDuty = async (req, res, next) => {
     try {
         const { title, description, venue, location, start_time, end_time, note } = req.body;
 
+        const police_station = req.user.police_station;
+
+        console.log(user);
+
+
+
         // Create a new duty
         const newDuty = new Duty({
             title,
@@ -12,6 +18,7 @@ const createDuty = async (req, res, next) => {
             location,
             start_time,
             end_time,
+            police_station,
             note
         });
 

@@ -407,6 +407,7 @@ const doc = {
       "description": "Ghaziabad Mela Duty",
       "venue": "Ghaziabad",
       "location": "28.6543728,77.409437",
+      "police_station": "ghaziabad",
       "start_time": "2025-07-20T07:25:07.000Z",
       "end_time": "2025-07-21T07:25:07.000Z",
       "note": "None",

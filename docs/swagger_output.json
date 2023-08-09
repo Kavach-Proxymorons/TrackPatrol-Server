@@ -4958,6 +4958,10 @@
             "type": "string",
             "example": "28.6543728,77.409437"
           },
+          "police_station": {
+            "type": "string",
+            "example": "ghaziabad"
+          },
           "start_time": {
             "type": "string",
             "example": "2025-07-20T07:25:07.000Z"
