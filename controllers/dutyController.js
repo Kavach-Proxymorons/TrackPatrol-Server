@@ -6,10 +6,6 @@ const createDuty = async (req, res, next) => {
 
         const police_station = req.user.police_station;
 
-        console.log(user);
-
-
-
         // Create a new duty
         const newDuty = new Duty({
             title,
@@ -39,9 +35,17 @@ const createDuty = async (req, res, next) => {
 const getDuty = async (req, res, next) => {
     try {
         const { page, limit } = req.query;
+        const police_station = req.user.police_station;
 
-        // Find all the duty sorted by start_date 
-        const duty = await Duty.find()
+        let query = {};
+        if(req.user.role === 'admin' || req.user.role === 'SP' || req.user.role === 'DSP'){
+            query = {};
+        } else {
+            query = { police_station };
+        }
+
+        // Find all the duty with police_station sorted by start_date 
+        const duty = await Duty.find(query)
             .skip((page - 1) * limit)
             .limit(limit * 1)
             .sort({ start_time: 'asc' })
