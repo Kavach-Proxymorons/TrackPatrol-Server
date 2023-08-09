@@ -31,6 +31,28 @@ Router.get('/getIssues', async(req, res, next) => {
     }
 });
 
+Router.get('/markComplete/:issue_id', async(req, res, next) => {
+    try{
+        const { issue_id } = req.params;
+        const requiredIssue = await Issue.findById(issue_id).exec();
+        if(!requiredIssue){
+            const err = new Error('Issue not found');
+            err.status = 404;
+            throw err;
+        }
+        requiredIssue.issue_status = "completed";
+        await requiredIssue.save();
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Issue marked as completed successfully',
+            data: requiredIssue
+        })
+    } catch (err) {
+        next(err);
+    }
+});
+
 Router.get('/',
     /*  #swagger.tags = ['App : Duty']
         #swagger.summary = 'get all upcoming assigned duty shifts in sorted order'
