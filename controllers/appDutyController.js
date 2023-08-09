@@ -181,13 +181,15 @@ const stopDuty = async (req, res, next) => {
 const postIssueController = async (req, res, next) => {
     const { personnel_id } = req.user;
     const { issue_category, description } = req.body;
+    const severity = req.body.severity || "low";
 
     try{
         const newIssue = new Issue({
             issue_category,
             issue_description: description,
             issue_status: "pending",
-            issue_creator: personnel_id
+            issue_creator: personnel_id,
+            severity
         });
 
         await newIssue.save();

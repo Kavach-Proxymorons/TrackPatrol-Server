@@ -14,6 +14,9 @@ const issueSchema = new mongoose.Schema({
     issue_creator: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Personnel'
+    }, 
+    severity: {
+        type: String,
     }
 }, { timestamps: true }
 );
