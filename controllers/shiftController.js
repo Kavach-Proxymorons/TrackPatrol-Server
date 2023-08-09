@@ -552,8 +552,14 @@ const generateReport = async (req, res, next) => {
                 ref: 'Duty'
             })
             .exec();
-
-        const range = Number(shift.distance_radius) || 250;
+        
+        let range = 250;
+        if(!shift.distance_radius) {
+            range = 250;
+        } else {
+            range = Number(shift.distance_radius);
+        }
+        
         const duty_location_lat = Number(shift.duty.location.split(',')[0]);
         const duty_location_long = Number(shift.duty.location.split(',')[1]);
 
