@@ -17,7 +17,7 @@ const pushDataController = async (req, res, next) => {
     console.log(data, useMap);
 
     const hardware_personnel_map = {
-        "565642991063" : "64b580ecce6f2178b5a5c965" // ram Charan
+        "565642991063" : "64d37c5adcebf2ccce0856d2" // ram Charan
     }
 
     try {
