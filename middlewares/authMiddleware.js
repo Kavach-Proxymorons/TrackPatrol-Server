@@ -55,7 +55,7 @@ const checkAdmin = async (req, res, next) => {
     try {
         // return next(); // remove in production
 
-        if(req.role === 'admin' || req.role === 'SP' || req.role === 'DSP' || req.role === 'CI' || req.role === 'SI' )
+        if(req.role === 'SuperAdmin' || req.role === "admin" || req.role === 'SP' || req.role === 'DSP' || req.role === 'CI' || req.role === 'SI' )
             return next();
 
         return res.status(403).json({

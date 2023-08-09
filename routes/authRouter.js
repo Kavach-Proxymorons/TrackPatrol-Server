@@ -136,7 +136,7 @@ router.get('/allUser',  // To refactor this route
     async (req, res, next) => {
         try {
             const role = req.user.role;
-            if (role === 'admin' || role === 'SP' || role === 'DSP') {
+            if (role === 'SuperAdmin') {
                 const users = await User.find({}).select('-password');
                 return res.status(200).json({
                     success: true,

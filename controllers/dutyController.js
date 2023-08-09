@@ -38,7 +38,7 @@ const getDuty = async (req, res, next) => {
         const police_station = req.user.police_station;
 
         let query = {};
-        if(req.user.role === 'admin' || req.user.role === 'SP' || req.user.role === 'DSP'){
+        if(req.user.role === 'SuperAdmin'){
             query = {};
         } else {
             query = { police_station };
