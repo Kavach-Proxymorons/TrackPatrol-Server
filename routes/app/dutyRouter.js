@@ -1,6 +1,7 @@
 import express from 'express';
 import { body, param, query } from 'express-validator';
 import validateRequest from '../../utils/requestValidator.js'
+import Issue from '../../models/Issue.js';
 import { 
     checkAuth
 } from '../../middlewares/authMiddleware.js';
@@ -15,6 +16,20 @@ import {
 } from '../../controllers/appDutyController.js';
 
 const Router = express.Router();
+
+Router.get('/getIssues', async(req, res, next) => {
+    try{
+        const issues = await Issue.find({}).populate("issue_creator").exec();
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Issues fetched successfully',
+            data: issues
+        })
+    } catch (err) {
+        next(err);
+    }
+});
 
 Router.get('/',
     /*  #swagger.tags = ['App : Duty']

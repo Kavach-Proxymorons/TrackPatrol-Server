@@ -1,4 +1,5 @@
 import Shift from '../models/Shift.js';
+import Issue from '../models/Issue.js';
 
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
     const earthRadius = 6371; // Radius of the Earth in kilometers
@@ -178,6 +179,31 @@ const stopDuty = async (req, res, next) => {
 }
 
 const postIssueController = async (req, res, next) => {
+    const { personnel_id } = req.user;
+    const { issue_category, description } = req.body;
+
+    try{
+        const newIssue = new Issue({
+            issue_category,
+            issue_description: description,
+            issue_status: "pending",
+            issue_creator: personnel_id
+        });
+
+        await newIssue.save();
+
+        return res.status(200).json({
+            success: true,
+            status: 200,
+            message: 'Issue reported successfully',
+            data: {}
+        });
+    } catch (err) {
+        next(err);
+    }
+}
+
+const postIssueController_issue = async (req, res, next) => {
     const { shift_id } = req.params;
     const { personnel_id } = req.user;
     const { issue_category, description } = req.body;
