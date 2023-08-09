@@ -1,5 +1,6 @@
 import express from "express";
-import { checkAuth } from "../middlewares/authMiddleware.js";
+import User from "../models/User.js";
+import { checkAuth, checkAdmin } from "../middlewares/authMiddleware.js";
 import { authController, registerController, loginController } from "../controllers/authController.js";
 import { body, query, param } from "express-validator";
 import validateRequest from "../utils/requestValidator.js";
@@ -116,6 +117,44 @@ router.post("/login",
     ],
     validateRequest,
     loginController
+)
+
+router.get('/allUser',  // To refactor this route
+    /*  #swagger.tags = ['Auth']
+        #swagger.description = 'Endpoint to get all users'
+        #swagger.summary = 'Get all users'
+        #swagger.security = [{
+            "bearerAuth": []
+        }]
+        #swagger.responses[200] = {
+            description: 'All users',
+            schema: { $ref: "#/definitions/All users" }
+        }
+    */
+    checkAuth,
+    checkAdmin,
+    async (req, res, next) => {
+        try {
+            const role = req.user.role;
+            if (role === 'admin' || role === 'SP' || role === 'DSP') {
+                const users = await User.find({}).select('-password');
+                return res.status(200).json({
+                    success: true,
+                    status: 200,
+                    message: 'All users',
+                    data: users
+                });
+            } else {
+                return res.status(403).json({
+                    success: false,
+                    status: 403,
+                    message: 'Forbidden'
+                });
+            }
+        } catch (error) {
+            next(error);
+        }
+    }
 )
 
 export default router;

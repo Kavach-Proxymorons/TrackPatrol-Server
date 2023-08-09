@@ -288,6 +288,52 @@
         }
       }
     },
+    "/api/v1/auth/allUser": {
+      "get": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Get all users",
+        "description": "Endpoint to get all users",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/All users"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/All users"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
     "/api/v1/admin/personnel/": {
       "post": {
         "tags": [
@@ -5232,6 +5278,62 @@
         },
         "xml": {
           "name": "Get duty res.body"
+        }
+      },
+      "All users": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "status": {
+            "type": "number",
+            "example": 200
+          },
+          "message": {
+            "type": "string",
+            "example": "All users"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "example": "64b57fd6ce6f2178b5a5c95d"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "Shahbaz"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "Shahbaz"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "SP"
+                },
+                "last_login": {
+                  "type": "string",
+                  "example": "2023-08-09T00:05:02.673Z"
+                },
+                "__v": {
+                  "type": "number",
+                  "example": 0
+                },
+                "police_station": {
+                  "type": "string",
+                  "example": "lal kua"
+                }
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "All users"
         }
       },
       "Create shift req.body": {

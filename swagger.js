@@ -502,6 +502,22 @@ const doc = {
         "__v": 1
       }
     },
+    "All users": {
+      "success": true,
+      "status": 200,
+      "message": "All users",
+      "data": [
+        {
+          "_id": "64b57fd6ce6f2178b5a5c95d",
+          "username": "Shahbaz",
+          "name": "Shahbaz",
+          "role": "SP",
+          "last_login": "2023-08-09T00:05:02.673Z",
+          "__v": 0,
+          "police_station": "lal kua"
+        },
+      ]
+    },
     "Create shift req.body": {
       "shift_name": "Ghaziabad Mela Duty Shift 1",
       "start_time": "2025-07-20T07:25:07.000Z",
