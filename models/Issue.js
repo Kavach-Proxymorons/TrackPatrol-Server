@@ -9,6 +9,7 @@ const issueSchema = new mongoose.Schema({
     },
     issue_status: {
         type: String,
+        default: "pending"
     },
     issue_creator: {
         type: mongoose.Schema.Types.ObjectId,
