@@ -47,6 +47,10 @@ const doc = {
     {
       url: "https://trackpatrol.onrender.com/",
       description: "production server"
+    },
+    {
+      url: "https://trackpatrol-server.shahbaz.tech/",
+      description: "production server AWS"
     }
   ],
   securityDefinitions: {

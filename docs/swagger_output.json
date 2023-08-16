@@ -13,6 +13,10 @@
     {
       "url": "https://trackpatrol.onrender.com/",
       "description": "production server"
+    },
+    {
+      "url": "https://trackpatrol-server.shahbaz.tech/",
+      "description": "production server AWS"
     }
   ],
   "tags": [
@@ -47,6 +51,16 @@
   ],
   "paths": {
     "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/dashboardStats": {
       "get": {
         "description": "",
         "responses": {
@@ -2629,6 +2643,36 @@
           },
           "403": {
             "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/api/v1/app/duty/getIssues": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/app/duty/markComplete/{issue_id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "issue_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         }
       }
